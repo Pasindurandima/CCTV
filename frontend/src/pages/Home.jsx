@@ -8,7 +8,7 @@ function Home() {
           <h1 className="text-5xl mb-5">Welcome to Our E-Commerce Store</h1>
           <p className="text-2xl mb-8">Discover amazing products at great prices</p>
           <button className="bg-white text-indigo-500 border-none py-4 px-10 text-xl rounded-full cursor-pointer transition-all font-bold hover:-translate-y-1 hover:shadow-xl">
-            Shop Now
+            Shop No
           </button>
         </div>
       </section>
