@@ -89,23 +89,58 @@ function Store() {
     { id: 60, name: 'ASPOR A352 5000mAh Built-in Cable', brand: 'ASPOR', price: 24.99, category: 'Power Bank', features: 'Built-in Type-C Connector, Portable Emergency Charger' },
     { id: 61, name: 'ASPOR A351 Smart Mini 5000mAh Power Bank', brand: 'ASPOR', price: 22.99, category: 'Power Bank', features: 'Ultra-Compact, Built-in Connector, Emergency Charger' },
     
+    // Hikvision Analog CCTV (Turbo HD) - ColorVu & Hybrid Light Cameras
+    { id: 62, name: 'Hikvision DS-2CE12DF0T-FS 2MP ColorVu Audio Fixed Bullet', brand: 'Hikvision', price: 89.99, category: 'Analog CCTV', features: 'Full-time Color Imaging, Built-in Audio, Night Vision' },
+    { id: 63, name: 'Hikvision DS-2CE12DF0T-LFS 2MP ColorVu Audio Fixed Bullet (Silver)', brand: 'Hikvision', price: 94.99, category: 'Analog CCTV', features: 'Hybrid Light, Color Night Vision, Audio Recording' },
+    { id: 64, name: 'Hikvision DS-2CE72KF3T-PIRXO 3K ColorVu PIR Siren 5MP Turret', brand: 'Hikvision', price: 129.99, category: 'Analog CCTV', features: 'PIR Motion Detection, Siren Alert, Color Night Vision' },
+    { id: 65, name: 'Hikvision DS-2CE12KF3T-PIRXO 3K ColorVu PIR Siren 5MP Bullet', brand: 'Hikvision', price: 124.99, category: 'Analog CCTV', features: 'Smart PIR Alarm, Outdoor Bullet, 5MP Resolution' },
+    { id: 66, name: 'Hikvision DS-2CE12DF3T-PIRXOS 2MP ColorVu PIR Siren Audio Bullet', brand: 'Hikvision', price: 119.99, category: 'Analog CCTV', features: 'PIR Alarm, Audio & Siren Functions, ColorVu' },
+    { id: 67, name: 'Hikvision DS-2CE12KF3T-L 3K Gold 40m 5MP ColorVu', brand: 'Hikvision', price: 114.99, category: 'Analog CCTV', features: 'High-Res Color Imaging, 40m IR Range, 5MP' },
+    { id: 68, name: 'Hikvision DS-2CE10KF0T-LPFS 3K ColorVu 5MP Smart Hybrid Light Mini Bullet', brand: 'Hikvision', price: 109.99, category: 'Analog CCTV', features: 'Hybrid Lighting, Night Image Quality, Compact Design' },
+    { id: 69, name: 'Hikvision DS-2CE50DF3T-VPLSZE 2MP Smart Hybrid Light ColorVu Varifocal', brand: 'Hikvision', price: 139.99, category: 'Analog CCTV', features: 'Varifocal Lens, Adjustable Viewing Angle, Hybrid Light' },
+    { id: 70, name: 'Hikvision DS-2CE70DF8T-MFSLN 2MP ColorVu Audio Turret', brand: 'Hikvision', price: 99.99, category: 'Analog CCTV', features: 'Fixed Turret Design, Built-in Audio, ColorVu' },
+    { id: 71, name: 'Hikvision DS-2CE70DF8T-MF 2MP Rainbow ColorVu Camera', brand: 'Hikvision', price: 94.99, category: 'Analog CCTV', features: 'Standard Color Turret, Night Vision, 2MP' },
+    { id: 72, name: 'Hikvision DS-2CE17D0T-EXLF 2MP Smart Hybrid Light 40m Fixed Bullet', brand: 'Hikvision', price: 84.99, category: 'Analog CCTV', features: 'Outdoor Camera, 40m Range, Hybrid Light' },
+    { id: 73, name: 'Hikvision DS-2CE76D0T-EXLPF 2MP Smart Dual Light Dome Indoor', brand: 'Hikvision', price: 79.99, category: 'Analog CCTV', features: 'Indoor Dome, Dual LED Lighting, 2MP Resolution' },
+    
+    // Hikvision Wired IP Network Cameras - Motorized/Varifocal
+    { id: 74, name: 'Hikvision DS-2CD2723G2-IZS 2MP Face Detection Varifocal Dome', brand: 'Hikvision', price: 189.99, category: 'IP Camera', features: 'Motorized Varifocal Lens, AcuSense Human Detection, Face Analytics' },
+    { id: 75, name: 'Hikvision DS-2CD2743G2-IZS 4MP Face Detection Varifocal Dome', brand: 'Hikvision', price: 229.99, category: 'IP Camera', features: 'Higher Resolution Varifocal, 4MP, Face Detection' },
+    { id: 76, name: 'Hikvision DS-2CD2623G2-IZS 2MP Line Cross Face Detection Varifocal', brand: 'Hikvision', price: 179.99, category: 'IP Camera', features: 'Line Crossing Analytics, Varifocal Lens, 2MP' },
+    { id: 77, name: 'Hikvision DS-2CD2643G2-IZS 4MP Line Cross Face Detection Varifocal', brand: 'Hikvision', price: 219.99, category: 'IP Camera', features: '4MP Analytics, Line Crossing Detection, Motorized Zoom' },
+    
+    // Hikvision Wired IP - Fixed Bullet Cameras
+    { id: 78, name: 'Hikvision DS-2CD2T23G2-4I 80m 2MP Human Vehicle Detection Fixed Bullet', brand: 'Hikvision', price: 159.99, category: 'IP Camera', features: 'Long Range Detection, 80m IR, Human/Vehicle AI' },
+    { id: 79, name: 'Hikvision DS-2CD2T23G2-2I 60m 2MP Human Vehicle Detection Fixed Bullet', brand: 'Hikvision', price: 149.99, category: 'IP Camera', features: 'Standard Detection Range, 60m IR, AI Analytics' },
+    { id: 80, name: 'Hikvision DS-2CD2T43G2-4I 80m 4MP Line Crossing Human Detection Fixed Bullet', brand: 'Hikvision', price: 189.99, category: 'IP Camera', features: '4MP Resolution, Line Crossing Analytics, 80m Range' },
+    { id: 81, name: 'Hikvision DS-2CD2T43G2-2I 60m 2K Line Crossing Human Detection Fixed Bullet', brand: 'Hikvision', price: 179.99, category: 'IP Camera', features: 'Line Cross Analytics, 2K Resolution, 60m IR' },
+    
+    // Hikvision Wired IP - Fixed Turret & Dome (Audio/Detection)
+    { id: 82, name: 'Hikvision DS-2CD2323G2-IU 2MP Line Crossing Face Detection Turret', brand: 'Hikvision', price: 169.99, category: 'IP Camera', features: 'Turret Design, Built-in Mic Option, Line Crossing Analytics' },
+    { id: 83, name: 'Hikvision DS-2CD2343G2-IU 4MP Mic SD Card Face Detection Turret', brand: 'Hikvision', price: 199.99, category: 'IP Camera', features: '4MP Turret, Built-in Audio, SD Card Slot' },
+    { id: 84, name: 'Hikvision DS-2CD2163G0-IU 6MP Audio Face Detection Fixed Network Camera', brand: 'Hikvision', price: 249.99, category: 'IP Camera', features: 'Compact IP Camera, 6MP, Built-in Microphone' },
+    { id: 85, name: 'Hikvision DS-2CD2183G0-IU 4K Audio Face Detection Fixed Dome', brand: 'Hikvision', price: 299.99, category: 'IP Camera', features: '8MP 4K Resolution, Built-in Mic, Face Analytics' },
+    { id: 86, name: 'Hikvision DS-2CD2123G2-IU 2MP Audio Face Detection IP Camera', brand: 'Hikvision', price: 139.99, category: 'IP Camera', features: 'Basic IP Dome, Built-in Audio, 2MP' },
+    { id: 87, name: 'Hikvision DS-2CD2143G2-IU 4MP Audio Face Detection IP Camera', brand: 'Hikvision', price: 179.99, category: 'IP Camera', features: '4MP Dome, Built-in Microphone, Face Detection' },
+    
     // Sound Devices
-    { id: 62, name: 'CCTV Audio Microphone', brand: 'Generic', price: 39.99, category: 'Sound Devices', features: 'High Sensitivity, Weather Resistant, RCA Output' },
-    { id: 63, name: 'Bluetooth Speaker for Announcements', brand: 'JBL', price: 89.99, category: 'Sound Devices', features: 'Portable, Long Battery Life, Clear Audio' },
+    { id: 88, name: 'CCTV Audio Microphone', brand: 'Generic', price: 39.99, category: 'Sound Devices', features: 'High Sensitivity, Weather Resistant, RCA Output' },
+    { id: 89, name: 'Bluetooth Speaker for Announcements', brand: 'JBL', price: 89.99, category: 'Sound Devices', features: 'Portable, Long Battery Life, Clear Audio' },
   ]);
 
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
   const categories = [
-    'Cameras',
     'Wireless Camera',
+    'Analog CCTV',
+    'IP Camera',
     'CCTV Package',
     'DVR',
-    'Hard Drive Memory',
-    'IP Camera',
-    'Mobile Accessories',
     'NVR',
+    'Hard Drive Memory',
+    'Cameras',
+    'Mobile Accessories',
     'Sound Devices',
     'TV and Monitor',
     'UPS Inverters',
