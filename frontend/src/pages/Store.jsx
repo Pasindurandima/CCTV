@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Store() {
   const [products] = useState([
@@ -211,42 +212,60 @@ function Store() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.map((product) => (
-              <div
-                key={product.id}
-                className="bg-white rounded-xl p-5 shadow-lg transition-all hover:-translate-y-1 hover:shadow-2xl"
-              >
-                <div className="bg-gradient-to-br from-indigo-500 to-purple-600 h-48 rounded-lg flex flex-col items-center justify-center text-white mb-4 relative overflow-hidden">
-                  <div className="text-6xl mb-2">📷</div>
-                  <p className="text-sm px-2 text-center">Image Placeholder</p>
-                  {product.brand && (
-                    <div className="absolute top-2 right-2 bg-white/90 text-indigo-600 px-3 py-1 rounded-full text-xs font-bold">
-                      {product.brand}
-                    </div>
-                  )}
-                </div>
-                <div className="text-left">
-                  <h3 className="text-lg font-bold mb-2 text-slate-800 line-clamp-2 min-h-[3.5rem]">
-                    {product.name}
-                  </h3>
-                  <p className="text-gray-500 text-xs mb-2 font-semibold uppercase tracking-wide">
-                    {product.category}
-                  </p>
-                  {product.features && (
-                    <p className="text-gray-600 text-sm mb-3 line-clamp-2 min-h-[2.5rem]">
-                      {product.features}
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <div className="bg-white rounded-xl p-5 shadow-lg transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer">
+                  <div className="bg-gradient-to-br from-indigo-500 to-purple-600 h-48 rounded-lg flex flex-col items-center justify-center text-white mb-4 relative overflow-hidden">
+                    <div className="text-6xl mb-2">📷</div>
+                    <p className="text-sm px-2 text-center">Image Placeholder</p>
+                    {product.brand && (
+                      <div className="absolute top-2 right-2 bg-white/90 text-indigo-600 px-3 py-1 rounded-full text-xs font-bold">
+                        {product.brand}
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-lg font-bold mb-2 text-slate-800 line-clamp-2 min-h-[3.5rem]">
+                      {product.name}
+                    </h3>
+                    <p className="text-gray-500 text-xs mb-2 font-semibold uppercase tracking-wide">
+                      {product.category}
                     </p>
-                  )}
-                  <div className="flex items-center justify-between mt-4">
-                    <p className="text-3xl text-blue-500 font-bold">${product.price}</p>
-                    <button className="bg-blue-500 text-white border-none py-2 px-5 rounded-lg cursor-pointer text-sm transition-all hover:bg-blue-600 hover:scale-105 font-semibold">
-                      Add to Cart
-                    </button>
+                    {product.features && (
+                      <p className="text-gray-600 text-sm mb-3 line-clamp-2 min-h-[2.5rem]">
+                        {product.features}
+                      </p>
+                    )}
+                    <div className="flex items-center justify-between mt-4">
+                      <p className="text-3xl text-blue-500 font-bold">${product.price}</p>
+                      <button 
+                        onClick={(e) => e.preventDefault()}
+                        className="bg-blue-500 text-white border-none py-2 px-5 rounded-lg cursor-pointer text-sm transition-all hover:bg-blue-600 hover:scale-105 font-semibold"
+                      >
+                        View Details
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Contact Banner */}
+      <div className="mt-12 bg-slate-800 text-white rounded-xl p-8 text-center">
+        <h3 className="text-2xl font-bold mb-4">Need Help Choosing? Call Us!</h3>
+        <div className="flex justify-center gap-8 flex-wrap">
+          <a href="tel:0777602018" className="flex items-center gap-2 text-xl hover:text-blue-400 transition-colors">
+            <span className="text-2xl">📞</span>
+            <span>077 760 2018</span>
+          </a>
+          <a href="tel:0770279136" className="flex items-center gap-2 text-xl hover:text-blue-400 transition-colors">
+            <span className="text-2xl">📞</span>
+            <span>077 027 9136</span>
+          </a>
+        </div>
+        <p className="mt-4 text-gray-300">Our experts are ready to help you find the perfect security solution</p>
       </div>
     </div>
   );

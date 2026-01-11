@@ -36,7 +36,10 @@ function ContactUs() {
           </div>
           <div className="mb-6">
             <h3 className="text-blue-500 text-xl mb-2">Phone</h3>
-            <p className="text-gray-600">+1 (555) 123-4567</p>
+            <p className="text-gray-600">
+              <a href="tel:0777602018" className="hover:text-blue-500 block">077 760 2018</a>
+              <a href="tel:0770279136" className="hover:text-blue-500 block">077 027 9136</a>
+            </p>
           </div>
           <div className="mb-6">
             <h3 className="text-blue-500 text-xl mb-2">Email</h3>

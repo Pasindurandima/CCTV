@@ -213,6 +213,23 @@ function Home() {
         </div>
       </section>
 
+      {/* Contact Info Banner */}
+      <section className="py-8 px-5 bg-slate-800 text-white">
+        <div className="max-w-6xl mx-auto text-center">
+          <h3 className="text-2xl font-bold mb-4">Need Help? Contact Us Today!</h3>
+          <div className="flex justify-center gap-8 flex-wrap">
+            <a href="tel:0777602018" className="flex items-center gap-2 text-xl hover:text-blue-400 transition-colors">
+              <span className="text-2xl">📞</span>
+              <span>077 760 2018</span>
+            </a>
+            <a href="tel:0770279136" className="flex items-center gap-2 text-xl hover:text-blue-400 transition-colors">
+              <span className="text-2xl">📞</span>
+              <span>077 027 9136</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 px-5 bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
         <div className="max-w-4xl mx-auto text-center">
