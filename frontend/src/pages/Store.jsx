@@ -303,16 +303,26 @@ function Store() {
                     )}
                     <div className="flex items-center justify-between mt-4">
                       <p className="text-3xl text-blue-500 font-bold">${product.price}</p>
-                      <div className="flex gap-2">
+                      <div className="flex flex-col gap-2">
+                        <button 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            alert(`Order placed for ${product.name}!`);
+                          }}
+                          className="bg-green-500 text-white border-none py-2 px-4 rounded-lg cursor-pointer text-sm transition-all hover:bg-green-600 hover:scale-105 font-semibold flex items-center justify-center gap-1"
+                          title="Order Now"
+                        >
+                          ✅ Order Now
+                        </button>
                         <button 
                           onClick={(e) => {
                             e.preventDefault();
                             alert(`${product.name} added to cart!`);
                           }}
-                          className="bg-blue-500 text-white border-none py-2 px-4 rounded-lg cursor-pointer text-sm transition-all hover:bg-green-600 hover:scale-105 font-semibold flex items-center gap-1"
+                          className="bg-blue-500 text-white border-none py-2 px-4 rounded-lg cursor-pointer text-sm transition-all hover:bg-blue-600 hover:scale-105 font-semibold flex items-center justify-center gap-1"
                           title="Add to Cart"
                         >
-                          🛒 Add
+                          🛒 Add To Cart
                         </button>
                       </div>
                     </div>
