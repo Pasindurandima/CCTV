@@ -111,7 +111,7 @@ function Store() {
     
     // Dome Cameras
     { id: 41, name: 'Hikvision DS-2CE56D0T-IRMMF 2MP Dome Camera', brand: 'Hikvision', price: 79.99, category: 'Cameras', features: '2MP Resolution, 20m IR Range, Vandal Proof' },
-    { id: 42, name: 'Hikvision ColorVu 2MP Fixed Dome Camer', brand: 'Hikvision', price: 119.99, category: 'Cameras', features: 'Color Night Vision, 24/7 Color Imaging' },
+    { id: 42, name: 'Hikvision ColorVu 2MP Fixed Dome Camera', brand: 'Hikvision', price: 119.99, category: 'Cameras', features: 'Color Night Vision, 24/7 Color Imaging' },
     
     // Accessories
     { id: 43, name: 'CCTV Power Supply 12V 5A', brand: 'Generic', price: 19.99, category: 'Mobile Accessories', features: 'DC 12V Output, Overcurrent Protection' },
@@ -276,36 +276,41 @@ function Store() {
             Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
             {selectedCategory && <span className="font-semibold"> in {selectedCategory}</span>}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
               <Link key={product.id} to={`/product/${product.id}`} className="no-underline">
-                <div className="bg-white rounded-xl p-5 shadow-lg transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer">
-                  <div className="bg-gradient-to-br from-indigo-500 to-purple-600 h-48 rounded-lg flex flex-col items-center justify-center text-white mb-4 relative overflow-hidden">
-                    <div className="text-6xl mb-2">📷</div>
-                    <p className="text-sm px-2 text-center">Image Placeholder</p>
+                <div className="bg-white rounded-xl overflow-hidden shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl cursor-pointer h-full flex flex-col">
+                  {/* Image Container - Fixed Aspect Ratio */}
+<div className="relative w-full aspect-square bg-white overflow-hidden flex items-center justify-center group">
+                    {product.imageUrl ? (
+                      <img 
+                        src={product.imageUrl} 
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="flex flex-col items-center justify-center text-white">
+                        <div className="text-6xl mb-2">📷</div>
+                        <p className="text-sm px-2 text-center">No Image</p>
+                      </div>
+                    )}
+                    {/* Brand Badge */}
                     {product.brand && (
-                      <div className="absolute top-2 right-2 bg-white/90 text-indigo-600 px-3 py-1 rounded-full text-xs font-bold">
+                      <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-indigo-600 px-3 py-1 rounded-full text-xs font-bold shadow-md">
                         {product.brand}
                       </div>
                     )}
                   </div>
-                  <div className="text-left">
-                    <h3 className="text-lg font-bold mb-2 text-slate-800 line-clamp-2 min-h-[3.5rem]">
+
+                  {/* Product Info Container */}
+                  <div className="p-5 flex flex-col flex-grow">
+                    <h3 className="text-base font-bold mb-4 text-slate-800 line-clamp-2 min-h-[2.5rem] leading-tight">
                       {product.name}
                     </h3>
-                    <p className="text-gray-500 text-xs mb-2 font-semibold uppercase tracking-wide">
-                      {product.category}
-                    </p>
-                    {product.features && product.features.length > 0 && (
-                      <p className="text-gray-600 text-sm mb-3 line-clamp-2 min-h-[2.5rem]">
-                        {Array.isArray(product.features) 
-                          ? product.features.slice(0, 2).join(', ') 
-                          : product.features
-                        }
-                      </p>
-                    )}
-                    <div className="flex items-center justify-between mt-4">
-                      <p className="text-3xl text-blue-500 font-bold">Rs {product.price}</p>
+                    
+                    {/* Price and Buttons */}
+                    <div className="mt-auto pt-4 border-t border-gray-100">
+                      <p className="text-2xl text-blue-500 font-bold mb-3">Rs {product.price}</p>
                       <div className="flex flex-col gap-2">
                         <button 
                           onClick={(e) => {
@@ -313,7 +318,7 @@ function Store() {
                             addToCart(product);
                             navigate('/checkout');
                           }}
-                          className="bg-green-500 text-white border-none py-2 px-4 rounded-lg cursor-pointer text-sm transition-all hover:bg-green-600 hover:scale-105 font-semibold flex items-center justify-center gap-1"
+                          className="bg-green-500 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs transition-all hover:bg-green-600 hover:scale-105 font-semibold flex items-center justify-center gap-1 w-full"
                           title="Order Now"
                         >
                           ✅ Order Now
@@ -324,7 +329,7 @@ function Store() {
                             addToCart(product);
                             alert(`${product.name} added to cart!`);
                           }}
-                          className="bg-blue-500 text-white border-none py-2 px-4 rounded-lg cursor-pointer text-sm transition-all hover:bg-blue-600 hover:scale-105 font-semibold flex items-center justify-center gap-1"
+                          className="bg-blue-500 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs transition-all hover:bg-blue-600 hover:scale-105 font-semibold flex items-center justify-center gap-1 w-full"
                           title="Add to Cart"
                         >
                           🛒 Add To Cart

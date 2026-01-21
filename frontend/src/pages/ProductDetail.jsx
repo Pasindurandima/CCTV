@@ -100,13 +100,23 @@ function ProductDetail() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Product Image Section */}
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <div className="bg-gradient-to-br from-indigo-500 to-purple-600 h-96 rounded-lg flex flex-col items-center justify-center text-white mb-4">
-            <div className="text-9xl mb-4">📷</div>
-            <p className="text-lg">Product Image</p>
+        <div className="bg-white rounded-xl shadow-lg p-6 sticky top-20">
+          <div className="w-full aspect-square bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white overflow-hidden group mb-4">
+            {product.imageUrl ? (
+              <img 
+                src={product.imageUrl} 
+                alt={product.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            ) : (
+              <div className="flex flex-col items-center justify-center">
+                <div className="text-9xl mb-4">📷</div>
+                <p className="text-lg">Product Image</p>
+              </div>
+            )}
           </div>
           {product.brand && (
-            <div className="inline-block bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
+            <div className="inline-block bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-bold w-full text-center">
               {product.brand}
             </div>
           )}

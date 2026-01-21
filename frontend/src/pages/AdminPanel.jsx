@@ -10,7 +10,8 @@ const AdminPanel = () => {
     category: '',
     shortDesc: '',
     features: [''],
-    imageUrl: ''
+    imageFile: null,
+    imagePreview: ''
   });
 
   const [products, setProducts] = useState([]);
@@ -56,6 +57,38 @@ const AdminPanel = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Handle image file selection
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        setMessage({ text: 'Please select a valid image file', type: 'error' });
+        return;
+      }
+
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setMessage({ text: 'Image size must be less than 5MB', type: 'error' });
+        return;
+      }
+
+      setFormData({ ...formData, imageFile: file });
+
+      // Create preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ ...prev, imagePreview: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Remove image
+  const removeImage = () => {
+    setFormData({ ...formData, imageFile: null, imagePreview: '' });
+  };
+
   // Handle feature input changes
   const handleFeatureChange = (index, value) => {
     const newFeatures = [...formData.features];
@@ -83,41 +116,92 @@ const AdminPanel = () => {
     // Filter out empty features
     const filteredFeatures = formData.features.filter(f => f.trim() !== '');
 
-    const productData = {
-      ...formData,
-      price: parseFloat(formData.price),
-      originalPrice: formData.originalPrice ? parseFloat(formData.originalPrice) : null,
-      features: filteredFeatures
-    };
-
     try {
-      const url = editMode 
-        ? `http://localhost:8080/api/products/${editId}`
-        : 'http://localhost:8080/api/products';
-      
-      const method = editMode ? 'PUT' : 'POST';
+      // Try multipart form data first (with file)
+      if (formData.imageFile) {
+        const formDataToSend = new FormData();
+        formDataToSend.append('name', formData.name);
+        formDataToSend.append('brand', formData.brand);
+        formDataToSend.append('price', parseFloat(formData.price));
+        formDataToSend.append('originalPrice', formData.originalPrice ? parseFloat(formData.originalPrice) : null);
+        formDataToSend.append('category', formData.category);
+        formDataToSend.append('shortDesc', formData.shortDesc);
+        formDataToSend.append('features', JSON.stringify(filteredFeatures));
+        formDataToSend.append('image', formData.imageFile);
 
-      const response = await fetch(url, {
-        method: method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(productData),
-      });
+        const url = editMode 
+          ? `http://localhost:8080/api/products/${editId}`
+          : 'http://localhost:8080/api/products';
+        
+        const method = editMode ? 'PUT' : 'POST';
 
-      if (response.ok) {
-        setMessage({ 
-          text: editMode ? 'Product updated successfully!' : 'Product added successfully!', 
-          type: 'success' 
+        console.log('Sending FormData with image:', {
+          name: formData.name,
+          brand: formData.brand,
+          price: formData.price,
+          imageFile: formData.imageFile.name,
         });
-        resetForm();
-        fetchProducts();
+
+        const response = await fetch(url, {
+          method: method,
+          body: formDataToSend,
+        });
+
+        if (response.ok) {
+          setMessage({ 
+            text: editMode ? 'Product updated successfully!' : 'Product added successfully!', 
+            type: 'success' 
+          });
+          resetForm();
+          fetchProducts();
+        } else {
+          const errorData = await response.json().catch(() => null);
+          const errorMessage = errorData?.error || errorData?.message || 'Failed to save product. Please check all fields.';
+          setMessage({ text: errorMessage, type: 'error' });
+          console.error('Server error:', errorData);
+        }
       } else {
-        // Try to get detailed error message from response
-        const errorData = await response.json().catch(() => null);
-        const errorMessage = errorData?.error || errorData?.message || 'Failed to save product. Please check all fields.';
-        setMessage({ text: errorMessage, type: 'error' });
-        console.error('Server error:', errorData);
+        // Fall back to JSON if no image
+        const productData = {
+          name: formData.name,
+          brand: formData.brand,
+          price: parseFloat(formData.price),
+          originalPrice: formData.originalPrice ? parseFloat(formData.originalPrice) : null,
+          category: formData.category,
+          shortDesc: formData.shortDesc,
+          features: filteredFeatures,
+          imageUrl: formData.imagePreview
+        };
+
+        const url = editMode 
+          ? `http://localhost:8080/api/products/${editId}`
+          : 'http://localhost:8080/api/products';
+        
+        const method = editMode ? 'PUT' : 'POST';
+
+        console.log('Sending JSON (no image):', productData);
+
+        const response = await fetch(url, {
+          method: method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productData),
+        });
+
+        if (response.ok) {
+          setMessage({ 
+            text: editMode ? 'Product updated successfully!' : 'Product added successfully!', 
+            type: 'success' 
+          });
+          resetForm();
+          fetchProducts();
+        } else {
+          const errorData = await response.json().catch(() => null);
+          const errorMessage = errorData?.error || errorData?.message || 'Failed to save product. Please check all fields.';
+          setMessage({ text: errorMessage, type: 'error' });
+          console.error('Server error:', errorData);
+        }
       }
     } catch (error) {
       console.error('Error:', error);
@@ -137,7 +221,8 @@ const AdminPanel = () => {
       category: '',
       shortDesc: '',
       features: [''],
-      imageUrl: ''
+      imageFile: null,
+      imagePreview: ''
     });
     setEditMode(false);
     setEditId(null);
@@ -153,7 +238,8 @@ const AdminPanel = () => {
       category: product.category,
       shortDesc: product.shortDesc,
       features: product.features && product.features.length > 0 ? product.features : [''],
-      imageUrl: product.imageUrl || ''
+      imageFile: null,
+      imagePreview: product.imageUrl || ''
     });
     setEditMode(true);
     setEditId(product.id);
@@ -296,15 +382,50 @@ const AdminPanel = () => {
               />
             </div>
 
+            {/* Image Upload Section */}
             <div className="form-group">
-              <label>Image URL (optional)</label>
-              <input
-                type="text"
-                name="imageUrl"
-                value={formData.imageUrl}
-                onChange={handleInputChange}
-                placeholder="https://example.com/image.jpg"
-              />
+              <label>Product Image (optional)</label>
+              <div className="image-upload-container">
+                <input
+                  type="file"
+                  id="image-input"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  style={{ display: 'none' }}
+                />
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('image-input').click()}
+                  className="image-upload-btn"
+                >
+                  📸 Browse Image from Your Laptop
+                </button>
+                
+                {formData.imagePreview && (
+                  <div className="image-preview-container">
+                    <img 
+                      src={formData.imagePreview} 
+                      alt="Preview" 
+                      className="image-preview"
+                    />
+                    <p className="preview-label">
+                      {formData.imageFile ? formData.imageFile.name : 'Current Image'}
+                    </p>
+                    {formData.imageFile && (
+                      <button
+                        type="button"
+                        onClick={removeImage}
+                        className="remove-image-btn"
+                      >
+                        ✕ Remove Image
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+              <small style={{ color: '#666', marginTop: '0.5rem', display: 'block' }}>
+                ℹ️ Supported formats: JPG, PNG, GIF, WebP. Max size: 5MB
+              </small>
             </div>
 
             <div className="form-group">
