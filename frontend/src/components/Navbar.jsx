@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 function Navbar() {
+  const { getCartCount } = useCart();
+  const cartCount = getCartCount();
+
   return (
     <nav className="bg-slate-800 h-[70px] flex justify-center items-center text-base fixed top-0 w-full z-[999] shadow-lg">
       <div className="flex justify-between items-center w-full max-w-[1300px] px-12">
@@ -27,6 +31,16 @@ function Navbar() {
           <li className="h-[70px] flex items-center">
             <Link to="/contact" className="text-white no-underline px-4 py-2 h-full flex items-center transition-all hover:text-blue-400 hover:-translate-y-0.5">
               Contact Us
+            </Link>
+          </li>
+          <li className="h-[70px] flex items-center">
+            <Link to="/cart" className="text-white no-underline px-4 py-2 h-full flex items-center transition-all hover:text-blue-400 hover:-translate-y-0.5 relative">
+              🛒 Cart
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
             </Link>
           </li>
         </ul>

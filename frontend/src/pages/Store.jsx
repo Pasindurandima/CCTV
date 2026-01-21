@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 function Store() {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -307,7 +310,8 @@ function Store() {
                         <button 
                           onClick={(e) => {
                             e.preventDefault();
-                            alert(`Order placed for ${product.name}!`);
+                            addToCart(product);
+                            navigate('/checkout');
                           }}
                           className="bg-green-500 text-white border-none py-2 px-4 rounded-lg cursor-pointer text-sm transition-all hover:bg-green-600 hover:scale-105 font-semibold flex items-center justify-center gap-1"
                           title="Order Now"
@@ -317,6 +321,7 @@ function Store() {
                         <button 
                           onClick={(e) => {
                             e.preventDefault();
+                            addToCart(product);
                             alert(`${product.name} added to cart!`);
                           }}
                           className="bg-blue-500 text-white border-none py-2 px-4 rounded-lg cursor-pointer text-sm transition-all hover:bg-blue-600 hover:scale-105 font-semibold flex items-center justify-center gap-1"
