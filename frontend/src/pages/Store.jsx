@@ -111,7 +111,7 @@ function Store() {
     
     // Dome Cameras
     { id: 41, name: 'Hikvision DS-2CE56D0T-IRMMF 2MP Dome Camera', brand: 'Hikvision', price: 79.99, category: 'Cameras', features: '2MP Resolution, 20m IR Range, Vandal Proof' },
-    { id: 42, name: 'Hikvision ColorVu 2MP Fixed Dome Camera', brand: 'Hikvision', price: 119.99, category: 'Cameras', features: 'Color Night Vision, 24/7 Color Imaging' },
+    { id: 42, name: 'Hikvision ColorVu 2MP Fixed Dome Camer', brand: 'Hikvision', price: 119.99, category: 'Cameras', features: 'Color Night Vision, 24/7 Color Imaging' },
     
     // Accessories
     { id: 43, name: 'CCTV Power Supply 12V 5A', brand: 'Generic', price: 19.99, category: 'Mobile Accessories', features: 'DC 12V Output, Overcurrent Protection' },
