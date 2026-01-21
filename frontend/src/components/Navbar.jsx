@@ -29,16 +29,6 @@ function Navbar() {
               Contact Us
             </Link>
           </li>
-          <li className="h-[70px] flex items-center">
-            <Link to="/login" className="text-white no-underline px-4 py-2 h-full flex items-center transition-all bg-transparent border-2 border-blue-400 rounded-md hover:bg-blue-400 hover:text-white">
-              Login
-            </Link>
-          </li>
-          <li className="h-[70px] flex items-center">
-            <Link to="/register" className="text-white no-underline px-4 py-2 h-full flex items-center transition-all bg-blue-400 rounded-md hover:bg-blue-600 hover:text-white">
-              Register
-            </Link>
-          </li>
         </ul>
       </div>
     </nav>

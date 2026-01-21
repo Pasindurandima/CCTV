@@ -1,8 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Store() {
-  const [products] = useState([
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch products from backend
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('http://localhost:8080/api/products');
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
+        const data = await response.json();
+        setProducts(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching products:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Old hardcoded data removed - now fetching from database
+  /* const [products] = useState([
     // EZVIZ Wi-Fi Cameras
     { id: 1, name: 'EZVIZ H3C Wireless Smart Home AI Camera', brand: 'EZVIZ', price: 129.99, category: 'Wireless Camera', features: 'AI Human/Vehicle Detection, Color Night Vision, Two-Way Talk, Weatherproof' },
     { id: 2, name: 'EZVIZ H6C Pro 360 Color Night Vision Wi-Fi Camera', brand: 'EZVIZ', price: 119.99, category: 'Wireless Camera', features: '1080p Panoramic View, Motion Tracking, Two-Way Audio' },
@@ -124,10 +152,7 @@ function Store() {
     { id: 86, name: 'Hikvision DS-2CD2123G2-IU 2MP Audio Face Detection IP Camera', brand: 'Hikvision', price: 139.99, category: 'IP Camera', features: 'Basic IP Dome, Built-in Audio, 2MP' },
     { id: 87, name: 'Hikvision DS-2CD2143G2-IU 4MP Audio Face Detection IP Camera', brand: 'Hikvision', price: 179.99, category: 'IP Camera', features: '4MP Dome, Built-in Microphone, Face Detection' },
     
-    // Sound Devices
-    { id: 88, name: 'CCTV Audio Microphone', brand: 'Generic', price: 39.99, category: 'Sound Devices', features: 'High Sensitivity, Weather Resistant, RCA Output' },
-    { id: 89, name: 'Bluetooth Speaker for Announcements', brand: 'JBL', price: 89.99, category: 'Sound Devices', features: 'Portable, Long Battery Life, Clear Audio' },
-  ]);
+  */
 
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -151,9 +176,47 @@ function Store() {
   const filteredProducts = products.filter(product => {
     const matchesCategory = !selectedCategory || product.category === selectedCategory;
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          product.category.toLowerCase().includes(searchQuery.toLowerCase());
+                          product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          (product.brand && product.brand.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
+
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="max-w-[1600px] mx-auto py-10 px-5">
+        <h1 className="text-4xl text-slate-800 mb-8 text-center">Our Store</h1>
+        <div className="flex justify-center items-center min-h-[400px]">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
+            <p className="text-xl text-gray-600">Loading products...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="max-w-[1600px] mx-auto py-10 px-5">
+        <h1 className="text-4xl text-slate-800 mb-8 text-center">Our Store</h1>
+        <div className="flex justify-center items-center min-h-[400px]">
+          <div className="text-center bg-red-50 p-8 rounded-lg">
+            <p className="text-2xl text-red-600 mb-4">⚠️ Error Loading Products</p>
+            <p className="text-gray-600 mb-4">{error}</p>
+            <p className="text-sm text-gray-500">Please make sure the backend server is running on port 8080</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="mt-4 bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-[1600px] mx-auto py-10 px-5">
@@ -230,9 +293,12 @@ function Store() {
                     <p className="text-gray-500 text-xs mb-2 font-semibold uppercase tracking-wide">
                       {product.category}
                     </p>
-                    {product.features && (
+                    {product.features && product.features.length > 0 && (
                       <p className="text-gray-600 text-sm mb-3 line-clamp-2 min-h-[2.5rem]">
-                        {product.features}
+                        {Array.isArray(product.features) 
+                          ? product.features.slice(0, 2).join(', ') 
+                          : product.features
+                        }
                       </p>
                     )}
                     <div className="flex items-center justify-between mt-4">

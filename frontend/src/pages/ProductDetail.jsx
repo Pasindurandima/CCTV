@@ -1,12 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { getProductById, CONTACT_NUMBERS } from '../data/products';
+
+const CONTACT_NUMBERS = {
+  phone1: '077 760 2018',
+  phone2: '077 027 9136'
+};
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const product = getProductById(id);
+  // Fetch product from backend
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`http://localhost:8080/api/products/${id}`);
+        if (!response.ok) {
+          throw new Error('Product not found');
+        }
+        const data = await response.json();
+        setProduct(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching product:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   // Extract technical specs from shortDesc
   const extractSpecs = (shortDesc) => {
@@ -29,7 +57,18 @@ function ProductDetail() {
 
   const technicalSpecs = product ? extractSpecs(product.shortDesc) : {};
 
-  if (!product) {
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="max-w-6xl mx-auto py-20 px-5 text-center">
+        <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
+        <p className="text-xl text-gray-600">Loading product...</p>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error || !product) {
     return (
       <div className="max-w-6xl mx-auto py-20 px-5 text-center">
         <h2 className="text-3xl font-bold text-slate-800 mb-4">Product Not Found</h2>
