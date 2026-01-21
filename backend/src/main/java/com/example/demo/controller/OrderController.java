@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.OrderRequest;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderItem;
+import com.example.demo.entity.SalesHistory;
 import com.example.demo.repository.OrderRepository;
+import com.example.demo.repository.SalesHistoryRepository;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -29,6 +31,9 @@ public class OrderController {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private SalesHistoryRepository salesHistoryRepository;
 
     // Get all orders
     @GetMapping
@@ -110,6 +115,7 @@ public class OrderController {
         
         if (orderData.isPresent()) {
             Order order = orderData.get();
+            String oldStatus = order.getStatus();
             
             // Update only the fields that are provided
             if (updates.containsKey("status")) {
@@ -146,6 +152,18 @@ public class OrderController {
             }
             
             Order updatedOrder = orderRepository.save(order);
+            
+            // If status changed to COMPLETED, save to sales_history
+            if (!oldStatus.equals("COMPLETED") && updatedOrder.getStatus().equals("COMPLETED")) {
+                try {
+                    SalesHistory salesHistory = new SalesHistory(updatedOrder);
+                    salesHistoryRepository.save(salesHistory);
+                } catch (Exception e) {
+                    System.err.println("Error saving to sales history: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            
             return ResponseEntity.ok(updatedOrder);
         }
         

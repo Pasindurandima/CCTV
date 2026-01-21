@@ -25,7 +25,7 @@ function AdminNavbar() {
     <nav className="admin-navbar">
       <div className="admin-nav-container">
         <div className="admin-nav-brand">
-          <h2>🛡️ Admin Dashboard</h2>
+          <h2>🛡️ Admin</h2>
         </div>
         <ul className="admin-nav-menu">
           <li>
@@ -46,6 +46,11 @@ function AdminNavbar() {
           <li>
             <Link to="/admin/orders" className="admin-nav-link">
               🛍️ Orders
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/sales-history" className="admin-nav-link">
+              💰 Sales History
             </Link>
           </li>
           <li>
