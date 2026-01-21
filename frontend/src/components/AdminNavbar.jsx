@@ -44,15 +44,18 @@ function AdminNavbar() {
             </Link>
           </li>
           <li>
+            <Link to="/admin/orders" className="admin-nav-link">
+              🛍️ Orders
+            </Link>
+          </li>
+          <li>
             <Link to="/admin/reports" className="admin-nav-link">
               📈 Reports
             </Link>
           </li>
           {user && (
             <>
-              <li className="admin-user-info">
-                <span>👤 {user.fullName}</span>
-              </li>
+            
               <li>
                 <button onClick={handleLogout} className="admin-logout-btn">
                   🚪 Logout

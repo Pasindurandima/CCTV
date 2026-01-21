@@ -16,6 +16,7 @@ import OrderSuccess from './pages/OrderSuccess';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminPanel from './pages/AdminPanel';
 import AdminInventory from './pages/AdminInventory';
+import AdminOrders from './pages/AdminOrders';
 import AdminReports from './pages/AdminReports';
 
 function AppContent() {
@@ -86,6 +87,14 @@ function AppContent() {
               element={
                 <ProtectedRoute requiredRole="ADMIN">
                   <AdminInventory />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/orders" 
+              element={
+                <ProtectedRoute requiredRole="ADMIN">
+                  <AdminOrders />
                 </ProtectedRoute>
               } 
             />

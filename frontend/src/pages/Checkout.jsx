@@ -42,6 +42,9 @@ function Checkout() {
     setLoading(true);
 
     try {
+      // Calculate total quantity from all cart items
+      const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+      
       // Create order object
       const orderData = {
         customerName: formData.fullName,
@@ -50,7 +53,7 @@ function Checkout() {
         shippingAddress: `${formData.address}, ${formData.city}, ${formData.postalCode}`,
         notes: formData.notes,
         totalAmount: getCartTotal(),
-        productCount: cartItems.length,
+        productCount: totalQuantity,
         status: 'PENDING',
         paymentMethod: paymentMethod,
         items: cartItems.map(item => ({
