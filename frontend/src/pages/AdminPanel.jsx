@@ -14,6 +14,7 @@ const AdminPanel = () => {
   });
 
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ text: '', type: '' });
   const [editMode, setEditMode] = useState(false);
@@ -32,8 +33,21 @@ const AdminPanel = () => {
     }
   };
 
+  // Fetch all categories
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/categories/active');
+      const data = await response.json();
+      setCategories(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      setCategories([]);
+    }
+  };
+
   useEffect(() => {
     fetchProducts();
+    fetchCategories();
   }, []);
 
   // Handle input changes
@@ -239,7 +253,17 @@ const AdminPanel = () => {
             </div>
 
             <div className="form-group">
-              <label>Category *</label>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                <label>Category *</label>
+                <button
+                  type="button"
+                  onClick={() => window.location.href = '/admin/categories'}
+                  className="add-feature-btn"
+                  style={{ padding: '0.4rem 0.8rem', fontSize: '0.875rem', margin: 0 }}
+                >
+                  📂 Manage Categories
+                </button>
+              </div>
               <select
                 name="category"
                 value={formData.category}
@@ -247,14 +271,17 @@ const AdminPanel = () => {
                 required
               >
                 <option value="">Select Category</option>
-                <option value="Wireless Camera">Wireless Camera</option>
-                <option value="Wired Camera">Wired Camera</option>
-                <option value="NVR">NVR</option>
-                <option value="DVR">DVR</option>
-                <option value="Smart Lock">Smart Lock</option>
-                <option value="Video Doorbell">Video Doorbell</option>
-                <option value="Accessories">Accessories</option>
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.name}>
+                    {cat.name}
+                  </option>
+                ))}
               </select>
+              {categories.length === 0 && (
+                <small style={{ color: '#e53e3e', marginTop: '0.25rem', display: 'block' }}>
+                  ⚠️ No categories found. Click "Manage Categories" to add categories.
+                </small>
+              )}
             </div>
 
             <div className="form-group">

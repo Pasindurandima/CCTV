@@ -116,9 +116,6 @@ public class InventoryController {
             if (inventoryDetails.getUnitPrice() != null) {
                 inventory.setUnitPrice(inventoryDetails.getUnitPrice());
             }
-            if (inventoryDetails.getLocation() != null) {
-                inventory.setLocation(inventoryDetails.getLocation());
-            }
             
             inventory.setLastUpdated(LocalDateTime.now());
             Inventory updatedInventory = inventoryRepository.save(inventory);

@@ -6,8 +6,11 @@ function Store() {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Fetch products from backend
   useEffect(() => {
@@ -29,7 +32,23 @@ function Store() {
       }
     };
 
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/categories/active');
+        if (!response.ok) {
+          throw new Error('Failed to fetch categories');
+        }
+        const data = await response.json();
+        setCategories(data);
+      } catch (err) {
+        console.error('Error fetching categories:', err);
+        // Use empty array if categories can't be loaded
+        setCategories([]);
+      }
+    };
+
     fetchProducts();
+    fetchCategories();
   }, []);
 
   // Old hardcoded data removed - now fetching from database
@@ -157,25 +176,6 @@ function Store() {
     
   */
 
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const categories = [
-    'Wireless Camera',
-    'Analog CCTV',
-    'IP Camera',
-    'CCTV Package',
-    'DVR',
-    'NVR',
-    'Hard Drive Memory',
-    'Cameras',
-    'Mobile Accessories',
-    'Sound Devices',
-    'TV and Monitor',
-    'UPS Inverters',
-    'Power Bank'
-  ];
-
   const filteredProducts = products.filter(product => {
     const matchesCategory = !selectedCategory || product.category === selectedCategory;
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -255,15 +255,15 @@ function Store() {
               </button>
               {categories.map((category) => (
                 <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.name)}
                   className={`w-full text-left px-4 py-3 rounded-md transition-all ${
-                    selectedCategory === category
+                    selectedCategory === category.name
                       ? 'bg-blue-500 text-white shadow-md'
                       : 'bg-gray-100 text-slate-700 hover:bg-gray-200'
                   }`}
                 >
-                  {category}
+                  {category.name}
                 </button>
               ))}
             </div>
@@ -278,7 +278,7 @@ function Store() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.map((product) => (
-              <Link key={product.id} to={`/product/${product.id}`}>
+              <Link key={product.id} to={`/product/${product.id}`} className="no-underline">
                 <div className="bg-white rounded-xl p-5 shadow-lg transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer">
                   <div className="bg-gradient-to-br from-indigo-500 to-purple-600 h-48 rounded-lg flex flex-col items-center justify-center text-white mb-4 relative overflow-hidden">
                     <div className="text-6xl mb-2">📷</div>

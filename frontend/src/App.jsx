@@ -18,6 +18,7 @@ import AdminPanel from './pages/AdminPanel';
 import AdminInventory from './pages/AdminInventory';
 import AdminOrders from './pages/AdminOrders';
 import AdminReports from './pages/AdminReports';
+import AdminCategories from './pages/AdminCategories';
 import SalesHistory from './pages/SalesHistory';
 import ProfitAnalytics from './pages/ProfitAnalytics';
 
@@ -49,10 +50,10 @@ function AppContent() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Conditional Navbar based on user role */}
-      {isAdmin ? <AdminNavbar /> : <Navbar />}
+      {/* Conditional Navbar based on user role - Hide on login page */}
+      {location.pathname !== '/admin/login' && (isAdmin ? <AdminNavbar /> : <Navbar />)}
         
-        <main className="flex-1 pt-[70px]">
+        <main className={location.pathname === '/admin/login' ? 'flex-1' : 'flex-1 pt-[70px]'}>
           <Routes>
             {/* Admin Login Route */}
             <Route path="/admin/login" element={<Login />} />
@@ -81,6 +82,14 @@ function AppContent() {
               element={
                 <ProtectedRoute requiredRole="ADMIN">
                   <AdminPanel />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/categories" 
+              element={
+                <ProtectedRoute requiredRole="ADMIN">
+                  <AdminCategories />
                 </ProtectedRoute>
               } 
             />
