@@ -265,186 +265,209 @@ function AdminOrders() {
       {/* Order Detail Modal */}
       {selectedOrder && (
         <div className="modal-overlay" onClick={() => setSelectedOrder(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>Order Details #{selectedOrder.id}</h2>
-              <button onClick={() => setSelectedOrder(null)} className="close-btn">✕</button>
+          <div className="modal-content-new" onClick={(e) => e.stopPropagation()}>
+            {/* Header with Status Badge */}
+            <div className="modal-header-new">
+              <div className="header-left">
+                <h2>Order #{selectedOrder.id}</h2>
+                <span className={`status-badge-large ${selectedOrder.status?.toLowerCase()}`}>
+                  {selectedOrder.status}
+                </span>
+              </div>
+              <button onClick={() => setSelectedOrder(null)} className="close-btn-new">✕</button>
             </div>
             
-            <div className="modal-body">
-              {/* Customer Information */}
-              <div className="detail-section">
-                <h3>👤 Customer Information</h3>
-                <div className="detail-grid">
-                  <div className="detail-item">
-                    <label>Name:</label>
-                    <span>{selectedOrder.customerName}</span>
+            <div className="modal-body-new">
+              {/* Two Column Layout */}
+              <div className="order-details-grid">
+                
+                {/* LEFT COLUMN - Customer & Order Info */}
+                <div className="left-column">
+                  
+                  {/* Customer Information Card */}
+                  <div className="info-card">
+                    <div className="card-header">
+                      <h3>👤 Customer Details</h3>
+                    </div>
+                    <div className="card-body">
+                      <div className="info-row">
+                        <span className="info-label">Name</span>
+                        <span className="info-value">{selectedOrder.customerName}</span>
+                      </div>
+                      <div className="info-row">
+                        <span className="info-label">Email</span>
+                        <span className="info-value">{selectedOrder.customerEmail}</span>
+                      </div>
+                      <div className="info-row">
+                        <span className="info-label">Phone</span>
+                        <span className="info-value">{selectedOrder.customerPhone || 'N/A'}</span>
+                      </div>
+                      <div className="info-row">
+                        <span className="info-label">Address</span>
+                        <span className="info-value">{selectedOrder.shippingAddress || 'N/A'}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="detail-item">
-                    <label>Email:</label>
-                    <span>{selectedOrder.customerEmail}</span>
-                  </div>
-                  <div className="detail-item">
-                    <label>Phone:</label>
-                    <span>{selectedOrder.customerPhone || 'N/A'}</span>
-                  </div>
-                  <div className="detail-item">
-                    <label>Address:</label>
-                    <span>{selectedOrder.shippingAddress || 'N/A'}</span>
-                  </div>
-                </div>
-              </div>
 
-              {/* Order Information */}
-              <div className="detail-section">
-                <h3>📦 Order Information</h3>
-                <div className="detail-grid">
-                  <div className="detail-item">
-                    <label>Order ID:</label>
-                    <span>#{selectedOrder.id}</span>
+                  {/* Order Information Card */}
+                  <div className="info-card">
+                    <div className="card-header">
+                      <h3>📋 Order Details</h3>
+                    </div>
+                    <div className="card-body">
+                      <div className="info-row">
+                        <span className="info-label">Order ID</span>
+                        <span className="info-value">#{selectedOrder.id}</span>
+                      </div>
+                      <div className="info-row">
+                        <span className="info-label">Date</span>
+                        <span className="info-value">{new Date(selectedOrder.orderDate).toLocaleDateString()}</span>
+                      </div>
+                      <div className="info-row">
+                        <span className="info-label">Time</span>
+                        <span className="info-value">{new Date(selectedOrder.orderDate).toLocaleTimeString()}</span>
+                      </div>
+                      <div className="info-row">
+                        <span className="info-label">Total Items</span>
+                        <span className="info-value">{selectedOrder.productCount} {selectedOrder.productCount === 1 ? 'item' : 'items'}</span>
+                      </div>
+                      <div className="info-row">
+                        <span className="info-label">Payment</span>
+                        <span className={`payment-badge-small ${selectedOrder.paymentMethod}`}>
+                          {selectedOrder.paymentMethod === 'cash' ? '💵 COD' : '💳 Online'}
+                        </span>
+                      </div>
+                      <div className="info-row highlight">
+                        <span className="info-label">Total Amount</span>
+                        <span className="info-value amount-large">${selectedOrder.totalAmount?.toFixed(2)}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="detail-item">
-                    <label>Order Date:</label>
-                    <span>{formatDate(selectedOrder.orderDate)}</span>
-                  </div>
-                  <div className="detail-item">
-                    <label>Total Items:</label>
-                    <span>{selectedOrder.productCount} {selectedOrder.productCount === 1 ? 'item' : 'items'}</span>
-                  </div>
-                  <div className="detail-item full-width">
-                    <label>Products Ordered:</label>
-                    <div className="products-table-container">
+
+                  {/* Order Notes if exists */}
+                  {selectedOrder.notes && (
+                    <div className="info-card">
+                      <div className="card-header">
+                        <h3>📝 Notes</h3>
+                      </div>
+                      <div className="card-body">
+                        <p className="notes-text">{selectedOrder.notes}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* RIGHT COLUMN - Products & Actions */}
+                <div className="right-column">
+                  
+                  {/* Products Ordered Card */}
+                  <div className="info-card">
+                    <div className="card-header">
+                      <h3>🛍️ Products Ordered</h3>
+                    </div>
+                    <div className="card-body">
                       {selectedOrder.items && selectedOrder.items.length > 0 ? (
-                        <table className="products-ordered-table">
-                          <thead>
-                            <tr>
-                              <th>Product Name</th>
-                              <th>Product Quantity</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {selectedOrder.items.map((item, index) => (
-                              <tr key={index}>
-                                <td>{item.productName}</td>
-                                <td className="text-center">{item.quantity}</td>
+                        <div className="products-list-new">
+                          <table className="products-table-new">
+                            <thead>
+                              <tr>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Subtotal</th>
                               </tr>
-                            ))}
-                          </tbody>
-                        </table>
+                            </thead>
+                            <tbody>
+                              {selectedOrder.items.map((item, index) => (
+                                <tr key={index}>
+                                  <td className="product-name-cell">{item.productName}</td>
+                                  <td className="qty-cell">{item.quantity}</td>
+                                  <td className="price-cell">${item.price.toFixed(2)}</td>
+                                  <td className="subtotal-cell">${(item.price * item.quantity).toFixed(2)}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                            <tfoot>
+                              <tr className="total-row">
+                                <td colSpan="3">Total</td>
+                                <td className="total-cell">${selectedOrder.totalAmount?.toFixed(2)}</td>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
                       ) : (
-                        <div className="no-items-message">No product details available</div>
+                        <div className="no-products-message">No product details available</div>
                       )}
                     </div>
                   </div>
-                  <div className="detail-item">
-                    <label>Total Amount:</label>
-                    <span className="amount">${selectedOrder.totalAmount?.toFixed(2)}</span>
-                  </div>
-                  <div className="detail-item">
-                    <label>Payment Method:</label>
-                    <span className={`payment-badge ${selectedOrder.paymentMethod}`}>
-                      {selectedOrder.paymentMethod === 'cash' ? '💵 Cash on Delivery' : '💳 Online Payment'}
-                    </span>
-                  </div>
-                  <div className="detail-item">
-                    <label>Status:</label>
-                    <span className={`status-badge ${selectedOrder.status?.toLowerCase()}`}>
-                      {selectedOrder.status}
-                    </span>
-                  </div>
-                </div>
-              </div>
 
-              {/* Product Items */}
-              {selectedOrder.items && selectedOrder.items.length > 0 && (
-                <div className="detail-section">
-                  <h3>🛍️ Ordered Products</h3>
-                  <div className="order-items-list">
-                    {selectedOrder.items.map((item, index) => (
-                      <div key={index} className="order-item-card">
-                        <div className="order-item-info">
-                          <h4 className="product-name">{item.productName}</h4>
-                          <div className="item-details">
-                            <span className="item-quantity">Qty: {item.quantity}</span>
-                            <span className="item-price">@ ${item.price.toFixed(2)}</span>
-                          </div>
-                        </div>
-                        <div className="item-subtotal">
-                          ${(item.price * item.quantity).toFixed(2)}
-                        </div>
+                  {/* Status Update Card */}
+                  <div className="info-card">
+                    <div className="card-header">
+                      <h3>🔄 Update Status</h3>
+                    </div>
+                    <div className="card-body">
+                      <div className="status-grid">
+                        <button
+                          onClick={() => updateOrderStatus(selectedOrder.id, 'PENDING')}
+                          className={`status-btn-new pending ${selectedOrder.status === 'PENDING' ? 'active' : ''}`}
+                          disabled={selectedOrder.status === 'PENDING'}
+                        >
+                          <span className="status-icon">⏳</span>
+                          <span className="status-text">Pending</span>
+                        </button>
+                        <button
+                          onClick={() => updateOrderStatus(selectedOrder.id, 'PROCESSING')}
+                          className={`status-btn-new processing ${selectedOrder.status === 'PROCESSING' ? 'active' : ''}`}
+                          disabled={selectedOrder.status === 'PROCESSING'}
+                        >
+                          <span className="status-icon">🔄</span>
+                          <span className="status-text">Processing</span>
+                        </button>
+                        <button
+                          onClick={() => updateOrderStatus(selectedOrder.id, 'SHIPPED')}
+                          className={`status-btn-new shipped ${selectedOrder.status === 'SHIPPED' ? 'active' : ''}`}
+                          disabled={selectedOrder.status === 'SHIPPED'}
+                        >
+                          <span className="status-icon">🚚</span>
+                          <span className="status-text">Shipped</span>
+                        </button>
+                        <button
+                          onClick={() => updateOrderStatus(selectedOrder.id, 'COMPLETED')}
+                          className={`status-btn-new completed ${selectedOrder.status === 'COMPLETED' ? 'active' : ''}`}
+                          disabled={selectedOrder.status === 'COMPLETED'}
+                        >
+                          <span className="status-icon">✅</span>
+                          <span className="status-text">Completed</span>
+                        </button>
+                        <button
+                          onClick={() => updateOrderStatus(selectedOrder.id, 'CANCELLED')}
+                          className={`status-btn-new cancelled ${selectedOrder.status === 'CANCELLED' ? 'active' : ''}`}
+                          disabled={selectedOrder.status === 'CANCELLED'}
+                        >
+                          <span className="status-icon">❌</span>
+                          <span className="status-text">Cancelled</span>
+                        </button>
                       </div>
-                    ))}
-                    <div className="order-total-row">
-                      <span className="total-label">Total:</span>
-                      <span className="total-amount">${selectedOrder.totalAmount?.toFixed(2)}</span>
                     </div>
                   </div>
-                </div>
-              )}
 
-              {/* Notes */}
-              {selectedOrder.notes && (
-                <div className="detail-section">
-                  <h3>📝 Order Notes</h3>
-                  <p className="notes">{selectedOrder.notes}</p>
+                  {/* Action Buttons */}
+                  <div className="action-buttons-container">
+                    <button
+                      onClick={() => window.print()}
+                      className="action-btn print-btn"
+                    >
+                      🖨️ Print Order
+                    </button>
+                    <button
+                      onClick={() => deleteOrder(selectedOrder.id)}
+                      className="action-btn delete-btn"
+                    >
+                      🗑️ Delete Order
+                    </button>
+                  </div>
                 </div>
-              )}
-
-              {/* Update Status */}
-              <div className="detail-section">
-                <h3>🔄 Update Order Status</h3>
-                <div className="status-actions">
-                  <button
-                    onClick={() => updateOrderStatus(selectedOrder.id, 'PENDING')}
-                    className={`status-btn pending ${selectedOrder.status === 'PENDING' ? 'active' : ''}`}
-                    disabled={selectedOrder.status === 'PENDING'}
-                    title={selectedOrder.status === 'PENDING' ? 'Current status' : 'Set to Pending'}
-                  >
-                    ⏳ Pending
-                  </button>
-                  <button
-                    onClick={() => updateOrderStatus(selectedOrder.id, 'PROCESSING')}
-                    className={`status-btn processing ${selectedOrder.status === 'PROCESSING' ? 'active' : ''}`}
-                    disabled={selectedOrder.status === 'PROCESSING'}
-                    title={selectedOrder.status === 'PROCESSING' ? 'Current status' : 'Set to Processing'}
-                  >
-                    🔄 Processing
-                  </button>
-                  <button
-                    onClick={() => updateOrderStatus(selectedOrder.id, 'SHIPPED')}
-                    className={`status-btn shipped ${selectedOrder.status === 'SHIPPED' ? 'active' : ''}`}
-                    disabled={selectedOrder.status === 'SHIPPED'}
-                    title={selectedOrder.status === 'SHIPPED' ? 'Current status' : 'Set to Shipped'}
-                  >
-                    🚚 Shipped
-                  </button>
-                  <button
-                    onClick={() => updateOrderStatus(selectedOrder.id, 'COMPLETED')}
-                    className={`status-btn completed ${selectedOrder.status === 'COMPLETED' ? 'active' : ''}`}
-                    disabled={selectedOrder.status === 'COMPLETED'}
-                    title={selectedOrder.status === 'COMPLETED' ? 'Current status' : 'Set to Completed'}
-                  >
-                    ✅ Completed
-                  </button>
-                  <button
-                    onClick={() => updateOrderStatus(selectedOrder.id, 'CANCELLED')}
-                    className={`status-btn cancelled ${selectedOrder.status === 'CANCELLED' ? 'active' : ''}`}
-                    disabled={selectedOrder.status === 'CANCELLED'}
-                    title={selectedOrder.status === 'CANCELLED' ? 'Current status' : 'Set to Cancelled'}
-                  >
-                    ❌ Cancelled
-                  </button>
-                </div>
-              </div>
-
-              {/* Delete Order */}
-              <div className="detail-section">
-                <button
-                  onClick={() => deleteOrder(selectedOrder.id)}
-                  className="delete-order-btn"
-                >
-                  🗑️ Delete Order
-                </button>
               </div>
             </div>
           </div>
