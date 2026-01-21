@@ -1,7 +1,13 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "inventory")
@@ -25,9 +31,6 @@ public class Inventory {
     
     @Column(nullable = false)
     private Double unitPrice;
-    
-    @Column(length = 255)
-    private String location;
     
     @Column(nullable = false)
     private LocalDateTime lastUpdated;
@@ -95,15 +98,7 @@ public class Inventory {
     public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
-    
-    public String getLocation() {
-        return location;
-    }
-    
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    
+
     public LocalDateTime getLastUpdated() {
         return lastUpdated;
     }

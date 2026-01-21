@@ -145,4 +145,71 @@ public class InventoryController {
                     .body("Error deleting inventory: " + e.getMessage());
         }
     }
+    
+    // Adjust stock (add or remove quantity)
+    @PostMapping("/{id}/adjust")
+    public ResponseEntity<?> adjustStock(@PathVariable Long id, @RequestBody java.util.Map<String, Object> adjustment) {
+        try {
+            Optional<Inventory> inventoryOptional = inventoryRepository.findById(id);
+            
+            if (inventoryOptional.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            
+            Inventory inventory = inventoryOptional.get();
+            String type = (String) adjustment.get("type"); // "add" or "remove"
+            Integer amount = (Integer) adjustment.get("amount");
+            String reason = (String) adjustment.get("reason");
+            
+            if (amount == null || amount <= 0) {
+                return ResponseEntity.badRequest().body("Valid amount is required");
+            }
+            
+            int newQuantity = inventory.getQuantity();
+            if ("add".equals(type)) {
+                newQuantity += amount;
+            } else if ("remove".equals(type)) {
+                newQuantity -= amount;
+                if (newQuantity < 0) {
+                    return ResponseEntity.badRequest().body("Insufficient stock");
+                }
+            } else {
+                return ResponseEntity.badRequest().body("Type must be 'add' or 'remove'");
+            }
+            
+            inventory.setQuantity(newQuantity);
+            inventory.setLastUpdated(LocalDateTime.now());
+            Inventory updatedInventory = inventoryRepository.save(inventory);
+            
+            return ResponseEntity.ok(updatedInventory);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error adjusting stock: " + e.getMessage());
+        }
+    }
+    
+    // Bulk update reorder levels
+    @PutMapping("/bulk/reorder-level")
+    public ResponseEntity<?> bulkUpdateReorderLevel(@RequestBody java.util.Map<String, Integer> updates) {
+        try {
+            int updated = 0;
+            for (java.util.Map.Entry<String, Integer> entry : updates.entrySet()) {
+                Long id = Long.parseLong(entry.getKey());
+                Integer reorderLevel = entry.getValue();
+                
+                Optional<Inventory> inventoryOptional = inventoryRepository.findById(id);
+                if (inventoryOptional.isPresent()) {
+                    Inventory inventory = inventoryOptional.get();
+                    inventory.setReorderLevel(reorderLevel);
+                    inventory.setLastUpdated(LocalDateTime.now());
+                    inventoryRepository.save(inventory);
+                    updated++;
+                }
+            }
+            return ResponseEntity.ok("Updated " + updated + " inventory items");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error bulk updating: " + e.getMessage());
+        }
+    }
 }

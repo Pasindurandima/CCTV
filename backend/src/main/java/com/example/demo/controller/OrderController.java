@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.OrderRequest;
+import com.example.demo.entity.Inventory;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderItem;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.SalesHistory;
+import com.example.demo.repository.InventoryRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.SalesHistoryRepository;
@@ -39,6 +41,9 @@ public class OrderController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private InventoryRepository inventoryRepository;
 
     // Get all orders
     @GetMapping
@@ -161,6 +166,41 @@ public class OrderController {
             // If status changed to COMPLETED, save to sales_history with profit calculation
             if (!oldStatus.equals("COMPLETED") && updatedOrder.getStatus().equals("COMPLETED")) {
                 try {
+                    // Reduce inventory quantities for each product in the order
+                    if (updatedOrder.getItems() != null && !updatedOrder.getItems().isEmpty()) {
+                        for (OrderItem item : updatedOrder.getItems()) {
+                            try {
+                                // Find inventory by productId
+                                Optional<Inventory> inventoryOpt = inventoryRepository.findByProductId(item.getProductId());
+                                if (inventoryOpt.isPresent()) {
+                                    Inventory inventory = inventoryOpt.get();
+                                    int currentQuantity = inventory.getQuantity();
+                                    int orderQuantity = item.getQuantity();
+                                    
+                                    // Reduce quantity
+                                    int newQuantity = currentQuantity - orderQuantity;
+                                    if (newQuantity < 0) {
+                                        System.err.println("Warning: Inventory for product " + item.getProductName() + 
+                                            " (ID: " + item.getProductId() + ") will go negative. Current: " + 
+                                            currentQuantity + ", Ordered: " + orderQuantity);
+                                        newQuantity = 0; // Set to 0 instead of negative
+                                    }
+                                    
+                                    inventory.setQuantity(newQuantity);
+                                    inventoryRepository.save(inventory);
+                                    System.out.println("Updated inventory for " + item.getProductName() + 
+                                        ": " + currentQuantity + " -> " + newQuantity);
+                                } else {
+                                    System.err.println("Warning: No inventory found for product ID: " + item.getProductId());
+                                }
+                            } catch (Exception e) {
+                                System.err.println("Error updating inventory for product ID " + item.getProductId() + ": " + e.getMessage());
+                                // Continue processing other items even if one fails
+                            }
+                        }
+                    }
+                    
+                    // Save to sales history
                     SalesHistory salesHistory = new SalesHistory(updatedOrder);
                     
                     // Calculate profit

@@ -12,5 +12,4 @@ import com.example.demo.entity.Inventory;
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
     Optional<Inventory> findByProductId(Long productId);
     List<Inventory> findByQuantityLessThanEqual(Integer quantity);
-    List<Inventory> findByLocation(String location);
 }
