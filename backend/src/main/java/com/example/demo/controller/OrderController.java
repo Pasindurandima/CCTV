@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.OrderRequest;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderItem;
+import com.example.demo.entity.Product;
 import com.example.demo.entity.SalesHistory;
 import com.example.demo.repository.OrderRepository;
+import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.SalesHistoryRepository;
 
 @RestController
@@ -34,6 +36,9 @@ public class OrderController {
 
     @Autowired
     private SalesHistoryRepository salesHistoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     // Get all orders
     @GetMapping
@@ -153,10 +158,32 @@ public class OrderController {
             
             Order updatedOrder = orderRepository.save(order);
             
-            // If status changed to COMPLETED, save to sales_history
+            // If status changed to COMPLETED, save to sales_history with profit calculation
             if (!oldStatus.equals("COMPLETED") && updatedOrder.getStatus().equals("COMPLETED")) {
                 try {
                     SalesHistory salesHistory = new SalesHistory(updatedOrder);
+                    
+                    // Calculate profit
+                    double totalCost = 0.0;
+                    double totalProfit = 0.0;
+                    
+                    if (updatedOrder.getItems() != null && !updatedOrder.getItems().isEmpty()) {
+                        for (OrderItem item : updatedOrder.getItems()) {
+                            Optional<Product> productOpt = productRepository.findById(item.getProductId());
+                            if (productOpt.isPresent()) {
+                                Product product = productOpt.get();
+                                double costPrice = product.getCostPrice() != null ? product.getCostPrice() : 0.0;
+                                double sellingPrice = item.getPrice();
+                                int quantity = item.getQuantity();
+                                
+                                totalCost += (costPrice * quantity);
+                                totalProfit += ((sellingPrice - costPrice) * quantity);
+                            }
+                        }
+                    }
+                    
+                    salesHistory.setTotalCost(totalCost);
+                    salesHistory.setTotalProfit(totalProfit);
                     salesHistoryRepository.save(salesHistory);
                 } catch (Exception e) {
                     System.err.println("Error saving to sales history: " + e.getMessage());

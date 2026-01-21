@@ -54,6 +54,11 @@ function AdminNavbar() {
             </Link>
           </li>
           <li>
+            <Link to="/admin/profit-analytics" className="admin-nav-link">
+              📊 Profit Analytics
+            </Link>
+          </li>
+          <li>
             <Link to="/admin/reports" className="admin-nav-link">
               📈 Reports
             </Link>
@@ -63,7 +68,7 @@ function AdminNavbar() {
             
               <li>
                 <button onClick={handleLogout} className="admin-logout-btn">
-                  🚪 Logout
+                  🚪 
                 </button>
               </li>
             </>

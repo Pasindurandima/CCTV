@@ -19,6 +19,7 @@ import AdminInventory from './pages/AdminInventory';
 import AdminOrders from './pages/AdminOrders';
 import AdminReports from './pages/AdminReports';
 import SalesHistory from './pages/SalesHistory';
+import ProfitAnalytics from './pages/ProfitAnalytics';
 
 function AppContent() {
   const location = useLocation();
@@ -104,6 +105,14 @@ function AppContent() {
               element={
                 <ProtectedRoute requiredRole="ADMIN">
                   <SalesHistory />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/profit-analytics" 
+              element={
+                <ProtectedRoute requiredRole="ADMIN">
+                  <ProfitAnalytics />
                 </ProtectedRoute>
               } 
             />

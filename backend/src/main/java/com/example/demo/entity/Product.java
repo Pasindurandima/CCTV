@@ -33,6 +33,8 @@ public class Product {
     
     private Double originalPrice;
     
+    private Double costPrice; // Cost/wholesale price for profit calculation
+    
     @Column(nullable = false)
     private String category;
     
@@ -103,6 +105,14 @@ public class Product {
     
     public void setOriginalPrice(Double originalPrice) {
         this.originalPrice = originalPrice;
+    }
+    
+    public Double getCostPrice() {
+        return costPrice;
+    }
+    
+    public void setCostPrice(Double costPrice) {
+        this.costPrice = costPrice;
     }
     
     public String getCategory() {

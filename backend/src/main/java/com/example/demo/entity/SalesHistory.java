@@ -44,6 +44,12 @@ public class SalesHistory {
     @Column(length = 1000)
     private String productDetails; // JSON string of products
     
+    @Column
+    private Double totalProfit; // Calculated profit (selling price - cost price)
+    
+    @Column
+    private Double totalCost; // Total cost of products
+    
     @Column(nullable = false)
     private LocalDateTime orderDate;
     
@@ -82,6 +88,10 @@ public class SalesHistory {
         }
         productsJson.append("]");
         this.productDetails = productsJson.toString();
+        
+        // Note: Profit will be calculated separately after product cost lookup
+        this.totalProfit = 0.0;
+        this.totalCost = 0.0;
     }
     
     // Getters and Setters
@@ -163,6 +173,22 @@ public class SalesHistory {
 
     public void setProductDetails(String productDetails) {
         this.productDetails = productDetails;
+    }
+
+    public Double getTotalProfit() {
+        return totalProfit;
+    }
+
+    public void setTotalProfit(Double totalProfit) {
+        this.totalProfit = totalProfit;
+    }
+
+    public Double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(Double totalCost) {
+        this.totalCost = totalCost;
     }
 
     public LocalDateTime getOrderDate() {
