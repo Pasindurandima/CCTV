@@ -548,7 +548,7 @@ function Checkout() {
                   <span className="text-gray-600">
                     {item.name} x {item.quantity}
                   </span>
-                  <span className="font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                  <span className="font-semibold">Rs {(item.price * item.quantity).toFixed(2)}</span>
                 </div>
               ))}
             </div>
@@ -556,7 +556,7 @@ function Checkout() {
             <div className="border-t border-gray-200 pt-3 space-y-2">
               <div className="flex justify-between text-gray-600">
                 <span>Subtotal</span>
-                <span>${getCartTotal().toFixed(2)}</span>
+                <span>Rs {getCartTotal().toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-gray-600">
                 <span>Shipping</span>
@@ -564,7 +564,7 @@ function Checkout() {
               </div>
               <div className="border-t border-gray-200 pt-2 flex justify-between text-xl font-bold text-slate-800">
                 <span>Total</span>
-                <span>${getCartTotal().toFixed(2)}</span>
+                <span>Rs {getCartTotal().toFixed(2)}</span>
               </div>
             </div>
 

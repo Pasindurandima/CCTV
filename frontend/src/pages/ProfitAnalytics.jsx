@@ -30,11 +30,7 @@ function ProfitAnalytics() {
   };
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      minimumFractionDigits: 2
-    }).format(amount || 0);
+    return `Rs ${(amount || 0).toFixed(2)}`;
   };
 
   const formatPercent = (value) => {

@@ -229,7 +229,7 @@ function AdminOrders() {
                       {order.productCount} {order.productCount === 1 ? 'item' : 'items'}
                     </span>
                   </td>
-                  <td className="amount">${order.totalAmount?.toFixed(2)}</td>
+                  <td className="amount">Rs {order.totalAmount?.toFixed(2)}</td>
                   <td>
                     <span className={`payment-badge ${order.paymentMethod}`}>
                       {order.paymentMethod === 'cash' ? '💵 COD' : '💳 Online'}
@@ -339,7 +339,7 @@ function AdminOrders() {
                       </div>
                       <div className="info-row highlight">
                         <span className="info-label">Total Amount</span>
-                        <span className="info-value amount-large">${selectedOrder.totalAmount?.toFixed(2)}</span>
+                        <span className="info-value amount-large">Rs {selectedOrder.totalAmount?.toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
@@ -382,15 +382,15 @@ function AdminOrders() {
                                 <tr key={index}>
                                   <td className="product-name-cell">{item.productName}</td>
                                   <td className="qty-cell">{item.quantity}</td>
-                                  <td className="price-cell">${item.price.toFixed(2)}</td>
-                                  <td className="subtotal-cell">${(item.price * item.quantity).toFixed(2)}</td>
+                                  <td className="price-cell">Rs {item.price.toFixed(2)}</td>
+                                  <td className="subtotal-cell">Rs {(item.price * item.quantity).toFixed(2)}</td>
                                 </tr>
                               ))}
                             </tbody>
                             <tfoot>
                               <tr className="total-row">
                                 <td colSpan="3">Total</td>
-                                <td className="total-cell">${selectedOrder.totalAmount?.toFixed(2)}</td>
+                                <td className="total-cell">Rs {selectedOrder.totalAmount?.toFixed(2)}</td>
                               </tr>
                             </tfoot>
                           </table>

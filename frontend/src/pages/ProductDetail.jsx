@@ -129,7 +129,7 @@ function ProductDetail() {
               </div>
             )}
             <div className="text-4xl font-bold text-blue-500">
-              ${product.price.toFixed(2)}
+              Rs {product.price.toFixed(2)}
             </div>
             <p className="text-sm text-gray-500 mt-2">Current price</p>
           </div>
@@ -293,16 +293,16 @@ function ProductDetail() {
                   {product.originalPrice && (
                     <p className="text-gray-700">
                       <span className="font-semibold">Original Price:</span>
-                      <span className="ml-2 line-through text-gray-500">${product.originalPrice.toFixed(2)}</span>
+                      <span className="ml-2 line-through text-gray-500">Rs {product.originalPrice.toFixed(2)}</span>
                     </p>
                   )}
                   <p className="text-gray-700">
                     <span className="font-semibold">Current Price:</span>
-                    <span className="ml-2 text-2xl text-blue-600 font-bold">${product.price.toFixed(2)}</span>
+                    <span className="ml-2 text-2xl text-blue-600 font-bold">Rs {product.price.toFixed(2)}</span>
                   </p>
                   {product.originalPrice && (
                     <p className="text-green-700 font-semibold">
-                      You Save: ${(product.originalPrice - product.price).toFixed(2)} 
+                      You Save: Rs {(product.originalPrice - product.price).toFixed(2)} 
                       ({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF)
                     </p>
                   )}

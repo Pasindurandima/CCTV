@@ -67,7 +67,7 @@ const UserDashboard = () => {
           <div className="stat-card">
             <div className="stat-icon">💰</div>
             <div className="stat-info">
-              <h3>₹{orders.reduce((sum, o) => sum + o.total, 0)}</h3>
+              <h3>Rs {orders.reduce((sum, o) => sum + o.total, 0)}</h3>
               <p>Total Spent</p>
             </div>
           </div>
@@ -127,7 +127,7 @@ const UserDashboard = () => {
                   </div>
                   <div className="order-details">
                     <p className="order-items">{order.items} items</p>
-                    <p className="order-total">₹{order.total}</p>
+                    <p className="order-total">Rs {order.total}</p>
                   </div>
                   <button className="track-btn">Track Order</button>
                 </div>

@@ -19,7 +19,7 @@ const AdminSales = () => {
         <h1>💰 Sales Management</h1>
         <div className="sales-summary">
           <div className="summary-item">
-            <h3>${totalSales.toFixed(2)}</h3>
+            <h3>Rs {totalSales.toFixed(2)}</h3>
             <p>Total Sales</p>
           </div>
           <div className="summary-item">
@@ -52,7 +52,7 @@ const AdminSales = () => {
                 <td className="order-no">{sale.orderNo}</td>
                 <td>{sale.product}</td>
                 <td>{sale.customer}</td>
-                <td className="amount">${sale.amount}</td>
+                <td className="amount">Rs {sale.amount}</td>
                 <td>{sale.date}</td>
                 <td>
                   <span className={`status-badge ${sale.status.toLowerCase()}`}>

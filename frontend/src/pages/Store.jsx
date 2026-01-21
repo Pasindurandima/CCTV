@@ -305,7 +305,7 @@ function Store() {
                       </p>
                     )}
                     <div className="flex items-center justify-between mt-4">
-                      <p className="text-3xl text-blue-500 font-bold">${product.price}</p>
+                      <p className="text-3xl text-blue-500 font-bold">Rs {product.price}</p>
                       <div className="flex flex-col gap-2">
                         <button 
                           onClick={(e) => {

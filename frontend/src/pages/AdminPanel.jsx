@@ -343,7 +343,7 @@ const AdminPanel = () => {
                       <h3>{product.name}</h3>
                       <p className="brand">🏢 {product.brand}</p>
                       <p className="category">🏷️ {product.category}</p>
-                      <p className="price">💵 ${product.price}</p>
+                      <p className="price">💵 Rs {product.price}</p>
                       {product.features && product.features.length > 0 && (
                         <p className="features-count">✨ {product.features.length} features</p>
                       )}

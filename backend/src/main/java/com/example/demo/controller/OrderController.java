@@ -172,7 +172,17 @@ public class OrderController {
                             Optional<Product> productOpt = productRepository.findById(item.getProductId());
                             if (productOpt.isPresent()) {
                                 Product product = productOpt.get();
-                                double costPrice = product.getCostPrice() != null ? product.getCostPrice() : 0.0;
+                                // Use costPrice if available, otherwise use originalPrice as cost
+                                // If neither is available, assume cost is 60% of selling price
+                                double costPrice;
+                                if (product.getCostPrice() != null && product.getCostPrice() > 0) {
+                                    costPrice = product.getCostPrice();
+                                } else if (product.getOriginalPrice() != null && product.getOriginalPrice() > 0) {
+                                    costPrice = product.getOriginalPrice();
+                                } else {
+                                    costPrice = item.getPrice() * 0.6; // Assume 40% profit margin
+                                }
+                                
                                 double sellingPrice = item.getPrice();
                                 int quantity = item.getQuantity();
                                 

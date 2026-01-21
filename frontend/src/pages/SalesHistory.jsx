@@ -133,7 +133,7 @@ function SalesHistory() {
           <div className="stat-icon">💵</div>
           <div className="stat-info">
             <h3>Total Revenue</h3>
-            <p className="stat-number">${totalRevenue.toFixed(2)}</p>
+            <p className="stat-number">Rs {totalRevenue.toFixed(2)}</p>
           </div>
         </div>
         <div className="stat-card">
@@ -203,7 +203,7 @@ function SalesHistory() {
                   </div>
                   <div className="customer-stat-item">
                     <span className="stat-label">Total Spent</span>
-                    <span className="stat-value amount">${customer.totalSpent.toFixed(2)}</span>
+                    <span className="stat-value amount">Rs {customer.totalSpent.toFixed(2)}</span>
                   </div>
                   <button className="expand-btn">
                     {selectedCustomer === index ? '▲' : '▼'}
@@ -244,7 +244,7 @@ function SalesHistory() {
                               <span className="no-products">N/A</span>
                             )}
                           </td>
-                          <td className="amount-cell">${order.totalAmount.toFixed(2)}</td>
+                          <td className="amount-cell">Rs {order.totalAmount.toFixed(2)}</td>
                           <td>
                             <span className={`payment-badge-small ${order.paymentMethod}`}>
                               {order.paymentMethod === 'cash' ? '💵 COD' : '💳 Online'}
@@ -256,7 +256,7 @@ function SalesHistory() {
                     <tfoot>
                       <tr>
                         <td colSpan="4" className="total-label">Customer Total</td>
-                        <td className="total-amount">${customer.totalSpent.toFixed(2)}</td>
+                        <td className="total-amount">Rs {customer.totalSpent.toFixed(2)}</td>
                         <td></td>
                       </tr>
                     </tfoot>

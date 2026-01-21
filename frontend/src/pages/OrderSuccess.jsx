@@ -29,7 +29,7 @@ function OrderSuccess() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Total Amount:</span>
-                <span className="font-semibold text-blue-500">${order.totalAmount}</span>
+                <span className="font-semibold text-blue-500">Rs {order.totalAmount}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Status:</span>
