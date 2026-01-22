@@ -1,10 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 function Navbar() {
   const { getCartCount } = useCart();
   const cartCount = getCartCount();
+  const location = useLocation();
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
   return (
     <nav className="bg-white h-[70px] flex justify-center items-center text-base fixed top-0 w-full z-[999] shadow-md border-b border-gray-200">
@@ -21,22 +26,22 @@ function Navbar() {
         {/* Navigation Links */}
         <ul className="flex items-center list-none gap-4">
           <li className="h-[70px] flex items-center">
-            <Link to="/" className="text-gray-700 no-underline px-4 py-2 h-full flex items-center transition-all hover:text-orange-500 font-medium">
+            <Link to="/" className={`text-gray-700 no-underline px-4 py-0 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${isActive('/') ? 'text-orange-500 border-orange-500' : 'border-transparent'}`}>
               Home
             </Link>
           </li>
           <li className="h-[70px] flex items-center">
-            <Link to="/store" className="text-gray-700 no-underline px-4 py-2 h-full flex items-center transition-all hover:text-orange-500 font-medium">
+            <Link to="/store" className={`text-gray-700 no-underline px-4 py-0 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${isActive('/store') ? 'text-orange-500 border-orange-500' : 'border-transparent'}`}>
               Store
             </Link>
           </li>
           <li className="h-[70px] flex items-center">
-            <Link to="/about" className="text-gray-700 no-underline px-4 py-2 h-full flex items-center transition-all hover:text-orange-500 font-medium">
+            <Link to="/about" className={`text-gray-700 no-underline px-4 py-0 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${isActive('/about') ? 'text-orange-500 border-orange-500' : 'border-transparent'}`}>
               About us
             </Link>
           </li>
           <li className="h-[70px] flex items-center">
-            <Link to="/contact" className="text-gray-700 no-underline px-4 py-2 h-full flex items-center transition-all hover:text-orange-500 font-medium">
+            <Link to="/contact" className={`text-gray-700 no-underline px-4 py-0 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${isActive('/contact') ? 'text-orange-500 border-orange-500' : 'border-transparent'}`}>
               Contact us
             </Link>
           </li>

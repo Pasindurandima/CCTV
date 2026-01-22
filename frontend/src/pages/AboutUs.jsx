@@ -3,181 +3,182 @@ import { Link } from 'react-router-dom';
 
 function AboutUs() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section with Image Placeholder */}
-      <div className="relative h-[500px] bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        {/* Animated background shapes */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-10 right-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-700"></div>
-        
-        {/* Hero Content */}
-        <div className="relative max-w-6xl mx-auto px-5 h-full flex flex-col justify-center items-center text-center text-white">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            About Our Company
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-100 max-w-3xl mb-8 animate-fade-in-delay">
-            Your Trusted Partner in CCTV & Security Solutions Since 2020
-          </p>
-          <div className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center text-7xl animate-bounce-slow backdrop-blur-sm">
-            🔒
-          </div>
-        </div>
-      </div>
+    <div className="w-full bg-white pt-0">
+      {/* Hero Section */}
+      
+
+
+      
+
+
+
+
+
 
       {/* Company Story Section */}
-      <div className="max-w-7xl mx-auto py-20 px-5">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-          {/* Image Placeholder */}
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-            <div className="relative bg-gradient-to-br from-blue-100 to-purple-100 h-96 rounded-2xl flex items-center justify-center text-6xl transform group-hover:scale-105 transition-transform duration-300 shadow-2xl">
-              🏢
-              <div className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-lg text-sm font-semibold text-gray-700">
-                Company Photo Here
-              </div>
+      <section className="bg-blue-100 py-16 px-2">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-30 items-center">
+            {/* Image */}
+            <div className="flex justify-center">
+              <img 
+                src="/assets/about-company.png" 
+                alt="Our Company" 
+                className="w-full max-w-xl h-auto rounded-lg shadow-2xl"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
             </div>
-          </div>
 
-          {/* Story Content */}
-          <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
-              Our Story
-            </h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Established in <strong className="text-blue-600">2020</strong>, we have become Sri Lanka's leading provider of 
-              cutting-edge CCTV cameras, security systems, and surveillance equipment. Our journey began with a simple 
-              mission: to make advanced security technology accessible and affordable for everyone.
-            </p>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Today, we proudly serve <strong className="text-blue-600">thousands of satisfied customers</strong> across 
-              the island, from residential homes to large commercial enterprises. Our commitment to quality, innovation, 
-              and customer satisfaction has made us the go-to destination for all security needs.
-            </p>
-            <div className="flex gap-4 pt-4">
-              <div className="bg-blue-100 px-6 py-3 rounded-full">
-                <p className="text-3xl font-bold text-blue-600">500+</p>
-                <p className="text-sm text-gray-600">Happy Clients</p>
-              </div>
-              <div className="bg-purple-100 px-6 py-3 rounded-full">
-                <p className="text-3xl font-bold text-purple-600">1000+</p>
-                <p className="text-sm text-gray-600">Projects Done</p>
-              </div>
-              <div className="bg-green-100 px-6 py-3 rounded-full">
-                <p className="text-3xl font-bold text-green-600">5+</p>
-                <p className="text-sm text-gray-600">Years Experience</p>
+            {/* Story Content */}
+            <div className="space-y-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                Our <span className="text-orange-500">Story</span>
+              </h2>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Established in <strong className="text-orange-500">2020</strong>, we have become Sri Lanka's leading provider of 
+                cutting-edge CCTV cameras, security systems, and surveillance equipment. Our journey began with a simple 
+                mission: to make advanced security technology accessible and affordable for everyone.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Today, we proudly serve <strong className="text-orange-500">thousands of satisfied customers</strong> across 
+                the island, from residential homes to large commercial enterprises. Our commitment to quality, innovation, 
+                and customer satisfaction has made us the go-to destination for all security needs.
+              </p>
+              <div className="flex gap-4 pt-4">
+                <div className="bg-orange-100 px-6 py-3 rounded-lg border-l-4 border-orange-500">
+                  <p className="text-3xl font-bold text-orange-500">500+</p>
+                  <p className="text-sm text-gray-600 font-medium">Happy Clients</p>
+                </div>
+                <div className="bg-orange-100 px-6 py-3 rounded-lg border-l-4 border-orange-500">
+                  <p className="text-3xl font-bold text-orange-500">1000+</p>
+                  <p className="text-sm text-gray-600 font-medium">Projects Done</p>
+                </div>
+                <div className="bg-orange-100 px-6 py-3 rounded-lg border-l-4 border-orange-500">
+                  <p className="text-3xl font-bold text-orange-500">5+</p>
+                  <p className="text-sm text-gray-600 font-medium">Years Experience</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Mission & Vision Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-          <div className="bg-gradient-to-br from-blue-500 to-blue-700 text-white p-10 rounded-3xl shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
-            <div className="text-6xl mb-6">🎯</div>
-            <h3 className="text-3xl font-bold mb-4">Our Mission</h3>
-            <p className="text-lg text-blue-100 leading-relaxed">
-              To provide state-of-the-art security solutions that protect what matters most to our customers. 
-              We strive to deliver exceptional quality products, professional installation services, and 
-              unmatched customer support at competitive prices.
-            </p>
-          </div>
+      {/* Mission & Vision Section */}
+      <section className="py-16 px-5 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            <div className="bg-orange-500 text-white p-10 rounded-lg shadow-lg">
+              <div className="text-5xl mb-4">🎯</div>
+              <h3 className="text-3xl font-bold mb-4">Our Mission</h3>
+              <p className="text-lg text-orange-50 leading-relaxed">
+                To provide state-of-the-art security solutions that protect what matters most to our customers. 
+                We strive to deliver exceptional quality products, professional installation services, and 
+                unmatched customer support at competitive prices.
+              </p>
+            </div>
 
-          <div className="bg-gradient-to-br from-purple-500 to-purple-700 text-white p-10 rounded-3xl shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
-            <div className="text-6xl mb-6">👁️</div>
-            <h3 className="text-3xl font-bold mb-4">Our Vision</h3>
-            <p className="text-lg text-purple-100 leading-relaxed">
-              To become Sri Lanka's most trusted and innovative security solutions provider, setting new 
-              standards in the industry through cutting-edge technology, reliability, and customer-centric 
-              approach. We envision a safer tomorrow for all.
-            </p>
+            <div className="bg-gray-800 text-white p-10 rounded-lg shadow-lg">
+              <div className="text-5xl mb-4">👁️</div>
+              <h3 className="text-3xl font-bold mb-4">Our Vision</h3>
+              <p className="text-lg text-gray-100 leading-relaxed">
+                To become Sri Lanka's most trusted and innovative security solutions provider, setting new 
+                standards in the industry through cutting-edge technology, reliability, and customer-centric 
+                approach. We envision a safer tomorrow for all.
+              </p>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Why Choose Us Cards */}
-        <div className="mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-slate-800 mb-4">
-            Why Choose Us?
+      {/* Why Choose Us Section */}
+      <section className="bg-blue-100 py-16 px-5">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-4">
+            WHY <span className="text-orange-500">CHOOSE US</span>?
           </h2>
-          <p className="text-center text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-gray-700 text-lg mb-12 max-w-2xl mx-auto">
             We're not just selling products – we're providing complete security solutions backed by expertise and care
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-blue-500">
-              <div className="text-5xl mb-4">🏆</div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Premium Quality</h3>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all border-b-4 border-orange-500">
+              <div className="text-4xl mb-3">🏆</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Premium Quality</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
                 We stock only genuine products from world-renowned brands like Hikvision, EZVIZ, and VStarcam.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-green-500">
-              <div className="text-5xl mb-4">⚡</div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Fast Delivery</h3>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all border-b-4 border-orange-500">
+              <div className="text-4xl mb-3">⚡</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Fast Delivery</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
                 Island-wide delivery within 3-5 days. Same-day delivery available in Colombo and suburbs.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-purple-500">
-              <div className="text-5xl mb-4">🔧</div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Expert Installation</h3>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all border-b-4 border-orange-500">
+              <div className="text-4xl mb-3">🔧</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Expert Installation</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
                 Professional installation by certified technicians with years of experience in security systems.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-orange-500">
-              <div className="text-5xl mb-4">💬</div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">24/7 Support</h3>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all border-b-4 border-orange-500">
+              <div className="text-4xl mb-3">💬</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">24/7 Support</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
                 Round-the-clock customer support and technical assistance whenever you need us.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-red-500">
-              <div className="text-5xl mb-4">💰</div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Best Prices</h3>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all border-b-4 border-orange-500">
+              <div className="text-4xl mb-3">💰</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Best Prices</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
                 Competitive pricing with flexible payment options and special discounts for bulk orders.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-indigo-500">
-              <div className="text-5xl mb-4">✓</div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Warranty Assured</h3>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all border-b-4 border-orange-500">
+              <div className="text-4xl mb-3">✓</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Warranty Assured</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
                 All products come with manufacturer warranty and our own quality guarantee.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-pink-500">
-              <div className="text-5xl mb-4">📦</div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Complete Packages</h3>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all border-b-4 border-orange-500">
+              <div className="text-4xl mb-3">📦</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Complete Packages</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
                 Ready-to-install CCTV packages with cameras, DVR/NVR, cables, and all accessories included.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-yellow-500">
-              <div className="text-5xl mb-4">🎓</div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Free Training</h3>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all border-b-4 border-orange-500">
+              <div className="text-4xl mb-3">🎓</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Free Training</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
                 Comprehensive training on system operation and mobile app usage after installation.
               </p>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Our Values Section */}
-        <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-3xl p-12 mb-20">
+      {/* Our Values Section */}
+      <section className="bg-gray-800 text-white py-16 px-5">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            Our Core Values
+            OUR CORE <span className="text-orange-500">VALUES</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex gap-4 items-start group">
-              <div className="text-4xl group-hover:scale-110 transition-transform">🤝</div>
+            <div className="flex gap-4 items-start">
+              <div className="text-4xl">🤝</div>
               <div>
                 <h3 className="text-2xl font-bold mb-2">Integrity</h3>
                 <p className="text-gray-300 leading-relaxed">
@@ -187,8 +188,8 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="flex gap-4 items-start group">
-              <div className="text-4xl group-hover:scale-110 transition-transform">❤️</div>
+            <div className="flex gap-4 items-start">
+              <div className="text-4xl">❤️</div>
               <div>
                 <h3 className="text-2xl font-bold mb-2">Customer First</h3>
                 <p className="text-gray-300 leading-relaxed">
@@ -221,102 +222,109 @@ function AboutUs() {
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Team Section */}
-        <div className="mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-slate-800 mb-4">
-            Meet Our Team
+      {/* CTA Section */}
+      <section className="py-16 px-5 bg-white">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+            Ready to Secure Your <span className="text-orange-500">Space</span>?
           </h2>
-          <p className="text-center text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
-            Experienced professionals dedicated to your security and satisfaction
+          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            Contact us today for a free consultation and let our experts design the perfect security solution for your needs.
           </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Team Member 1 */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
-              <div className="h-64 bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-8xl relative group">
-                👨‍💼
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all"></div>
-              </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold text-slate-800 mb-1">Technical Manager</h3>
-                <p className="text-blue-600 mb-3">Installation Expert</p>
-                <p className="text-gray-600 text-sm">
-                  15+ years experience in security systems installation and maintenance
-                </p>
-              </div>
+          <Link to="/contact">
+            <button className="bg-orange-500 text-white px-8 py-3 font-bold rounded-lg hover:bg-orange-600 transition-all text-lg">
+              Get In Touch
+            </button>
+          </Link>
+        </div>
+      </section>
+
+
+  {/* Footer */}
+      <section className="bg-white text-gray-800 py-16 px-5 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          {/* Header with Logo and Button */}
+          <div className="flex justify-between items-center mb-12 pb-4 border-b border-gray-300">
+            <div className="flex items-center gap-2">
+              <img src="/assets/logo.jpg" alt="SecU Engineering Logo" className="h-10 w-auto" />
+              <span className="font-bold text-lg">SecU</span><span className="font-bold text-lg text-orange-500">Engineering</span>
+            </div>
+            <button className="bg-orange-500 text-white px-6 py-2 font-bold rounded hover:bg-orange-600 transition-all">
+              Get In Touch
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
+            {/* Company */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">COMPANY</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Who we are</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Blog</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Careers</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Report Fraud</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Contact</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Investor Relations</p>
             </div>
 
-            {/* Team Member 2 */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
-              <div className="h-64 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-8xl relative group">
-                👩‍💼
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all"></div>
-              </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold text-slate-800 mb-1">Customer Relations</h3>
-                <p className="text-purple-600 mb-3">Support Specialist</p>
-                <p className="text-gray-600 text-sm">
-                  Dedicated to ensuring your complete satisfaction with our products and services
-                </p>
-              </div>
+            {/* For Service */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">FOR SERVICE</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">YT video support</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Case Studies</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Email Support</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Chat Support</p>
             </div>
 
-            {/* Team Member 3 */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
-              <div className="h-64 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-8xl relative group">
-                👨‍🔧
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all"></div>
+            {/* For You */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">FOR YOU</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Privacy</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Terms</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Security</p>
+            </div>
+
+            {/* Marketing */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">MARKETING</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Posters/EDM</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Brouchers</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Schema</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Videos</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Events</p>
+            </div>
+
+            {/* Social Links and Apps */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">SOCIAL LINKS</h3>
+              <div className="flex gap-3 mb-6">
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📱</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📘</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📹</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">🐦</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">💼</a>
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold text-slate-800 mb-1">Field Technician</h3>
-                <p className="text-green-600 mb-3">Installation & Support</p>
-                <p className="text-gray-600 text-sm">
-                  Certified technician providing professional installation and maintenance services
-                </p>
+              
+              {/* App Badges */}
+              <div className="flex flex-col gap-2">
+                <img src="/assets/google-play.png" alt="Google Play" className="h-10 w-auto" />
+                <img src="/assets/app-store.png" alt="App Store" className="h-10 w-auto" />
               </div>
             </div>
           </div>
-        </div>
 
-        {/* CTA Section */}
-        <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-3xl p-12 text-center text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-400/10 rounded-full -ml-48 -mb-48"></div>
-          
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to Secure Your Property?</h2>
-            <p className="text-xl text-gray-100 mb-8 max-w-2xl mx-auto">
-              Get in touch with us today for a free consultation and quote. Our experts are ready to help!
+          {/* Bottom Footer */}
+          <div className="border-t border-gray-300 pt-8 text-center text-gray-600 text-sm">
+            <p className="mb-4">
+              By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners.
             </p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <Link 
-                to="/store" 
-                className="bg-white text-blue-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transform hover:scale-105 transition-all shadow-xl"
-              >
-                Browse Products
-              </Link>
-              <Link 
-                to="/contact" 
-                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transform hover:scale-105 transition-all"
-              >
-                Contact Us
-              </Link>
-            </div>
-            <div className="mt-8 flex gap-6 justify-center items-center">
-              <a href="tel:0777602018" className="flex items-center gap-2 text-white hover:text-gray-200 transition-colors">
-                <span className="text-2xl">📞</span>
-                <span className="font-semibold">077 760 2018</span>
-              </a>
-              <span className="text-gray-300">|</span>
-              <a href="tel:0770279136" className="flex items-center gap-2 text-white hover:text-gray-200 transition-colors">
-                <span className="text-2xl">📞</span>
-                <span className="font-semibold">077 027 9136</span>
-              </a>
-            </div>
+            <p>2008-2026 © Eagle Eye™ Ltd. All rights reserved.</p>
           </div>
         </div>
-      </div>
+      </section>
+
+
     </div>
   );
 }

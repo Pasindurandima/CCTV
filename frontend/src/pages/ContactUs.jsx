@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function ContactUs() {
   const [formData, setFormData] = useState({
@@ -32,23 +33,61 @@ function ContactUs() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
-        {/* Animated circles */}
-        <div className="absolute top-10 right-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-700"></div>
-        
-        <div className="relative max-w-7xl mx-auto px-5 text-center text-white">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 animate-fade-in">
-            Get In Touch
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-100 max-w-2xl mx-auto">
-            Have questions? We're here to help! Reach out to our team anytime.
-          </p>
+    <div className="w-full bg-white pt-0">
+      {/* Hero Section - Home Page Style */}
+      <section className="relative bg-white py-16 px-5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              {/* Tagline Box */}
+              <div className="mb-10 border-l-4 border-orange-500 pl-8 py-2">
+                <p className="text-xl md:text-2xl text-gray-600 mb-2 font-medium tracking-wide">
+                  We're here to help
+                </p>
+
+                <p className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-tight">
+                  <span className="text-orange-500">Get In</span> Touch
+                </p>
+
+                <p className="text-lg text-gray-600 mt-6 max-w-2xl">
+                  Have questions about our CCTV systems or security solutions? Our expert team is ready to assist you anytime!
+                </p>
+              </div>
+
+              {/* Browse Products Button */}
+              <Link to="/store">
+                <button className="bg-orange-500 text-white px-8 py-3 font-bold rounded hover:bg-orange-600 transition-all text-lg">
+                  Browse Products
+                </button>
+              </Link>
+            </div>
+
+            {/* Right Image */}
+            <div className="flex justify-center">
+              <img 
+                src="/assets/hero1.png" 
+                alt="Contact Us" 
+                className="w-full max-w-2xl h-auto"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
+            </div>
+          </div>
         </div>
-      </div>
+
+        {/* Separator Divider */}
+        <div className="flex justify-center my-12">
+          <div className="flex items-center gap-4">
+            <div className="h-px bg-gray-300 w-12"></div>
+            <svg className="w-6 h-6 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+            </svg>
+            <div className="h-px bg-gray-300 w-12"></div>
+          </div>
+        </div>
+      </section>
 
       <div className="max-w-7xl mx-auto py-16 px-5">
         {/* Quick Contact Cards */}
@@ -182,37 +221,9 @@ function ContactUs() {
               </div>
             </div>
 
-            {/* Map Placeholder */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-              <div className="h-64 bg-gradient-to-br from-blue-200 to-purple-200 flex items-center justify-center relative group">
-                <div className="text-center">
-                  <div className="text-6xl mb-3">🗺️</div>
-                  <p className="text-slate-700 font-semibold">Google Maps Location</p>
-                  <p className="text-sm text-gray-600 mt-2">Interactive map will be added here</p>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all"></div>
-              </div>
-            </div>
+         
 
-            {/* Social Media */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 rounded-2xl shadow-xl text-white">
-              <h3 className="text-2xl font-bold mb-4">Follow Us</h3>
-              <p className="text-gray-100 mb-6">Stay connected with us on social media for updates, offers, and tips!</p>
-              <div className="flex gap-4">
-                <a href="#" className="bg-white/20 hover:bg-white/30 p-3 rounded-lg transition-all transform hover:scale-110">
-                  <div className="text-2xl">📘</div>
-                </a>
-                <a href="#" className="bg-white/20 hover:bg-white/30 p-3 rounded-lg transition-all transform hover:scale-110">
-                  <div className="text-2xl">📷</div>
-                </a>
-                <a href="#" className="bg-white/20 hover:bg-white/30 p-3 rounded-lg transition-all transform hover:scale-110">
-                  <div className="text-2xl">💬</div>
-                </a>
-                <a href="#" className="bg-white/20 hover:bg-white/30 p-3 rounded-lg transition-all transform hover:scale-110">
-                  <div className="text-2xl">▶️</div>
-                </a>
-              </div>
-            </div>
+          
           </div>
 
           {/* Right Side - Contact Form */}
@@ -368,6 +379,91 @@ function ContactUs() {
           </div>
         </div>
       </div>
+
+
+  {/* Footer */}
+      <section className="bg-white text-gray-800 py-16 px-5 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          {/* Header with Logo and Button */}
+          <div className="flex justify-between items-center mb-12 pb-4 border-b border-gray-300">
+            <div className="flex items-center gap-2">
+              <img src="/assets/logo.jpg" alt="SecU Engineering Logo" className="h-10 w-auto" />
+              <span className="font-bold text-lg">SecU</span><span className="font-bold text-lg text-orange-500">Engineering</span>
+            </div>
+            <button className="bg-orange-500 text-white px-6 py-2 font-bold rounded hover:bg-orange-600 transition-all">
+              Get In Touch
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
+            {/* Company */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">COMPANY</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Who we are</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Blog</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Careers</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Report Fraud</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Contact</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Investor Relations</p>
+            </div>
+
+            {/* For Service */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">FOR SERVICE</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">YT video support</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Case Studies</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Email Support</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Chat Support</p>
+            </div>
+
+            {/* For You */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">FOR YOU</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Privacy</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Terms</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Security</p>
+            </div>
+
+            {/* Marketing */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">MARKETING</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Posters/EDM</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Brouchers</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Schema</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Videos</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Events</p>
+            </div>
+
+            {/* Social Links and Apps */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">SOCIAL LINKS</h3>
+              <div className="flex gap-3 mb-6">
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📱</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📘</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📹</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">🐦</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">💼</a>
+              </div>
+              
+              {/* App Badges */}
+              <div className="flex flex-col gap-2">
+                <img src="/assets/google-play.png" alt="Google Play" className="h-10 w-auto" />
+                <img src="/assets/app-store.png" alt="App Store" className="h-10 w-auto" />
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Footer */}
+          <div className="border-t border-gray-300 pt-8 text-center text-gray-600 text-sm">
+            <p className="mb-4">
+              By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners.
+            </p>
+            <p>2008-2026 © Eagle Eye™ Ltd. All rights reserved.</p>
+          </div>
+        </div>
+      </section>
+
+
     </div>
   );
 }

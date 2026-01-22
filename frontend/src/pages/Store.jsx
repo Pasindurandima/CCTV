@@ -348,7 +348,9 @@ function Store() {
       </div>
 
       {/* Contact Banner */}
-      <div className="mt-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg p-10 text-center shadow-lg">
+      <div className="mt-16 bg-blue-100 text-black rounded-lg p-10 text-center ">
+
+
         <h3 className="text-3xl font-bold mb-6">Need Help Choosing? Call Us!</h3>
         <div className="flex justify-center gap-8 flex-wrap mb-6">
           <a href="tel:0777602018" className="flex items-center gap-2 text-xl hover:text-orange-100 transition-colors font-semibold">
@@ -360,7 +362,7 @@ function Store() {
             <span>077 027 9136</span>
           </a>
         </div>
-        <p className="text-orange-50">Our experts are ready to help you find the perfect security solution</p>
+        <p className="text-black-100">Our experts are ready to help you find the perfect security solution</p>
       </div>
       </div>
     </div>
