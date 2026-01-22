@@ -3,91 +3,132 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   const categories = [
-    { name: 'CCTV Cameras', icon: '📹', description: 'High-quality surveillance cameras' },
-    { name: 'DVR & NVR', icon: '💾', description: 'Recording & storage solutions' },
-    { name: 'Wireless Systems', icon: '📡', description: 'Flexible wireless security' },
-    { name: 'IP Cameras', icon: '🌐', description: 'Network-based monitoring' },
-    { name: 'Accessories', icon: '🔌', description: 'Complete your setup' },
-    { name: 'Power Solutions', icon: '⚡', description: 'UPS & power backup' }
+    { name: 'DVR/NVR', icon: '/assets/icon1.png', description: 'Truly Unlimited Internet With Speed Up-To 1000 Mbps !' },
+    { name: 'Power Banks', icon: '/assets/icon2.png', description: 'Crystal Clear Truly Unlimited STD And Local Calls With Eagle Eye Smart Telephony' },
+    { name: 'CCTV', icon: '/assets/icon3.png', description: 'Enterprise Business Solutions Internet Leased Line' },
+
+
+    { name: 'DVR/NVR', icon: '/assets/icon1.png', description: 'Truly Unlimited Internet With Speed Up-To 1000 Mbps !' },
+    { name: 'Power Banks', icon: '/assets/icon2.png', description: 'Crystal Clear Truly Unlimited STD And Local Calls With Eagle Eye Smart Telephony' },
+    { name: 'CCTV', icon: '/assets/icon3.png', description: 'Enterprise Business Solutions Internet Leased Line' }
   ];
 
-  const features = [
+  const services = [
     {
       icon: '🛡️',
       title: '24/7 Security',
-      description: 'Round-the-clock protection for your property with reliable surveillance systems'
+      description: 'Round-the-clock protection for your property'
     },
     {
       icon: '💰',
       title: 'Best Prices',
-      description: 'Competitive pricing with quality assurance on all products'
+      description: 'Competitive pricing on all products'
     },
     {
       icon: '🚚',
       title: 'Fast Delivery',
-      description: 'Quick and secure delivery to your doorstep'
+      description: 'Quick delivery to your doorstep'
     },
     {
       icon: '🔧',
       title: 'Expert Support',
-      description: 'Professional installation and technical support available'
+      description: 'Professional support available'
     }
   ];
 
   return (
-    <div className="w-full">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 text-white py-32 px-5 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+    <div className="w-full bg-white pt-0">
+      {/* Hero Section - Figma Design */}
+      <section className="relative bg-white py-16 px-5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              {/* Tagline Box */}
+<div className="mb-10 border-l-4 border-orange-500 pl-8 py-2">
+  <p className="text-xl md:text-2xl text-gray-600 mb-2 font-medium tracking-wide">
+    A Complete solution
+  </p>
+
+  <p className="text-xl md:text-2xl text-gray-600 mb-4 font-medium tracking-wide">
+    for all your
+  </p>
+
+  <p className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-tight">
+    <span className="text-orange-500">Security</span> needs
+  </p>
+</div>
+
+
+
+              {/* Shop Now Button */}
+              <Link to="/store">
+                <button className="bg-orange-500 text-white px-8 py-3 font-bold rounded hover:bg-orange-600 transition-all text-lg">
+                  Shop Now
+                </button>
+              </Link>
+            </div>
+
+            {/* Right Image */}
+            <div className="flex justify-center">
+              <img 
+                src="/assets/hero3.png" 
+                alt="Security Camera" 
+                className="w-full max-w-2xl h-auto"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
+            </div>
+          </div>
         </div>
-        
-        <div className="relative max-w-6xl mx-auto text-center">
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 animate-fade-in-down">
-            Your Security, Our Priority
-          </h1>
-          <p className="text-2xl md:text-3xl mb-4 text-gray-200">
-            Complete CCTV & Surveillance Solutions
-          </p>
-          <p className="text-lg md:text-xl mb-10 text-gray-300 max-w-3xl mx-auto">
-            Protect what matters most with our advanced security cameras, DVRs, NVRs, and complete surveillance packages. Professional quality at affordable prices.
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link to="/store">
-              <button className="bg-blue-500 text-white border-none py-4 px-10 text-xl rounded-full cursor-pointer transition-all font-bold hover:bg-blue-600 hover:-translate-y-1 hover:shadow-2xl">
-                Shop Now
-              </button>
-            </Link>
-            <Link to="/contact">
-              <button className="bg-transparent text-white border-2 border-white py-4 px-10 text-xl rounded-full cursor-pointer transition-all font-bold hover:bg-white hover:text-indigo-900 hover:-translate-y-1 hover:shadow-2xl">
-                Get Quote
-              </button>
-            </Link>
+
+        {/* Separator Divider */}
+        <div className="flex justify-center my-12">
+          <div className="flex items-center gap-4">
+            <div className="h-px bg-gray-300 w-12"></div>
+            <svg className="w-6 h-6 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+            </svg>
+            <div className="h-px bg-gray-300 w-12"></div>
           </div>
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-20 px-5 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-center text-4xl md:text-5xl font-bold mb-4 text-slate-800">
-            Browse by Category
-          </h2>
-          <p className="text-center text-xl text-gray-600 mb-12">
-            Find the perfect security solution for your needs
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Browse by Category Section */}
+      <section className="bg-blue-100 py-16 px-5">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
+              BROWSE BY <span className="text-orange-500">CATEGORY</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {categories.map((category, index) => (
               <Link key={index} to="/store">
-                <div className="bg-white rounded-xl p-8 shadow-md transition-all hover:-translate-y-2 hover:shadow-2xl cursor-pointer group">
-                  <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">
-                    {category.icon}
+                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden h-full flex flex-col items-center py-6 px-4">
+                  {/* Icon */}
+                  <div className="mb-4 w-16 h-16 flex items-center justify-center">
+                    <img src={category.icon} alt={category.name} className="w-full h-full object-contain" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 text-slate-800 group-hover:text-blue-500">
-                    {category.name}
-                  </h3>
-                  <p className="text-gray-600">{category.description}</p>
+
+                  {/* Content */}
+                  <div className="text-center flex-1 flex flex-col justify-between w-full">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-800 mb-3">
+                        {category.name}
+                      </h3>
+                      <p className="text-gray-600 text-xs mb-4 leading-relaxed h-12 flex items-center justify-center">
+                        {category.description}
+                      </p>
+                    </div>
+                    <Link to="/store">
+                      <button className="bg-orange-500 text-white px-8 py-2 rounded font-bold hover:bg-orange-600 transition-all text-sm mt-4">
+                        Know More
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -95,161 +136,134 @@ function Home() {
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="max-w-6xl my-20 mx-auto px-5">
-        <h2 className="text-center text-4xl md:text-5xl font-bold mb-4 text-slate-800">
-          Featured Products
-        </h2>
-        <p className="text-center text-xl text-gray-600 mb-12">
-          Best sellers and customer favorites
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-white rounded-xl p-6 shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl group">
-            <div className="bg-gradient-to-br from-indigo-500 to-purple-600 h-56 rounded-xl flex items-center justify-center text-white text-7xl mb-5 group-hover:scale-105 transition-transform overflow-hidden">
-              <div className="text-center">
-                <div className="text-8xl mb-2">📹</div>
-                <p className="text-lg font-semibold">Image Placeholder</p>
-              </div>
-            </div>
-            <span className="inline-block bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
-              Best Seller
-            </span>
-            <h3 className="text-2xl font-bold mb-2 text-slate-800">CCTV Complete Package</h3>
-            <p className="text-gray-600 mb-4">4 cameras, DVR, cables & accessories included</p>
-            <div className="flex items-center justify-between">
-              <p className="text-4xl text-blue-500 font-bold">$599.99</p>
-              <button className="bg-blue-500 text-white border-none py-3 px-6 rounded-lg cursor-pointer text-base transition-all hover:bg-blue-600 hover:scale-105">
-                Add to Cart
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-6 shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl group">
-            <div className="bg-gradient-to-br from-indigo-500 to-purple-600 h-56 rounded-xl flex items-center justify-center text-white text-7xl mb-5 group-hover:scale-105 transition-transform overflow-hidden">
-              <div className="text-center">
-                <div className="text-8xl mb-2">📡</div>
-                <p className="text-lg font-semibold">Image Placeholder</p>
-              </div>
-            </div>
-            <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
-              New Arrival
-            </span>
-            <h3 className="text-2xl font-bold mb-2 text-slate-800">Wireless HD Camera</h3>
-            <p className="text-gray-600 mb-4">1080p resolution with night vision & WiFi</p>
-            <div className="flex items-center justify-between">
-              <p className="text-4xl text-blue-500 font-bold">$149.99</p>
-              <button className="bg-blue-500 text-white border-none py-3 px-6 rounded-lg cursor-pointer text-base transition-all hover:bg-blue-600 hover:scale-105">
-                Add to Cart
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-6 shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl group">
-            <div className="bg-gradient-to-br from-indigo-500 to-purple-600 h-56 rounded-xl flex items-center justify-center text-white text-7xl mb-5 group-hover:scale-105 transition-transform overflow-hidden">
-              <div className="text-center">
-                <div className="text-8xl mb-2">💾</div>
-                <p className="text-lg font-semibold">Image Placeholder</p>
-              </div>
-            </div>
-            <span className="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
-              Top Rated
-            </span>
-            <h3 className="text-2xl font-bold mb-2 text-slate-800">16 Channel NVR</h3>
-            <p className="text-gray-600 mb-4">Network video recorder with 4TB storage</p>
-            <div className="flex items-center justify-between">
-              <p className="text-4xl text-blue-500 font-bold">$349.99</p>
-              <button className="bg-blue-500 text-white border-none py-3 px-6 rounded-lg cursor-pointer text-base transition-all hover:bg-blue-600 hover:scale-105">
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-20 px-5 bg-gradient-to-br from-blue-50 to-indigo-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-center text-4xl md:text-5xl font-bold mb-4 text-slate-800">
-            Why Choose Us?
-          </h2>
-          <p className="text-center text-xl text-gray-600 mb-12">
-            Your trusted partner in security solutions
-          </p>
+      {/* Services Section */}
+      <section className="py-20 px-5 bg-white">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="bg-white rounded-xl p-8 shadow-md text-center hover:shadow-xl transition-all">
-                <div className="text-6xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold mb-3 text-slate-800">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+            {services.map((service, index) => (
+              <div key={index} className="text-center p-6 hover:shadow-lg transition-all rounded-lg">
+                <div className="text-5xl mb-4">{service.icon}</div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">{service.title}</h3>
+                <p className="text-gray-600 text-sm">{service.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Brands/Trust Section */}
-      <section className="py-16 px-5 bg-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-800">
-            Trusted by Thousands of Customers
-          </h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Leading brands and professional quality products
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60">
-            <div className="bg-gray-100 h-24 rounded-lg flex items-center justify-center text-gray-500 font-bold text-lg">
-              Brand Logo
+      {/* Promotional Section with Girl Image */}
+      <section className="bg-blue-100 py-16 px-5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                Your Security Partner<br />
+                <span className="text-orange-500 text-5xl font-black">SecU Engineering</span>
+              </h2>
+              <p className="text-gray-700 text-lg mb-8">
+                Your Safety Our Priority
+              </p>
+              
+              {/* Banner */}
+              <div className="bg-orange-500 text-white py-4 px-6 rounded-lg text-center text-xl font-bold">
+                Get 20% Off on Your First Purchase! Use Code: WELCOME20
+              </div>
             </div>
-            <div className="bg-gray-100 h-24 rounded-lg flex items-center justify-center text-gray-500 font-bold text-lg">
-              Brand Logo
-            </div>
-            <div className="bg-gray-100 h-24 rounded-lg flex items-center justify-center text-gray-500 font-bold text-lg">
-              Brand Logo
-            </div>
-            <div className="bg-gray-100 h-24 rounded-lg flex items-center justify-center text-gray-500 font-bold text-lg">
-              Brand Logo
+
+            {/* Right Image */}
+            <div className="flex justify-center">
+              <img 
+                src="/assets/girl.png" 
+                alt="Promotional Girl" 
+                className="max-w-md w-full h-auto"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Info Banner */}
-      <section className="py-8 px-5 bg-slate-800 text-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <h3 className="text-2xl font-bold mb-4">Need Help? Contact Us Today!</h3>
-          <div className="flex justify-center gap-8 flex-wrap">
-            <a href="tel:0777602018" className="flex items-center gap-2 text-xl hover:text-blue-400 transition-colors">
-              <span className="text-2xl">📞</span>
-              <span>077 760 2018</span>
-            </a>
-            <a href="tel:0770279136" className="flex items-center gap-2 text-xl hover:text-blue-400 transition-colors">
-              <span className="text-2xl">📞</span>
-              <span>077 027 9136</span>
-            </a>
+      {/* Footer */}
+      <section className="bg-white text-gray-800 py-16 px-5 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          {/* Header with Logo and Button */}
+          <div className="flex justify-between items-center mb-12 pb-4 border-b border-gray-300">
+            <div className="flex items-center gap-2">
+              <img src="/assets/logo.jpg" alt="SecU Engineering Logo" className="h-10 w-auto" />
+              <span className="font-bold text-lg">SecU</span><span className="font-bold text-lg text-orange-500">Engineering</span>
+            </div>
+            <button className="bg-orange-500 text-white px-6 py-2 font-bold rounded hover:bg-orange-600 transition-all">
+              Get In Touch
+            </button>
           </div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-5 bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to Secure Your Property?
-          </h2>
-          <p className="text-xl md:text-2xl mb-8 text-gray-200">
-            Get started with our complete CCTV solutions today. Free consultation available!
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link to="/store">
-              <button className="bg-white text-indigo-600 border-none py-4 px-10 text-xl rounded-full cursor-pointer transition-all font-bold hover:bg-gray-100 hover:-translate-y-1 hover:shadow-2xl">
-                Browse Products
-              </button>
-            </Link>
-            <Link to="/contact">
-              <button className="bg-transparent text-white border-2 border-white py-4 px-10 text-xl rounded-full cursor-pointer transition-all font-bold hover:bg-white hover:text-indigo-600 hover:-translate-y-1 hover:shadow-2xl">
-                Contact Us
-              </button>
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
+            {/* Company */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">COMPANY</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Who we are</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Blog</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Careers</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Report Fraud</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Contact</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Investor Relations</p>
+            </div>
+
+            {/* For Service */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">FOR SERVICE</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">YT video support</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Case Studies</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Email Support</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Chat Support</p>
+            </div>
+
+            {/* For You */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">FOR YOU</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Privacy</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Terms</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Security</p>
+            </div>
+
+            {/* Marketing */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">MARKETING</h3>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Posters/EDM</p>
+              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Brouchers</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Schema</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Videos</p>
+              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Events</p>
+            </div>
+
+            {/* Social Links and Apps */}
+            <div>
+              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">SOCIAL LINKS</h3>
+              <div className="flex gap-3 mb-6">
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📱</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📘</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📹</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">🐦</a>
+                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">💼</a>
+              </div>
+              
+              {/* App Badges */}
+              <div className="flex flex-col gap-2">
+                <img src="/assets/google-play.png" alt="Google Play" className="h-10 w-auto" />
+                <img src="/assets/app-store.png" alt="App Store" className="h-10 w-auto" />
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Footer */}
+          <div className="border-t border-gray-300 pt-8 text-center text-gray-600 text-sm">
+            <p className="mb-4">
+              By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners.
+            </p>
+            <p>2008-2026 © Eagle Eye™ Ltd. All rights reserved.</p>
           </div>
         </div>
       </section>

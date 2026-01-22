@@ -222,15 +222,18 @@ function Store() {
   }
 
   return (
-    <div className="max-w-[1600px] mx-auto py-10 px-5">
-      <h1 className="text-4xl text-slate-800 mb-8 text-center">Our Store</h1>
+    <div className="w-full bg-white pt-0">
+      <div className="max-w-[1600px] mx-auto py-16 px-5">
+      <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-8 text-center">
+        OUR <span className="text-orange-500">STORE</span>
+      </h1>
       
       {/* Search Bar */}
-      <div className="flex justify-center mb-8">
+      <div className="flex justify-center mb-12">
         <input
           type="text"
           placeholder="Search products..."
-          className="py-3 px-5 border-2 border-gray-300 rounded-md text-base w-full max-w-[500px] transition-all focus:outline-none focus:border-blue-500"
+          className="py-3 px-5 border-2 border-orange-300 rounded-lg text-base w-full max-w-[500px] transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200 shadow-md"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -240,15 +243,15 @@ function Store() {
       <div className="flex gap-8 flex-col lg:flex-row">
         {/* Sidebar */}
         <aside className="lg:w-64 w-full">
-          <div className="bg-white rounded-lg shadow-lg p-5 sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
-            <h2 className="text-2xl font-bold text-slate-800 mb-4">Categories</h2>
+          <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4 uppercase">Categories</h2>
             <div className="space-y-2">
               <button
                 onClick={() => setSelectedCategory('')}
-                className={`w-full text-left px-4 py-3 rounded-md transition-all ${
+                className={`w-full text-left px-4 py-3 rounded-lg transition-all font-medium ${
                   selectedCategory === ''
-                    ? 'bg-blue-500 text-white shadow-md'
-                    : 'bg-gray-100 text-slate-700 hover:bg-gray-200'
+                    ? 'bg-orange-500 text-white shadow-md'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
                 All Products
@@ -257,10 +260,10 @@ function Store() {
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.name)}
-                  className={`w-full text-left px-4 py-3 rounded-md transition-all ${
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-all font-medium ${
                     selectedCategory === category.name
-                      ? 'bg-blue-500 text-white shadow-md'
-                      : 'bg-gray-100 text-slate-700 hover:bg-gray-200'
+                      ? 'bg-orange-500 text-white shadow-md'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
                   {category.name}
@@ -310,7 +313,7 @@ function Store() {
                     
                     {/* Price and Buttons */}
                     <div className="mt-auto pt-4 border-t border-gray-100">
-                      <p className="text-2xl text-blue-500 font-bold mb-3">Rs {product.price}</p>
+                      <p className="text-2xl text-orange-500 font-bold mb-3">Rs {product.price}</p>
                       <div className="flex flex-col gap-2">
                         <button 
                           onClick={(e) => {
@@ -318,10 +321,10 @@ function Store() {
                             addToCart(product);
                             navigate('/checkout');
                           }}
-                          className="bg-green-500 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs transition-all hover:bg-green-600 hover:scale-105 font-semibold flex items-center justify-center gap-1 w-full"
+                          className="bg-orange-500 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs transition-all hover:bg-orange-600 hover:scale-105 font-semibold flex items-center justify-center gap-1 w-full"
                           title="Order Now"
                         >
-                          ✅ Order Now
+                          🛒 Order Now
                         </button>
                         <button 
                           onClick={(e) => {
@@ -329,10 +332,10 @@ function Store() {
                             addToCart(product);
                             alert(`${product.name} added to cart!`);
                           }}
-                          className="bg-blue-500 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs transition-all hover:bg-blue-600 hover:scale-105 font-semibold flex items-center justify-center gap-1 w-full"
+                          className="bg-gray-700 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs transition-all hover:bg-gray-800 hover:scale-105 font-semibold flex items-center justify-center gap-1 w-full"
                           title="Add to Cart"
                         >
-                          🛒 Add To Cart
+                          ❤️ Add To Cart
                         </button>
                       </div>
                     </div>
@@ -345,19 +348,20 @@ function Store() {
       </div>
 
       {/* Contact Banner */}
-      <div className="mt-12 bg-slate-800 text-white rounded-xl p-8 text-center">
-        <h3 className="text-2xl font-bold mb-4">Need Help Choosing? Call Us!</h3>
-        <div className="flex justify-center gap-8 flex-wrap">
-          <a href="tel:0777602018" className="flex items-center gap-2 text-xl hover:text-blue-400 transition-colors">
+      <div className="mt-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg p-10 text-center shadow-lg">
+        <h3 className="text-3xl font-bold mb-6">Need Help Choosing? Call Us!</h3>
+        <div className="flex justify-center gap-8 flex-wrap mb-6">
+          <a href="tel:0777602018" className="flex items-center gap-2 text-xl hover:text-orange-100 transition-colors font-semibold">
             <span className="text-2xl">📞</span>
             <span>077 760 2018</span>
           </a>
-          <a href="tel:0770279136" className="flex items-center gap-2 text-xl hover:text-blue-400 transition-colors">
+          <a href="tel:0770279136" className="flex items-center gap-2 text-xl hover:text-orange-100 transition-colors font-semibold">
             <span className="text-2xl">📞</span>
             <span>077 027 9136</span>
           </a>
         </div>
-        <p className="mt-4 text-gray-300">Our experts are ready to help you find the perfect security solution</p>
+        <p className="text-orange-50">Our experts are ready to help you find the perfect security solution</p>
+      </div>
       </div>
     </div>
   );
