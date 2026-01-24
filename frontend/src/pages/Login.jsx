@@ -145,7 +145,7 @@ function Login() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="admin@example.com"
+                    placeholder="engineering.secu@gmail.com"
                     className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                     required
                     disabled={loading}

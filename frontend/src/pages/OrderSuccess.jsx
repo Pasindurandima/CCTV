@@ -62,7 +62,7 @@ function OrderSuccess() {
           <p className="text-sm text-gray-600">
             <strong>Need help?</strong> Contact us at:
             <br />
-            📞 077 760 2018 | 077 027 9136
+            📞 077 760 2021 | 077 482 0276
           </p>
         </div>
       </div>

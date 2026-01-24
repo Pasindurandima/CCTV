@@ -219,7 +219,7 @@ function Checkout() {
                           onChange={handleChange}
                           required
                           className="w-full py-3 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                          placeholder="your@email.com"
+                          placeholder="engineering.secu@gmail.com"
                         />
                       </div>
 
@@ -234,7 +234,7 @@ function Checkout() {
                           onChange={handleChange}
                           required
                           className="w-full py-3 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                          placeholder="077 123 4567"
+                          placeholder="077 760 2021"
                         />
                       </div>
                     </div>
@@ -433,7 +433,7 @@ function Checkout() {
                           onChange={handleChange}
                           required
                           className="w-full py-3 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                          placeholder="your@email.com"
+                          placeholder="engineering.secu@gmail.com"
                         />
                       </div>
 
@@ -448,7 +448,7 @@ function Checkout() {
                           onChange={handleChange}
                           required
                           className="w-full py-3 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                          placeholder="077 123 4567"
+                          placeholder="077 760 2021"
                         />
                       </div>
                     </div>
@@ -525,7 +525,7 @@ function Checkout() {
                     </button>
                     <button
                       type="submit"
-                      className="flex-1 bg-blue-500 text-white py-3 rounded-lg font-bold hover:bg-blue-600 transition-all disabled:bg-gray-400"
+                      className="flex-1 bg-orange-500 text-white py-3 rounded-lg font-bold hover:bg-orange-600 transition-all disabled:bg-gray-400"
                       disabled={loading}
                     >
                       {loading ? 'Processing Payment...' : 'Pay Now'}

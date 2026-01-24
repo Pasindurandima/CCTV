@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const CONTACT_NUMBERS = {
-  phone1: '077 760 2018',
-  phone2: '077 027 9136'
+  phone1: '077 760 2021',
+  phone2: '077 482 0276'
 };
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -101,7 +103,7 @@ function ProductDetail() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Product Image Section */}
         <div className="bg-white rounded-xl shadow-lg p-6 sticky top-20">
-          <div className="w-full aspect-square bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white overflow-hidden group mb-4">
+          <div className="w-full aspect-square bg-white rounded-xl flex items-center justify-center text-white overflow-hidden group mb-4">
             {product.imageUrl ? (
               <img 
                 src={product.imageUrl} 
@@ -116,7 +118,7 @@ function ProductDetail() {
             )}
           </div>
           {product.brand && (
-            <div className="inline-block bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-bold w-full text-center">
+            <div className="inline-block bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-bold w-full text-center">
               {product.brand}
             </div>
           )}
@@ -128,17 +130,8 @@ function ProductDetail() {
           
           {/* Price Section */}
           <div className="mb-6">
-            {product.originalPrice && (
-              <div className="flex items-center gap-4 mb-2">
-                <span className="text-2xl text-gray-400 line-through">
-                  ${product.originalPrice.toFixed(2)}
-                </span>
-                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold">
-                  Save ${(product.originalPrice - product.price).toFixed(2)}
-                </span>
-              </div>
-            )}
-            <div className="text-4xl font-bold text-blue-500">
+           
+            <div className="text-4xl font-bold text-orange-500">
               Rs {product.price.toFixed(2)}
             </div>
             <p className="text-sm text-gray-500 mt-2">Current price</p>
@@ -158,7 +151,7 @@ function ProductDetail() {
           </div>
 
           {/* Technical Specifications Summary */}
-          <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+          <div className="mb-6 p-4 bg-gradient-to-r from-orange-50 to-orange-50 rounded-lg border border-blue-200">
             <h3 className="text-lg font-bold text-slate-800 mb-3">Technical Specifications</h3>
             <div className="grid grid-cols-1 gap-3">
               {technicalSpecs.type && (
@@ -205,7 +198,13 @@ function ProductDetail() {
 
           {/* Action Buttons */}
           <div className="flex gap-4">
-            <button className="flex-1 bg-blue-500 text-white py-4 px-6 rounded-lg font-bold text-lg hover:bg-blue-600 transition-all hover:scale-105">
+            <button
+              onClick={() => {
+                addToCart(product);
+                navigate('/cart');
+              }}
+              className="flex-1 bg-orange-500 text-white py-4 px-6 rounded-lg font-bold text-lg hover:bg-orange-600 transition-all hover:scale-105"
+            >
               Add to Cart
             </button>
             <button className="bg-gray-200 text-slate-700 py-4 px-6 rounded-lg font-bold hover:bg-gray-300 transition-all">
@@ -303,14 +302,9 @@ function ProductDetail() {
                  
                   <p className="text-gray-700">
                     <span className="font-semibold">Current Price:</span>
-                    <span className="ml-2 text-2xl text-blue-600 font-bold">Rs {product.price.toFixed(2)}</span>
+                    <span className="ml-2 text-2xl text-orange-600 font-bold">Rs {product.price.toFixed(2)}</span>
                   </p>
-                  {product.originalPrice && (
-                    <p className="text-green-700 font-semibold">
-                      You Save: Rs {(product.originalPrice - product.price).toFixed(2)} 
-                      ({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF)
-                    </p>
-                  )}
+                 
                 </div>
               </div>
 
@@ -361,28 +355,28 @@ function ProductDetail() {
       </div>
 
       {/* Why Choose Us Section */}
-      <div className="mt-8 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl shadow-lg p-8">
+      <div className="mt-8 bg-orange-50 text-black rounded-xl shadow-lg p-8">
         <h2 className="text-2xl font-bold mb-6 text-center">Why Choose Our Products?</h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="text-center">
             <div className="text-4xl mb-3">✓</div>
             <h3 className="font-bold mb-2">Genuine Products</h3>
-            <p className="text-sm text-indigo-100">100% authentic items with warranty</p>
+            <p className="text-sm text-black">100% authentic items with warranty</p>
           </div>
           <div className="text-center">
             <div className="text-4xl mb-3">🚚</div>
             <h3 className="font-bold mb-2">Fast Delivery</h3>
-            <p className="text-sm text-indigo-100">Quick shipping across Sri Lanka</p>
+            <p className="text-sm text-black">Quick shipping across Sri Lanka</p>
           </div>
           <div className="text-center">
             <div className="text-4xl mb-3">💯</div>
             <h3 className="font-bold mb-2">Quality Assured</h3>
-            <p className="text-sm text-indigo-100">Tested & verified products</p>
+            <p className="text-sm text-black">Tested & verified products</p>
           </div>
           <div className="text-center">
             <div className="text-4xl mb-3">👨‍💼</div>
             <h3 className="font-bold mb-2">Expert Support</h3>
-            <p className="text-sm text-indigo-100">Professional guidance available</p>
+            <p className="text-sm text-black">Professional guidance available</p>
           </div>
         </div>
       </div>

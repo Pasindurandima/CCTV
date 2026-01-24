@@ -26,28 +26,51 @@ function Navbar() {
         </Link>
 
         {/* Navigation Links */}
-        <ul className="flex items-center list-none gap-4">
-          <li className="h-[70px] flex items-center">
-            <Link to="/" className={`text-gray-700 no-underline px-4 py-0 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${isActive('/') ? 'text-orange-500 border-orange-500' : 'border-transparent'}`}>
-              Home
-            </Link>
-          </li>
-          <li className="h-[70px] flex items-center">
-            <Link to="/store" className={`text-gray-700 no-underline px-4 py-0 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${isActive('/store') ? 'text-orange-500 border-orange-500' : 'border-transparent'}`}>
-              Store
-            </Link>
-          </li>
-          <li className="h-[70px] flex items-center">
-            <Link to="/about" className={`text-gray-700 no-underline px-4 py-0 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${isActive('/about') ? 'text-orange-500 border-orange-500' : 'border-transparent'}`}>
-              About us
-            </Link>
-          </li>
-          <li className="h-[70px] flex items-center">
-            <Link to="/contact" className={`text-gray-700 no-underline px-4 py-0 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${isActive('/contact') ? 'text-orange-500 border-orange-500' : 'border-transparent'}`}>
-              Contact us
-            </Link>
-          </li>
-        </ul>
+     <ul className="flex items-center justify-center list-none gap-4 h-full">
+    <li className="h-full flex items-center">
+      <Link
+        to="/"
+        className={`text-gray-700 no-underline px-4 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${
+          isActive("/") ? "text-orange-500 border-orange-500" : "border-transparent"
+        }`}
+      >
+        Home
+      </Link>
+    </li>
+
+    <li className="h-full flex items-center">
+      <Link
+        to="/store"
+        className={`text-gray-700 no-underline px-4 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${
+          isActive("/store") ? "text-orange-500 border-orange-500" : "border-transparent"
+        }`}
+      >
+        Store
+      </Link>
+    </li>
+
+    <li className="h-full flex items-center">
+      <Link
+        to="/about"
+        className={`text-gray-700 no-underline px-4 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${
+          isActive("/about") ? "text-orange-500 border-orange-500" : "border-transparent"
+        }`}
+      >
+        About us
+      </Link>
+    </li>
+
+    <li className="h-full flex items-center">
+      <Link
+        to="/contact"
+        className={`text-gray-700 no-underline px-4 h-full flex items-center transition-all hover:text-orange-500 font-medium border-b-2 ${
+          isActive("/contact") ? "text-orange-500 border-orange-500" : "border-transparent"
+        }`}
+      >
+        Contact us
+      </Link>
+    </li>
+  </ul>
 
         {/* Cart Button */}
         <Link to="/cart" className="relative">

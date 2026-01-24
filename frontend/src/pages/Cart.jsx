@@ -38,13 +38,21 @@ function Cart() {
           <div className="bg-white rounded-lg shadow-lg p-6">
             {cartItems.map((item) => (
               <div key={item.id} className="flex gap-4 border-b border-gray-200 pb-4 mb-4 last:border-0 last:mb-0">
-                <div className="bg-gradient-to-br from-indigo-500 to-purple-600 w-24 h-24 rounded-lg flex items-center justify-center text-white text-3xl flex-shrink-0">
-                  📷
+                <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-white flex items-center justify-center">
+                  {item.imageUrl ? (
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-white text-3xl">📷</span>
+                  )}
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-slate-800 mb-1">{item.name}</h3>
                   <p className="text-sm text-gray-500 mb-2">{item.category}</p>
-                  <p className="text-xl text-blue-500 font-bold">Rs {item.price}</p>
+                  <p className="text-xl text-orange-500 font-bold">Rs {item.price}</p>
                 </div>
                 <div className="flex flex-col items-end gap-2">
                   <button

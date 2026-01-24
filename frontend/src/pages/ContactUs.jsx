@@ -92,36 +92,37 @@ function ContactUs() {
       <div className="max-w-7xl mx-auto py-16 px-5">
         {/* Quick Contact Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 -mt-20 mb-16">
-          <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-blue-500">
-            <div className="text-5xl mb-3 text-center">📞</div>
+          <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-orange-500">
+            <div className="mb-3 flex justify-center">
+              <img src="/assets/call.png" alt="Call" className="h-12 w-12 object-contain" />
+            </div>
             <h3 className="font-bold text-slate-800 text-center mb-2">Call Us</h3>
             <div className="text-center space-y-1">
-              <a href="tel:0777602018" className="block text-blue-600 hover:text-blue-700 font-semibold">
-                077 760 2018
+              <a href="tel:0777602021" className="block text-black-600 hover:text-black-700 font-semibold">
+                077 760 2021
               </a>
-              <a href="tel:0770279136" className="block text-blue-600 hover:text-blue-700 font-semibold">
-                077 027 9136
+              <a href="tel:0774820276" className="block text-black-600 hover:text-black-700 font-semibold">
+                077 482 0276
               </a>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-green-500">
-            <div className="text-5xl mb-3 text-center">✉️</div>
+          <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-orange-500">
+            <div className="mb-3 flex justify-center">
+              <img src="/assets/mail.png" alt="Email" className="h-12 w-12 object-contain" />
+            </div>
             <h3 className="font-bold text-slate-800 text-center mb-2">Email Us</h3>
             <p className="text-gray-600 text-center text-sm">
-              <a href="mailto:info@cctvsecurity.lk" className="hover:text-blue-600">
-                info@cctvsecurity.lk
-              </a>
-            </p>
-            <p className="text-gray-600 text-center text-sm">
-              <a href="mailto:support@cctvsecurity.lk" className="hover:text-blue-600">
-                support@cctvsecurity.lk
+              <a href="mailto:engineering.secu@gmail.com" className="hover:text-blue-600">
+                engineering.secu@gmail.com
               </a>
             </p>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-purple-500">
-            <div className="text-5xl mb-3 text-center">📍</div>
+          <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-orange-500">
+            <div className="mb-3 flex justify-center">
+              <img src="/assets/location.png" alt="Location" className="h-12 w-12 object-contain" />
+            </div>
             <h3 className="font-bold text-slate-800 text-center mb-2">Visit Us</h3>
             <p className="text-gray-600 text-center text-sm">
               123 Security Solutions Street<br />
@@ -130,7 +131,9 @@ function ContactUs() {
           </div>
 
           <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-orange-500">
-            <div className="text-5xl mb-3 text-center">🕐</div>
+            <div className="mb-3 flex justify-center">
+              <img src="/assets/time.png" alt="Business Hours" className="h-12 w-12 object-contain" />
+            </div>
             <h3 className="font-bold text-slate-800 text-center mb-2">Working Hours</h3>
             <p className="text-gray-600 text-center text-sm">
               Mon - Sat: 9AM - 6PM<br />
@@ -153,45 +156,35 @@ function ContactUs() {
               {/* Contact Details */}
               <div className="space-y-6">
                 <div className="flex items-start gap-4 group">
-                  <div className="bg-blue-100 p-3 rounded-lg group-hover:bg-blue-200 transition-colors">
-                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                    </svg>
+                  <div className="bg-blue-50 p-3 rounded-lg group-hover:bg-blue-200 transition-colors">
+                    <img src="/assets/call.png" alt="Call" className="w-6 h-6 object-contain" />
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-800 mb-1">Phone Numbers</h3>
-                    <a href="tel:0777602018" className="block text-blue-600 hover:text-blue-700 font-semibold">
-                      077 760 2018
+                    <a href="tel:0777602021" className="block text-gray-600 hover:text-blue-700 font-semibold">
+                      077 760 2021
                     </a>
-                    <a href="tel:0770279136" className="block text-blue-600 hover:text-blue-700 font-semibold">
-                      077 027 9136
+                    <a href="tel:0774820276" className="block text-gray-600 hover:text-blue-700 font-semibold">
+                      077 482 0276
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4 group">
-                  <div className="bg-green-100 p-3 rounded-lg group-hover:bg-green-200 transition-colors">
-                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
+                  <div className="bg-blue-50 p-3 rounded-lg group-hover:bg-green-200 transition-colors">
+                    <img src="/assets/mail.png" alt="Email" className="w-6 h-6 object-contain" />
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-800 mb-1">Email Address</h3>
-                    <a href="mailto:info@cctvsecurity.lk" className="block text-green-600 hover:text-green-700">
-                      info@cctvsecurity.lk
-                    </a>
-                    <a href="mailto:support@cctvsecurity.lk" className="block text-green-600 hover:text-green-700">
-                      support@cctvsecurity.lk
+                    <a href="mailto:engineering.secu@gmail.com" className="block text-gray-600 hover:text-green-700">
+                      engineering.secu@gmail.com
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4 group">
-                  <div className="bg-purple-100 p-3 rounded-lg group-hover:bg-purple-200 transition-colors">
-                    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
+                  <div className="bg-blue-50 p-3 rounded-lg group-hover:bg-purple-200 transition-colors">
+                    <img src="/assets/location.png" alt="Location" className="w-6 h-6 object-contain" />
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-800 mb-1">Office Location</h3>
@@ -204,10 +197,8 @@ function ContactUs() {
                 </div>
 
                 <div className="flex items-start gap-4 group">
-                  <div className="bg-orange-100 p-3 rounded-lg group-hover:bg-orange-200 transition-colors">
-                    <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
+                  <div className="bg-blue-50 p-3 rounded-lg group-hover:bg-orange-200 transition-colors">
+                    <img src="/assets/time.png" alt="Business Hours" className="w-6 h-6 object-contain" />
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-800 mb-1">Business Hours</h3>
@@ -261,7 +252,7 @@ function ContactUs() {
                       value={formData.email}
                       onChange={handleChange}
                       className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                      placeholder="john@example.com"
+                      placeholder="engineering.secu@gmail.com"
                       required
                     />
                   </div>
@@ -279,7 +270,7 @@ function ContactUs() {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                      placeholder="077 123 4567"
+                      placeholder="077 760 2021"
                     />
                   </div>
 
@@ -325,7 +316,7 @@ function ContactUs() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`bg-gradient-to-r from-blue-600 to-purple-600 text-white border-none py-4 px-10 rounded-lg cursor-pointer text-lg w-full font-bold transition-all hover:from-blue-700 hover:to-purple-700 transform hover:scale-[1.02] hover:shadow-xl flex items-center justify-center gap-2 ${
+                  className={`bg-orange-500 text-white border-none py-4 px-10 rounded-lg cursor-pointer text-lg w-full font-bold transition-all hover:from-blue-700 hover:to-purple-700 transform hover:scale-[1.02] hover:shadow-xl flex items-center justify-center gap-2 ${
                     isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
                   }`}
                 >

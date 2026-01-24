@@ -11,6 +11,9 @@ function Store() {
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showQuantityModal, setShowQuantityModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   // Fetch products from backend
   useEffect(() => {
@@ -184,6 +187,21 @@ function Store() {
     return matchesCategory && matchesSearch;
   });
 
+  const handleOrderNowClick = (product) => {
+    setSelectedProduct(product);
+    setQuantity(1);
+    setShowQuantityModal(true);
+  };
+
+  const handleConfirmOrder = () => {
+    if (selectedProduct) {
+      addToCart({ ...selectedProduct, quantity });
+      setShowQuantityModal(false);
+      setSelectedProduct(null);
+      navigate('/checkout');
+    }
+  };
+
   // Show loading state
   if (loading) {
     return (
@@ -279,22 +297,22 @@ function Store() {
             Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
             {selectedCategory && <span className="font-semibold"> in {selectedCategory}</span>}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
               <Link key={product.id} to={`/product/${product.id}`} className="no-underline">
                 <div className="bg-white rounded-xl overflow-hidden shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl cursor-pointer h-full flex flex-col">
-                  {/* Image Container - Fixed Aspect Ratio */}
-<div className="relative w-full aspect-square bg-white overflow-hidden flex items-center justify-center group">
+                  {/* Image Container - Fixed Height for Better Display */}
+                  <div className="relative w-full h-64 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex items-center justify-center group">
                     {product.imageUrl ? (
                       <img 
                         src={product.imageUrl} 
                         alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="flex flex-col items-center justify-center text-white">
+                      <div className="flex flex-col items-center justify-center text-gray-400">
                         <div className="text-6xl mb-2">📷</div>
-                        <p className="text-sm px-2 text-center">No Image</p>
+                        <p className="text-sm px-2 text-center">No Image Available</p>
                       </div>
                     )}
                     {/* Brand Badge */}
@@ -318,8 +336,7 @@ function Store() {
                         <button 
                           onClick={(e) => {
                             e.preventDefault();
-                            addToCart(product);
-                            navigate('/checkout');
+                            handleOrderNowClick(product);
                           }}
                           className="bg-orange-500 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs transition-all hover:bg-orange-600 hover:scale-105 font-semibold flex items-center justify-center gap-1 w-full"
                           title="Order Now"
@@ -353,17 +370,78 @@ function Store() {
 
         <h3 className="text-3xl font-bold mb-6">Need Help Choosing? Call Us!</h3>
         <div className="flex justify-center gap-8 flex-wrap mb-6">
-          <a href="tel:0777602018" className="flex items-center gap-2 text-xl hover:text-orange-100 transition-colors font-semibold">
+          <a href="tel:0777602021" className="flex items-center gap-2 text-xl hover:text-orange-100 transition-colors font-semibold">
             <span className="text-2xl">📞</span>
-            <span>077 760 2018</span>
+            <span>077 760 2021</span>
           </a>
-          <a href="tel:0770279136" className="flex items-center gap-2 text-xl hover:text-orange-100 transition-colors font-semibold">
+          <a href="tel:0774820276" className="flex items-center gap-2 text-xl hover:text-orange-100 transition-colors font-semibold">
             <span className="text-2xl">📞</span>
-            <span>077 027 9136</span>
+            <span>077 482 0276</span>
           </a>
         </div>
         <p className="text-black-100">Our experts are ready to help you find the perfect security solution</p>
       </div>
+
+      {/* Quantity Selection Modal */}
+      {showQuantityModal && selectedProduct && (
+        <div className="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center z-[1000] p-4">
+          <div className="bg-orange-100 rounded-lg shadow-2xl max-w-md w-full p-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Select Quantity</h2>
+            
+            {/* Product Info */}
+            <div className="mb-6 pb-6 border-b border-gray-200">
+              <p className="text-lg font-semibold text-gray-700 mb-2">{selectedProduct.name}</p>
+              <p className="text-2xl font-bold text-orange-500">Rs {selectedProduct.price}</p>
+            </div>
+
+            {/* Quantity Selector */}
+            <div className="mb-8">
+              <label className="block text-sm font-semibold text-gray-700 mb-4">Quantity</label>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition-colors"
+                >
+                  −
+                </button>
+                <input
+                  type="number"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                  className="w-20 text-center text-xl font-bold border-2 border-gray-300 rounded-lg py-2 focus:outline-none focus:border-orange-500"
+                  min="1"
+                />
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition-colors"
+                >
+                  +
+                </button>
+              </div>
+              <p className="text-sm text-gray-600 mt-3">Total: Rs {(selectedProduct.price * quantity).toFixed(2)}</p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowQuantityModal(false);
+                  setSelectedProduct(null);
+                }}
+                className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmOrder}
+                className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+              >
+                Proceed to Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       </div>
     </div>
   );

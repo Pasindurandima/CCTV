@@ -546,16 +546,23 @@ const AdminPanel = () => {
                 <p className="text-gray-600 text-lg">No products available. Add your first product above!</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {products.map((product) => (
                   <div key={product.id} className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow-lg hover:shadow-xl transition-all overflow-hidden">
-                    {product.imageUrl && (
-                      <div className="h-48 overflow-hidden bg-gray-200">
+                    {product.imageUrl ? (
+                      <div className="h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center group">
                         <img
                           src={product.imageUrl}
                           alt={product.name}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform"
+                          className="w-full h-full object-contain group-hover:scale-105 transition-transform"
                         />
+                      </div>
+                    ) : (
+                      <div className="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <div className="flex flex-col items-center justify-center text-gray-400">
+                          <div className="text-6xl mb-2">📷</div>
+                          <p className="text-sm">No Image</p>
+                        </div>
                       </div>
                     )}
                     <div className="p-4">

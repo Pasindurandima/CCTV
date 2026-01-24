@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [stats, setStats] = useState({
     totalProducts: 0,
@@ -13,6 +15,8 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchProducts();
+    // Push a new state to browser history so back button navigates to login
+    window.history.pushState({ from: 'dashboard' }, '', window.location.href);
   }, []);
 
   const fetchProducts = async () => {
@@ -52,6 +56,19 @@ const AdminDashboard = () => {
     acc[product.category] = (acc[product.category] || 0) + 1;
     return acc;
   }, {}) : {};
+
+  const handleBackNavigation = () => {
+    navigate('/admin/login');
+  };
+
+  // Listen for back button
+  useEffect(() => {
+    const handlePopState = () => {
+      navigate('/admin/login');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [navigate]);
 
   return (
     <div className="w-full bg-white pt-0">

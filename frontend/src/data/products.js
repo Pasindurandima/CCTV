@@ -1462,7 +1462,7 @@ export const getProductById = (id) => {
 };
 
 export const CONTACT_NUMBERS = {
-  phone1: '0777602018',
-  phone2: '0770279136',
-  formatted: '077 760 2018 / 077 027 9136'
+  phone1: '0777602021',
+  phone2: '0774820276',
+  formatted: '077 760 2021 / 077 482 0276'
 };
