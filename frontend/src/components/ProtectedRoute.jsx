@@ -1,20 +1,28 @@
-import { Navigate } from 'react-router-dom';
-import Unauthorized from '../pages/Unauthorized';
+import { Navigate, useLocation } from 'react-router-dom';
 
+// Protects admin-only pages. If the stored session is missing or the role is not authorized,
+// redirect to the hardened admin login route instead of silently rendering public pages.
 const ProtectedRoute = ({ children, requiredRole }) => {
-  const user = JSON.parse(localStorage.getItem('user') || 'null');
+  const location = useLocation();
 
-  // If no user is logged in, redirect to login
-  if (!user) {
-    return <Navigate to="/login" replace />;
+  let user = null;
+  try {
+    user = JSON.parse(localStorage.getItem('user') || 'null');
+  } catch (err) {
+    // Corrupted data should not allow access
+    localStorage.removeItem('user');
   }
 
-  // If a specific role is required and user doesn't have it, show unauthorized page
-  if (requiredRole && user.role !== requiredRole) {
-    return <Unauthorized />;
+  const roleMatches = requiredRole
+    ? user?.role?.toUpperCase() === requiredRole.toUpperCase()
+    : Boolean(user);
+
+  if (!user || !roleMatches) {
+    // Clear any stale client-side session and send the user to the admin login screen
+    localStorage.removeItem('user');
+    return <Navigate to="/admin/login" replace state={{ from: location.pathname }} />;
   }
 
-  // User is authorized, render the protected content
   return children;
 };
 

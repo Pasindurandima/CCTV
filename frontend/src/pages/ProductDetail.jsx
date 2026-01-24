@@ -300,12 +300,7 @@ function ProductDetail() {
               <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                 <h4 className="font-bold text-gray-800 mb-2">💰 Price Information</h4>
                 <div className="space-y-2">
-                  {product.originalPrice && (
-                    <p className="text-gray-700">
-                      <span className="font-semibold">Original Price:</span>
-                      <span className="ml-2 line-through text-gray-500">Rs {product.originalPrice.toFixed(2)}</span>
-                    </p>
-                  )}
+                 
                   <p className="text-gray-700">
                     <span className="font-semibold">Current Price:</span>
                     <span className="ml-2 text-2xl text-blue-600 font-bold">Rs {product.price.toFixed(2)}</span>

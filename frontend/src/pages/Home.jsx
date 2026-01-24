@@ -3,14 +3,42 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   const categories = [
-    { name: 'DVR/NVR', icon: '/assets/icon1.png', description: 'Truly Unlimited Internet With Speed Up-To 1000 Mbps !' },
-    { name: 'Power Banks', icon: '/assets/icon2.png', description: 'Crystal Clear Truly Unlimited STD And Local Calls With Eagle Eye Smart Telephony' },
-    { name: 'CCTV', icon: '/assets/icon3.png', description: 'Enterprise Business Solutions Internet Leased Line' },
+        { 
+  name: 'CCTV Camera',
+  icon: '/assets/icon3.png',
+  description: 'High-definition surveillance cameras for 24/7 security monitoring in homes, offices, and enterprises.'
+},
 
+{ 
+  name: 'DVR/NVR',
+  icon: '/assets/icon1.png',
+  description: 'Digital and Network Video Recorders for storing, managing, and reviewing CCTV footage efficiently.'
+},
 
-    { name: 'DVR/NVR', icon: '/assets/icon1.png', description: 'Truly Unlimited Internet With Speed Up-To 1000 Mbps !' },
-    { name: 'Power Banks', icon: '/assets/icon2.png', description: 'Crystal Clear Truly Unlimited STD And Local Calls With Eagle Eye Smart Telephony' },
-    { name: 'CCTV', icon: '/assets/icon3.png', description: 'Enterprise Business Solutions Internet Leased Line' }
+{ 
+  name: 'CCTV Accessories',
+  icon: '/assets/icon7.png',
+  description: 'Complete range of CCTV accessories including cables, power adapters, mounts, and connectors.'
+},
+
+{ 
+  name: 'Power Banks',
+  icon: '/assets/icon4.png',
+  description: 'Portable high-capacity power banks for reliable backup charging of mobile devices and gadgets.'
+},
+
+{ 
+  name: 'Fingerprint Scanner',
+  icon: '/assets/icon5.png',
+  description: 'Biometric fingerprint scanners for secure authentication, attendance systems, and access control.'
+},
+
+{ 
+  name: 'GPS Tracking System',
+  icon: '/assets/icon6.png',
+  description: 'Real-time GPS tracking solutions for vehicles, assets, and fleet management with live location updates.'
+}
+
   ];
 
   const services = [
@@ -47,7 +75,7 @@ function Home() {
               {/* Tagline Box */}
 <div className="mb-10 border-l-4 border-orange-500 pl-8 py-2">
   <p className="text-xl md:text-2xl text-gray-600 mb-2 font-medium tracking-wide">
-    A Complete solution
+    A Complete solution all electrical & electronic accessories
   </p>
 
   <p className="text-xl md:text-2xl text-gray-600 mb-4 font-medium tracking-wide">
@@ -55,7 +83,7 @@ function Home() {
   </p>
 
   <p className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-tight">
-    <span className="text-orange-500">Security</span> needs
+    <span className="text-orange-500">SecU</span> Engineering
   </p>
 </div>
 

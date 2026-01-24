@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import '../styles/AdminPanel.css';
 
 const AdminPanel = () => {
   const [formData, setFormData] = useState({
@@ -268,241 +267,311 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="admin-panel">
-      <div className="admin-container">
-        <div className="admin-header">
-          <h1 className="admin-title">📦 Product Management</h1>
-          <p>Add, edit, and manage your product catalog</p>
-        </div>
+    <div className="w-full bg-white pt-0">
+     
 
-        <div className="management-section">
-          <h2 className="section-title">{editMode ? '✏️ Edit Product' : '➕ Add New Product'}</h2>
-
+      {/* Main Content */}
+      <section className="py-12 px-5 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto">
+          {/* Message Display */}
           {message.text && (
-            <div className={`message ${message.type}`}>
-              {message.text}
+            <div className={`mb-6 p-4 rounded-lg border-l-4 flex items-start gap-3 ${
+              message.type === 'success' 
+                ? 'bg-green-100 border-green-500 text-green-700' 
+                : 'bg-red-100 border-red-500 text-red-700'
+            }`}>
+              <span className="text-xl">{message.type === 'success' ? '✅' : '⚠️'}</span>
+              <div>
+                <p className="font-semibold">{message.type === 'success' ? 'Success' : 'Error'}</p>
+                <p className="text-sm">{message.text}</p>
+              </div>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="product-form">
-            <div className="form-row">
-              <div className="form-group">
-                <label>Product Name *</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Enter product name"
-                />
-              </div>
+          {/* Form Section */}
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-2">
+              {editMode ? '✏️ Edit Product' : '➕ Add New Product'}
+            </h2>
 
-              <div className="form-group">
-                <label>Brand *</label>
-                <input
-                  type="text"
-                  name="brand"
-                  value={formData.brand}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Enter brand name"
-                />
-              </div>
-            </div>
-
-            <div className="form-row">
-              <div className="form-group">
-                <label>Price *</label>
-                <input
-                  type="number"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleInputChange}
-                  required
-                  step="0.01"
-                  placeholder="0.00"
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Original Price</label>
-                <input
-                  type="number"
-                  name="originalPrice"
-                  value={formData.originalPrice}
-                  onChange={handleInputChange}
-                  step="0.01"
-                  placeholder="0.00"
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                <label>Category *</label>
-                <button
-                  type="button"
-                  onClick={() => window.location.href = '/admin/categories'}
-                  className="add-feature-btn"
-                  style={{ padding: '0.4rem 0.8rem', fontSize: '0.875rem', margin: 0 }}
-                >
-                  📂 Manage Categories
-                </button>
-              </div>
-              <select
-                name="category"
-                value={formData.category}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="">Select Category</option>
-                {categories.map((cat) => (
-                  <option key={cat.id} value={cat.name}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
-              {categories.length === 0 && (
-                <small style={{ color: '#e53e3e', marginTop: '0.25rem', display: 'block' }}>
-                  ⚠️ No categories found. Click "Manage Categories" to add categories.
-                </small>
-              )}
-            </div>
-
-            <div className="form-group">
-              <label>Short Description *</label>
-              <textarea
-                name="shortDesc"
-                value={formData.shortDesc}
-                onChange={handleInputChange}
-                required
-                rows="3"
-                placeholder="Brief description of the product"
-              />
-            </div>
-
-            {/* Image Upload Section */}
-            <div className="form-group">
-              <label>Product Image (optional)</label>
-              <div className="image-upload-container">
-                <input
-                  type="file"
-                  id="image-input"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  style={{ display: 'none' }}
-                />
-                <button
-                  type="button"
-                  onClick={() => document.getElementById('image-input').click()}
-                  className="image-upload-btn"
-                >
-                  📸 Browse Image from Your Laptop
-                </button>
-                
-                {formData.imagePreview && (
-                  <div className="image-preview-container">
-                    <img 
-                      src={formData.imagePreview} 
-                      alt="Preview" 
-                      className="image-preview"
-                    />
-                    <p className="preview-label">
-                      {formData.imageFile ? formData.imageFile.name : 'Current Image'}
-                    </p>
-                    {formData.imageFile && (
-                      <button
-                        type="button"
-                        onClick={removeImage}
-                        className="remove-image-btn"
-                      >
-                        ✕ Remove Image
-                      </button>
-                    )}
-                  </div>
-                )}
-              </div>
-              <small style={{ color: '#666', marginTop: '0.5rem', display: 'block' }}>
-                ℹ️ Supported formats: JPG, PNG, GIF, WebP. Max size: 5MB
-              </small>
-            </div>
-
-            <div className="form-group">
-              <label>Features</label>
-              {formData.features.map((feature, index) => (
-                <div key={index} className="feature-input-group">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Product Name and Brand */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block mb-2 text-slate-800 font-semibold">
+                    Product Name <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
-                    value={feature}
-                    onChange={(e) => handleFeatureChange(index, e.target.value)}
-                    placeholder={`Feature ${index + 1}`}
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Enter product name"
+                    className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
                   />
-                  {formData.features.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => removeFeatureInput(index)}
-                      className="remove-btn"
-                    >
-                      Remove
-                    </button>
+                </div>
+
+                <div>
+                  <label className="block mb-2 text-slate-800 font-semibold">
+                    Brand <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="brand"
+                    value={formData.brand}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Enter brand name"
+                    className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                  />
+                </div>
+              </div>
+
+              {/* Price Fields */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block mb-2 text-slate-800 font-semibold">
+                    Price <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleInputChange}
+                    required
+                    step="0.01"
+                    placeholder="0.00"
+                    className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                  />
+                </div>
+
+                <div>
+                  <label className="block mb-2 text-slate-800 font-semibold">
+                    Original Price
+                  </label>
+                  <input
+                    type="number"
+                    name="originalPrice"
+                    value={formData.originalPrice}
+                    onChange={handleInputChange}
+                    step="0.01"
+                    placeholder="0.00"
+                    className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                  />
+                </div>
+              </div>
+
+              {/* Category */}
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-slate-800 font-semibold">
+                    Category <span className="text-red-500">*</span>
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => window.location.href = '/admin/categories'}
+                    className="bg-blue-500 text-white px-3 py-1 rounded text-sm font-semibold hover:bg-blue-600 transition-all"
+                  >
+                    📂 Manage Categories
+                  </button>
+                </div>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                >
+                  <option value="">Select Category</option>
+                  {categories.map((cat) => (
+                    <option key={cat.id} value={cat.name}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
+                {categories.length === 0 && (
+                  <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                    ⚠️ No categories found. Click "Manage Categories" to add categories.
+                  </p>
+                )}
+              </div>
+
+              {/* Short Description */}
+              <div>
+                <label className="block mb-2 text-slate-800 font-semibold">
+                  Short Description <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  name="shortDesc"
+                  value={formData.shortDesc}
+                  onChange={handleInputChange}
+                  required
+                  rows="3"
+                  placeholder="Brief description of the product"
+                  className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                />
+              </div>
+
+              {/* Image Upload */}
+              <div>
+                <label className="block mb-2 text-slate-800 font-semibold">
+                  Product Image (optional)
+                </label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-orange-500 transition-all">
+                  <input
+                    type="file"
+                    id="image-input"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById('image-input').click()}
+                    className="bg-orange-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-orange-600 transition-all inline-block"
+                  >
+                    📸 Browse Image from Your Laptop
+                  </button>
+                  
+                  {formData.imagePreview && (
+                    <div className="mt-4">
+                      <img 
+                        src={formData.imagePreview} 
+                        alt="Preview" 
+                        className="max-w-xs mx-auto rounded-lg shadow-md"
+                      />
+                      <p className="text-gray-600 text-sm mt-2">
+                        {formData.imageFile ? formData.imageFile.name : 'Current Image'}
+                      </p>
+                      {formData.imageFile && (
+                        <button
+                          type="button"
+                          onClick={removeImage}
+                          className="bg-red-500 text-white px-4 py-1 rounded text-sm mt-2 hover:bg-red-600 transition-all"
+                        >
+                          ✕ Remove Image
+                        </button>
+                      )}
+                    </div>
                   )}
                 </div>
-              ))}
-              <button
-                type="button"
-                onClick={addFeatureInput}
-                className="add-feature-btn"
-              >
-                + Add Feature
-              </button>
-            </div>
+                <p className="text-gray-600 text-sm mt-2">
+                  ℹ️ Supported formats: JPG, PNG, GIF, WebP. Max size: 5MB
+                </p>
+              </div>
 
-            <div className="form-actions">
-              <button type="submit" disabled={loading} className="submit-btn">
-                {loading ? 'Saving...' : editMode ? 'Update Product' : 'Add Product'}
-              </button>
-              {editMode && (
-                <button type="button" onClick={resetForm} className="cancel-btn">
-                  Cancel Edit
+              {/* Features */}
+              <div>
+                <label className="block mb-2 text-slate-800 font-semibold">
+                  Features
+                </label>
+                <div className="space-y-3">
+                  {formData.features.map((feature, index) => (
+                    <div key={index} className="flex gap-2">
+                      <input
+                        type="text"
+                        value={feature}
+                        onChange={(e) => handleFeatureChange(index, e.target.value)}
+                        placeholder={`Feature ${index + 1}`}
+                        className="flex-1 py-2 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500"
+                      />
+                      {formData.features.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeFeatureInput(index)}
+                          className="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-600 transition-all"
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={addFeatureInput}
+                  className="mt-3 bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-all"
+                >
+                  + Add Feature
                 </button>
-              )}
-            </div>
-          </form>
+              </div>
 
-          <div className="products-list">
-            <div className="list-header">
-              <h2>📋 All Products ({products.length})</h2>
-              <button onClick={fetchProducts} className="refresh-btn">
+              {/* Form Actions */}
+              <div className="flex gap-4 pt-6 border-t border-gray-200">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 px-8 rounded-lg font-bold hover:from-orange-600 hover:to-orange-700 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex-1"
+                >
+                  {loading ? 'Saving...' : editMode ? 'Update Product' : 'Add Product'}
+                </button>
+                {editMode && (
+                  <button
+                    type="button"
+                    onClick={resetForm}
+                    className="border-2 border-gray-300 text-gray-700 py-3 px-8 rounded-lg font-bold hover:bg-gray-50 transition-all"
+                  >
+                    Cancel Edit
+                  </button>
+                )}
+              </div>
+            </form>
+          </div>
+
+          {/* Products List Section */}
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
+                📋 All Products <span className="text-orange-500">({products.length})</span>
+              </h2>
+              <button
+                onClick={fetchProducts}
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-all flex items-center gap-2"
+              >
                 🔄 Refresh
               </button>
             </div>
 
             {products.length === 0 ? (
-              <p className="no-products">No products available. Add your first product above!</p>
+              <div className="text-center py-12">
+                <p className="text-gray-600 text-lg">No products available. Add your first product above!</p>
+              </div>
             ) : (
-              <div className="products-grid">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {products.map((product) => (
-                  <div key={product.id} className="product-card-admin">
+                  <div key={product.id} className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow-lg hover:shadow-xl transition-all overflow-hidden">
                     {product.imageUrl && (
-                      <img src={product.imageUrl} alt={product.name} className="product-image-admin" />
+                      <div className="h-48 overflow-hidden bg-gray-200">
+                        <img
+                          src={product.imageUrl}
+                          alt={product.name}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform"
+                        />
+                      </div>
                     )}
-                    <div className="product-info">
-                      <h3>{product.name}</h3>
-                      <p className="brand">🏢 {product.brand}</p>
-                      <p className="category">🏷️ {product.category}</p>
-                      <p className="price">💵 Rs {product.price}</p>
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold text-gray-800 mb-1">{product.name}</h3>
+                      <p className="text-sm text-gray-600 mb-1">🏢 {product.brand}</p>
+                      <p className="text-sm text-gray-600 mb-1">🏷️ {product.category}</p>
+                      <p className="text-lg font-bold text-orange-500 mb-2">💵 Rs {product.price}</p>
                       {product.features && product.features.length > 0 && (
-                        <p className="features-count">✨ {product.features.length} features</p>
+                        <p className="text-sm text-gray-600 mb-4">✨ {product.features.length} features</p>
                       )}
-                    </div>
-                    <div className="product-actions">
-                      <button onClick={() => handleEdit(product)} className="edit-btn">
-                        ✏️ Edit
-                      </button>
-                      <button onClick={() => handleDelete(product.id)} className="delete-btn">
-                        🗑️ Delete
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleEdit(product)}
+                          className="flex-1 bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition-all"
+                        >
+                          ✏️ Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(product.id)}
+                          className="flex-1 bg-red-500 text-white py-2 rounded-lg font-semibold hover:bg-red-600 transition-all"
+                        >
+                          🗑️ Delete
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -510,7 +579,7 @@ const AdminPanel = () => {
             )}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

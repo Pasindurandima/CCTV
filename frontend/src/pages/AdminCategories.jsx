@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import '../styles/AdminCategories.css';
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -145,121 +144,162 @@ const AdminCategories = () => {
   };
 
   return (
-    <div className="admin-categories">
-      <div className="categories-container">
-        <div className="categories-header">
-          <h1>📂 Category Management</h1>
-          <button onClick={handleAddNew} className="add-category-btn">
-            ➕ Add New Category
-          </button>
-        </div>
+    <div className="w-full bg-white">
+    
 
-        {/* Message Display */}
-        {message.text && (
-          <div className={`message ${message.type}`}>
-            {message.text}
+      {/* Main Content */}
+      <section className="py-12 px-5 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto">
+          {/* Message Display */}
+          {message.text && (
+            <div className={`mb-6 p-4 rounded-lg border-l-4 font-semibold flex items-start gap-3 ${
+              message.type === 'success' 
+                ? 'bg-green-100 border-green-500 text-green-700' 
+                : 'bg-red-100 border-red-500 text-red-700'
+            }`}>
+              <span className="text-xl">{message.type === 'success' ? '✅' : '⚠️'}</span>
+              <div>
+                <p className="font-semibold">{message.type === 'success' ? 'Success' : 'Error'}</p>
+                <p className="text-sm">{message.text}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Categories Section */}
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <div className="flex justify-between items-center mb-8 pb-6 border-b-2 border-gray-200">
+              <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
+                📂 All Categories <span className="text-orange-500">({categories.length})</span>
+              </h2>
+              <button
+                onClick={handleAddNew}
+                className="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transform hover:-translate-y-1 transition-all"
+              >
+                ➕ Add New
+              </button>
+            </div>
+
+            {categories.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-600 text-lg">No categories found. Click "Add New" to create one.</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto border border-gray-200 rounded-lg">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-orange-400 text-white">
+                      <th className="px-6 py-4 text-left font-semibold">Name</th>
+                      <th className="px-6 py-4 text-left font-semibold">Description</th>
+                      <th className="px-6 py-4 text-left font-semibold">Created At</th>
+                      <th className="px-6 py-4 text-center font-semibold">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {categories.map((category) => (
+                      <tr key={category.id} className="border-b border-gray-200 hover:bg-gray-50 transition-all">
+                        <td className="px-6 py-4 font-semibold text-gray-800">{category.name}</td>
+                        <td className="px-6 py-4 text-gray-600 max-w-xs">{category.description || '-'}</td>
+                        <td className="px-6 py-4 text-gray-600">{new Date(category.createdAt).toLocaleDateString()}</td>
+                        <td className="px-6 py-4 text-center">
+                          <div className="flex gap-2 justify-center">
+                            <button
+                              onClick={() => handleEdit(category)}
+                              className="bg-blue-100 hover:bg-blue-200 text-blue-700 p-2 rounded transition-all text-lg transform hover:scale-110"
+                              title="Edit"
+                            >
+                              ✏️
+                            </button>
+                            <button
+                              onClick={() => handleDelete(category.id)}
+                              className="bg-red-100 hover:bg-red-200 text-red-700 p-2 rounded transition-all text-lg transform hover:scale-110"
+                              title="Delete"
+                            >
+                              🗑️
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
-        )}
-
-        {/* Categories Table */}
-        <div className="categories-table-wrapper">
-          <table className="categories-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Created At</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories.length === 0 ? (
-                <tr>
-                  <td colSpan="4" className="no-data">
-                    No categories found. Click "Add New Category" to create one.
-                  </td>
-                </tr>
-              ) : (
-                categories.map((category) => (
-                  <tr key={category.id}>
-                    <td className="category-name">{category.name}</td>
-                    <td className="category-desc">{category.description || '-'}</td>
-                    <td>{new Date(category.createdAt).toLocaleDateString()}</td>
-                    <td className="actions-cell">
-                      <button
-                        onClick={() => handleEdit(category)}
-                        className="action-btn edit-btn"
-                        title="Edit"
-                      >
-                        ✏️
-                      </button>
-                      <button
-                        onClick={() => handleDelete(category.id)}
-                        className="action-btn delete-btn"
-                        title="Delete"
-                      >
-                        🗑️
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
         </div>
+      </section>
 
-        {/* Modal for Add/Edit */}
-        {showModal && (
-          <div className="modal-overlay" onClick={() => setShowModal(false)}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <div className="modal-header">
-                <h2>{editMode ? 'Edit Category' : 'Add New Category'}</h2>
-                <button className="close-btn" onClick={() => setShowModal(false)}>
-                  ✕
-                </button>
+      {/* Modal for Add/Edit */}
+      {showModal && (
+        <div 
+          className="fixed inset-0 bg-white bg-opacity-60 flex justify-center items-center z-50"
+          onClick={() => setShowModal(false)}
+        >
+          <div 
+            className="bg-white rounded-2xl shadow-2xl p-8 w-96 max-h-96 overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-800">
+                {editMode ? '✏️ Edit Category' : '➕ Add New Category'}
+              </h2>
+              <button 
+                className="text-gray-600 hover:text-gray-900 text-2xl cursor-pointer hover:bg-gray-200 p-1 rounded transition-all"
+                onClick={() => setShowModal(false)}
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block mb-2 text-gray-700 font-semibold">
+                  Category Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={currentCategory.name}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="e.g., Wireless Camera"
+                  className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500"
+                />
               </div>
 
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label>Category Name *</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={currentCategory.name}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="e.g., Wireless Camera"
-                  />
-                </div>
+              <div>
+                <label className="block mb-2 text-gray-700 font-semibold">
+                  Description
+                </label>
+                <textarea
+                  name="description"
+                  value={currentCategory.description}
+                  onChange={handleInputChange}
+                  rows="3"
+                  placeholder="Brief description of the category..."
+                  className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500"
+                />
+              </div>
 
-                <div className="form-group">
-                  <label>Description</label>
-                  <textarea
-                    name="description"
-                    value={currentCategory.description}
-                    onChange={handleInputChange}
-                    rows="3"
-                    placeholder="Brief description of the category..."
-                  />
-                </div>
-
-                <div className="modal-actions">
-                  <button type="submit" disabled={loading} className="submit-btn">
-                    {loading ? 'Saving...' : editMode ? 'Update Category' : 'Add Category'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                    className="cancel-btn"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
+              <div className="flex gap-3 pt-4">
+                <button 
+                  type="submit" 
+                  disabled={loading} 
+                  className="flex-1 bg-orange-500 text-white py-3 px-4 rounded-lg font-bold hover:bg-orange-600 transform hover:-translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? 'Saving...' : editMode ? 'Update' : 'Add'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="flex-1 bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-bold hover:bg-gray-300 transition-all"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
