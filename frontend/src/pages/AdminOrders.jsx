@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/AdminOrders.css';
 
 function AdminOrders() {
   const [orders, setOrders] = useState([]);
@@ -110,10 +109,10 @@ function AdminOrders() {
 
   if (loading) {
     return (
-      <div className="admin-orders-container">
-        <h1 className="admin-orders-title">📦 Order Management</h1>
-        <div className="loading-container">
-          <div className="spinner"></div>
+      <div className="max-w-7xl mx-auto px-5 py-8">
+        <h1 className="text-4xl font-bold text-slate-800 mb-0">📦 Order Management</h1>
+        <div className="text-center py-16 bg-white rounded-xl shadow">
+          <div className="w-12 h-12 border-4 border-slate-200 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
           <p>Loading orders...</p>
         </div>
       </div>
@@ -122,68 +121,68 @@ function AdminOrders() {
 
   if (error) {
     return (
-      <div className="admin-orders-container">
-        <h1 className="admin-orders-title">📦 Order Management</h1>
-        <div className="error-container">
+      <div className="max-w-7xl mx-auto px-5 py-8">
+        <h1 className="text-4xl font-bold text-slate-800 mb-0">📦 Order Management</h1>
+        <div className="text-center py-16 bg-white rounded-xl shadow">
           <p>⚠️ Error: {error}</p>
-          <button onClick={fetchOrders} className="retry-btn">Retry</button>
+          <button onClick={fetchOrders} className="bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-600 transition mt-4">Retry</button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="admin-orders-container">
-      <div className="admin-orders-header">
-        <h1 className="admin-orders-title">📦 Order Management</h1>
-        <button onClick={fetchOrders} className="refresh-btn">🔄 Refresh</button>
+    <div className="max-w-7xl mx-auto px-5 py-8">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold text-slate-800 m-0">📦 Order Management</h1>
+        <button onClick={fetchOrders} className="bg-gradient-to-r from-yellow-200 to-orange-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-600 transition -translate-y-0.5">🔄 Refresh</button>
       </div>
 
       {/* Statistics Cards */}
-      <div className="order-stats">
-        <div className="stat-card">
-          <div className="stat-icon">📋</div>
-          <div className="stat-info">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <div className="bg-white rounded-xl p-6 flex gap-4 items-center shadow hover:-translate-y-1 transition">
+          <div className="text-5xl">📋</div>
+          <div className="flex-1">
             <h3>Total Orders</h3>
-            <p className="stat-number">{orders.length}</p>
+            <p className="text-3xl font-bold text-slate-800 mt-1">{orders.length}</p>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon">⏳</div>
-          <div className="stat-info">
+        <div className="bg-white rounded-xl p-6 flex gap-4 items-center shadow hover:-translate-y-1 transition">
+          <div className="text-5xl">⏳</div>
+          <div className="flex-1">
             <h3>Pending</h3>
-            <p className="stat-number">{orders.filter(o => o.status === 'PENDING').length}</p>
+            <p className="text-3xl font-bold text-slate-800 mt-1">{orders.filter(o => o.status === 'PENDING').length}</p>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon">💵</div>
-          <div className="stat-info">
+        <div className="bg-white rounded-xl p-6 flex gap-4 items-center shadow hover:-translate-y-1 transition">
+          <div className="text-5xl">💵</div>
+          <div className="flex-1">
             <h3>Cash on Delivery</h3>
-            <p className="stat-number">{orders.filter(o => o.paymentMethod === 'cash').length}</p>
+            <p className="text-3xl font-bold text-slate-800 mt-1">{orders.filter(o => o.paymentMethod === 'cash').length}</p>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon">💳</div>
-          <div className="stat-info">
+        <div className="bg-white rounded-xl p-6 flex gap-4 items-center shadow hover:-translate-y-1 transition">
+          <div className="text-5xl">💳</div>
+          <div className="flex-1">
             <h3>Online Payment</h3>
-            <p className="stat-number">{orders.filter(o => o.paymentMethod === 'online').length}</p>
+            <p className="text-3xl font-bold text-slate-800 mt-1">{orders.filter(o => o.paymentMethod === 'online').length}</p>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="filters-container">
-        <div className="filter-group">
-          <label>Payment Method:</label>
-          <select value={filterPayment} onChange={(e) => setFilterPayment(e.target.value)}>
+      <div className="bg-white p-5 rounded-xl mb-5 flex gap-5 flex-wrap shadow">
+        <div className="flex gap-2 items-center">
+          <label className="font-semibold text-slate-600">Payment Method:</label>
+          <select value={filterPayment} onChange={(e) => setFilterPayment(e.target.value)} className="py-2 px-4 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-blue-500">
             <option value="all">All Payments</option>
             <option value="cash">Cash on Delivery</option>
             <option value="online">Online Payment</option>
           </select>
         </div>
-        <div className="filter-group">
-          <label>Status:</label>
-          <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+        <div className="flex gap-2 items-center">
+          <label className="font-semibold text-slate-600">Status:</label>
+          <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="py-2 px-4 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-blue-500">
             <option value="all">All Status</option>
             <option value="pending">Pending</option>
             <option value="completed">Completed</option>
@@ -193,62 +192,62 @@ function AdminOrders() {
       </div>
 
       {/* Orders Table */}
-      <div className="orders-table-container">
+      <div className="bg-white rounded-xl p-5 shadow overflow-x-auto">
         {filteredOrders.length === 0 ? (
-          <div className="no-orders">
+          <div className="text-center py-16 bg-white rounded-xl shadow">
             <p>No orders found matching the filters</p>
           </div>
         ) : (
-          <table className="orders-table">
+          <table className="w-full border-collapse">
             <thead>
-              <tr>
-                <th>Order ID</th>
-                <th>Customer</th>
-                <th>Contact</th>
-                <th>Items</th>
-                <th>Total</th>
-                <th>Payment</th>
-                <th>Status</th>
-                <th>Date</th>
-                <th>Actions</th>
+              <tr className="bg-slate-100">
+                <th className="p-4 text-left font-semibold text-slate-600 border-b-2 border-slate-200">Order ID</th>
+                <th className="p-4 text-left font-semibold text-slate-600 border-b-2 border-slate-200">Customer</th>
+                <th className="p-4 text-left font-semibold text-slate-600 border-b-2 border-slate-200">Contact</th>
+                <th className="p-4 text-left font-semibold text-slate-600 border-b-2 border-slate-200">Items</th>
+                <th className="p-4 text-left font-semibold text-slate-600 border-b-2 border-slate-200">Total</th>
+                <th className="p-4 text-left font-semibold text-slate-600 border-b-2 border-slate-200">Payment</th>
+                <th className="p-4 text-left font-semibold text-slate-600 border-b-2 border-slate-200">Status</th>
+                <th className="p-4 text-left font-semibold text-slate-600 border-b-2 border-slate-200">Date</th>
+                <th className="p-4 text-left font-semibold text-slate-600 border-b-2 border-slate-200">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredOrders.map((order) => (
-                <tr key={order.id} onClick={() => setSelectedOrder(order)} className="order-row">
-                  <td className="order-id">#{order.id}</td>
-                  <td>{order.customerName}</td>
-                  <td>
-                    <div className="contact-info">
+                <tr key={order.id} onClick={() => setSelectedOrder(order)} className="cursor-pointer hover:bg-slate-50 transition">
+                  <td className="p-4 border-b border-slate-200 font-bold text-orange-500">#{order.id}</td>
+                  <td className="p-4 border-b border-slate-200">{order.customerName}</td>
+                  <td className="p-4 border-b border-slate-200">
+                    <div className="flex flex-col gap-1">
                       <div>{order.customerEmail}</div>
-                      <div className="phone">{order.customerPhone || 'N/A'}</div>
+                      <div className="text-sm text-slate-600">{order.customerPhone || 'N/A'}</div>
                     </div>
                   </td>
-                  <td className="text-center">
-                    <span className="items-count">
+                  <td className="p-4 border-b border-slate-200 text-center">
+                    <span className="inline-block py-1 px-2.5 bg-indigo-100 text-orange-500 rounded-full text-sm font-semibold">
                       {order.productCount} {order.productCount === 1 ? 'item' : 'items'}
                     </span>
                   </td>
-                  <td className="amount">Rs {order.totalAmount?.toFixed(2)}</td>
-                  <td>
-                    <span className={`payment-badge ${order.paymentMethod}`}>
+                  <td className="p-4 border-b border-slate-200 font-bold text-green-600 text-lg">Rs {order.totalAmount?.toFixed(2)}</td>
+                  <td className="p-4 border-b border-slate-200">
+                    <span className={`inline-block py-1.5 px-3 rounded-full text-sm font-semibold ${order.paymentMethod === 'cash' ? 'bg-yellow-100 text-amber-900' : 'bg-blue-100 text-blue-900'}`}>
                       {order.paymentMethod === 'cash' ? '💵 COD' : '💳 Online'}
                     </span>
                   </td>
-                  <td>
-                    <span className={`status-badge ${order.status?.toLowerCase()}`}>
+                  <td className="p-4 border-b border-slate-200">
+                    <span className={`inline-block py-1.5 px-3 rounded-full text-sm font-semibold uppercase ${order.status?.toLowerCase() === 'pending' ? 'bg-yellow-100 text-amber-900' : order.status?.toLowerCase() === 'processing' ? 'bg-blue-100 text-blue-900' : order.status?.toLowerCase() === 'shipped' ? 'bg-indigo-100 text-indigo-700' : order.status?.toLowerCase() === 'completed' ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`}>
                       {order.status}
                     </span>
                   </td>
-                  <td className="date">{formatDate(order.orderDate)}</td>
-                  <td>
-                    <div className="action-buttons">
+                  <td className="p-4 border-b border-slate-200 text-slate-600 text-sm">{formatDate(order.orderDate)}</td>
+                  <td className="p-4 border-b border-slate-200">
+                    <div className="flex gap-2">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           setSelectedOrder(order);
                         }}
-                        className="view-btn"
+                        className="bg-orange-500 text-white py-2 px-3 rounded hover:bg-blue-600 transition scale-100 hover:scale-110"
                         title="View Details"
                       >
                         👁️
@@ -264,205 +263,205 @@ function AdminOrders() {
 
       {/* Order Detail Modal */}
       {selectedOrder && (
-        <div className="modal-overlay" onClick={() => setSelectedOrder(null)}>
-          <div className="modal-content-new" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 p-5" onClick={() => setSelectedOrder(null)}>
+          <div className="bg-slate-100 rounded-3xl max-w-5xl w-full max-h-95vh overflow-y-auto shadow-2xl animate-in" onClick={(e) => e.stopPropagation()}>
             {/* Header with Status Badge */}
-            <div className="modal-header-new">
-              <div className="header-left">
-                <h2>Order #{selectedOrder.id}</h2>
-                <span className={`status-badge-large ${selectedOrder.status?.toLowerCase()}`}>
+            <div className="bg-gradient-to-r from-purple-600 to-purple-700 py-6 px-8 flex justify-between items-center rounded-3xl rounded-b-none text-white">
+              <div className="flex items-center gap-4">
+                <h2 className="text-3xl font-bold">Order #{selectedOrder.id}</h2>
+                <span className={`py-2 px-5 rounded-full text-sm font-bold uppercase tracking-wide ${selectedOrder.status?.toLowerCase() === 'pending' ? 'bg-yellow-400 bg-opacity-20' : selectedOrder.status?.toLowerCase() === 'processing' ? 'bg-blue-400 bg-opacity-20' : selectedOrder.status?.toLowerCase() === 'shipped' ? 'bg-indigo-400 bg-opacity-20' : selectedOrder.status?.toLowerCase() === 'completed' ? 'bg-green-400 bg-opacity-20' : 'bg-red-400 bg-opacity-20'}`}>
                   {selectedOrder.status}
                 </span>
               </div>
-              <button onClick={() => setSelectedOrder(null)} className="close-btn-new">✕</button>
+              <button onClick={() => setSelectedOrder(null)} className="bg-white bg-opacity-20 border-none text-white text-3xl cursor-pointer w-11 h-11 rounded-full flex items-center justify-center hover:bg-opacity-30 transition -rotate-0 hover:rotate-90">✕</button>
             </div>
             
-            <div className="modal-body-new">
+            <div className="p-6">
               {/* Two Column Layout */}
-              <div className="order-details-grid">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 
                 {/* LEFT COLUMN - Customer & Order Info */}
-                <div className="left-column">
+                <div className="flex flex-col gap-5">
                   
                   {/* Customer Information Card */}
-                  <div className="info-card">
-                    <div className="card-header">
-                      <h3>👤 Customer Details</h3>
+                  <div className="bg-white rounded-2xl shadow overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition">
+                    <div className="bg-gradient-to-r from-slate-100 to-slate-200 py-4 px-5 border-b-2 border-slate-200">
+                      <h3 className="text-lg font-bold text-slate-800 m-0">👤 Customer Details</h3>
                     </div>
-                    <div className="card-body">
-                      <div className="info-row">
-                        <span className="info-label">Name</span>
-                        <span className="info-value">{selectedOrder.customerName}</span>
+                    <div className="p-5">
+                      <div className="flex justify-between items-center py-3 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600 text-sm">Name</span>
+                        <span className="font-medium text-slate-800 text-sm text-right">{selectedOrder.customerName}</span>
                       </div>
-                      <div className="info-row">
-                        <span className="info-label">Email</span>
-                        <span className="info-value">{selectedOrder.customerEmail}</span>
+                      <div className="flex justify-between items-center py-3 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600 text-sm">Email</span>
+                        <span className="font-medium text-slate-800 text-sm text-right">{selectedOrder.customerEmail}</span>
                       </div>
-                      <div className="info-row">
-                        <span className="info-label">Phone</span>
-                        <span className="info-value">{selectedOrder.customerPhone || 'N/A'}</span>
+                      <div className="flex justify-between items-center py-3 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600 text-sm">Phone</span>
+                        <span className="font-medium text-slate-800 text-sm text-right">{selectedOrder.customerPhone || 'N/A'}</span>
                       </div>
-                      <div className="info-row">
-                        <span className="info-label">Address</span>
-                        <span className="info-value">{selectedOrder.shippingAddress || 'N/A'}</span>
+                      <div className="flex justify-between items-center py-3">
+                        <span className="font-semibold text-slate-600 text-sm">Address</span>
+                        <span className="font-medium text-slate-800 text-sm text-right">{selectedOrder.shippingAddress || 'N/A'}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Order Information Card */}
-                  <div className="info-card">
-                    <div className="card-header">
-                      <h3>📋 Order Details</h3>
+                  <div className="bg-white rounded-2xl shadow overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition">
+                    <div className="bg-gradient-to-r from-slate-100 to-slate-200 py-4 px-5 border-b-2 border-slate-200">
+                      <h3 className="text-lg font-bold text-slate-800 m-0">📋 Order Details</h3>
                     </div>
-                    <div className="card-body">
-                      <div className="info-row">
-                        <span className="info-label">Order ID</span>
-                        <span className="info-value">#{selectedOrder.id}</span>
+                    <div className="p-5">
+                      <div className="flex justify-between items-center py-3 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600 text-sm">Order ID</span>
+                        <span className="font-medium text-slate-800 text-sm text-right">#{selectedOrder.id}</span>
                       </div>
-                      <div className="info-row">
-                        <span className="info-label">Date</span>
-                        <span className="info-value">{new Date(selectedOrder.orderDate).toLocaleDateString()}</span>
+                      <div className="flex justify-between items-center py-3 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600 text-sm">Date</span>
+                        <span className="font-medium text-slate-800 text-sm text-right">{new Date(selectedOrder.orderDate).toLocaleDateString()}</span>
                       </div>
-                      <div className="info-row">
-                        <span className="info-label">Time</span>
-                        <span className="info-value">{new Date(selectedOrder.orderDate).toLocaleTimeString()}</span>
+                      <div className="flex justify-between items-center py-3 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600 text-sm">Time</span>
+                        <span className="font-medium text-slate-800 text-sm text-right">{new Date(selectedOrder.orderDate).toLocaleTimeString()}</span>
                       </div>
-                      <div className="info-row">
-                        <span className="info-label">Total Items</span>
-                        <span className="info-value">{selectedOrder.productCount} {selectedOrder.productCount === 1 ? 'item' : 'items'}</span>
+                      <div className="flex justify-between items-center py-3 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600 text-sm">Total Items</span>
+                        <span className="font-medium text-slate-800 text-sm text-right">{selectedOrder.productCount} {selectedOrder.productCount === 1 ? 'item' : 'items'}</span>
                       </div>
-                      <div className="info-row">
-                        <span className="info-label">Payment</span>
-                        <span className={`payment-badge-small ${selectedOrder.paymentMethod}`}>
+                      <div className="flex justify-between items-center py-3 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600 text-sm">Payment</span>
+                        <span className={`inline-block py-1 px-3 rounded-full text-xs font-semibold ${selectedOrder.paymentMethod === 'cash' ? 'bg-yellow-100 text-amber-900' : 'bg-blue-100 text-blue-900'}`}>
                           {selectedOrder.paymentMethod === 'cash' ? '💵 COD' : '💳 Online'}
                         </span>
                       </div>
-                      <div className="info-row highlight">
-                        <span className="info-label">Total Amount</span>
-                        <span className="info-value amount-large">Rs {selectedOrder.totalAmount?.toFixed(2)}</span>
+                      <div className="flex justify-between items-center py-3 bg-gradient-to-r from-blue-50 to-indigo-50 px-4 mx-(-5) mb-(-5) rounded-b-2xl">
+                        <span className="font-semibold text-slate-600 text-sm">Total Amount</span>
+                        <span className="text-2xl font-bold text-blue-500">Rs {selectedOrder.totalAmount?.toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Order Notes if exists */}
                   {selectedOrder.notes && (
-                    <div className="info-card">
-                      <div className="card-header">
-                        <h3>📝 Notes</h3>
+                    <div className="bg-white rounded-2xl shadow overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition">
+                      <div className="bg-gradient-to-r from-slate-100 to-slate-200 py-4 px-5 border-b-2 border-slate-200">
+                        <h3 className="text-lg font-bold text-slate-800 m-0">📝 Notes</h3>
                       </div>
-                      <div className="card-body">
-                        <p className="notes-text">{selectedOrder.notes}</p>
+                      <div className="p-5">
+                        <p className="m-0 text-slate-700 leading-relaxed bg-slate-50 p-3 rounded border-l-4 border-blue-500">{selectedOrder.notes}</p>
                       </div>
                     </div>
                   )}
                 </div>
 
                 {/* RIGHT COLUMN - Products & Actions */}
-                <div className="right-column">
+                <div className="flex flex-col gap-5">
                   
                   {/* Products Ordered Card */}
-                  <div className="info-card">
-                    <div className="card-header">
-                      <h3>🛍️ Products Ordered</h3>
+                  <div className="bg-white rounded-2xl shadow overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition">
+                    <div className="bg-gradient-to-r from-slate-100 to-slate-200 py-4 px-5 border-b-2 border-slate-200">
+                      <h3 className="text-lg font-bold text-slate-800 m-0">🛍️ Products Ordered</h3>
                     </div>
-                    <div className="card-body">
+                    <div className="p-5">
                       {selectedOrder.items && selectedOrder.items.length > 0 ? (
-                        <div className="products-list-new">
-                          <table className="products-table-new">
+                        <div className="overflow-x-auto">
+                          <table className="w-full border-collapse">
                             <thead>
-                              <tr>
-                                <th>Product</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Subtotal</th>
+                              <tr className="bg-gradient-to-r from-purple-600 to-purple-700">
+                                <th className="p-3.5 text-left text-white font-semibold text-sm uppercase tracking-widest">Product</th>
+                                <th className="p-3.5 text-left text-white font-semibold text-sm uppercase tracking-widest">Qty</th>
+                                <th className="p-3.5 text-left text-white font-semibold text-sm uppercase tracking-widest">Price</th>
+                                <th className="p-3.5 text-left text-white font-semibold text-sm uppercase tracking-widest">Subtotal</th>
                               </tr>
                             </thead>
                             <tbody>
                               {selectedOrder.items.map((item, index) => (
-                                <tr key={index}>
-                                  <td className="product-name-cell">{item.productName}</td>
-                                  <td className="qty-cell">{item.quantity}</td>
-                                  <td className="price-cell">Rs {item.price.toFixed(2)}</td>
-                                  <td className="subtotal-cell">Rs {(item.price * item.quantity).toFixed(2)}</td>
+                                <tr key={index} className="border-b border-slate-100 hover:bg-slate-50 transition">
+                                  <td className="p-3.5 font-semibold text-slate-800">{item.productName}</td>
+                                  <td className="p-3.5 text-center font-bold text-purple-600">{item.quantity}</td>
+                                  <td className="p-3.5 text-right text-slate-600">Rs {item.price.toFixed(2)}</td>
+                                  <td className="p-3.5 text-right font-bold text-green-600">Rs {(item.price * item.quantity).toFixed(2)}</td>
                                 </tr>
                               ))}
                             </tbody>
-                            <tfoot>
-                              <tr className="total-row">
-                                <td colSpan="3">Total</td>
-                                <td className="total-cell">Rs {selectedOrder.totalAmount?.toFixed(2)}</td>
+                            <tfoot className="bg-slate-50 border-t-3 border-purple-600">
+                              <tr>
+                                <td colSpan="3" className="p-4 font-bold text-slate-800">Total</td>
+                                <td className="p-4 font-bold text-blue-500 text-lg">Rs {selectedOrder.totalAmount?.toFixed(2)}</td>
                               </tr>
                             </tfoot>
                           </table>
                         </div>
                       ) : (
-                        <div className="no-products-message">No product details available</div>
+                        <div className="text-center py-10 text-slate-600 italic bg-slate-50 rounded border-2 border-dashed border-slate-200">No product details available</div>
                       )}
                     </div>
                   </div>
 
                   {/* Status Update Card */}
-                  <div className="info-card">
-                    <div className="card-header">
-                      <h3>🔄 Update Status</h3>
+                  <div className="bg-white rounded-2xl shadow overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition">
+                    <div className="bg-gradient-to-r from-slate-100 to-slate-200 py-4 px-5 border-b-2 border-slate-200">
+                      <h3 className="text-lg font-bold text-slate-800 m-0">🔄 Update Status</h3>
                     </div>
-                    <div className="card-body">
-                      <div className="status-grid">
+                    <div className="p-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         <button
                           onClick={() => updateOrderStatus(selectedOrder.id, 'PENDING')}
-                          className={`status-btn-new pending ${selectedOrder.status === 'PENDING' ? 'active' : ''}`}
+                          className={`flex flex-col items-center gap-2 p-4 border-2 rounded-2xl cursor-pointer transition ${selectedOrder.status === 'PENDING' ? 'bg-yellow-100 border-yellow-400 scale-105 shadow-lg' : 'bg-yellow-100 border-transparent hover:shadow-md'} ${selectedOrder.status === 'PENDING' ? '' : ''}`}
                           disabled={selectedOrder.status === 'PENDING'}
                         >
-                          <span className="status-icon">⏳</span>
-                          <span className="status-text">Pending</span>
+                          <span className="text-2xl">⏳</span>
+                          <span className="text-xs uppercase tracking-wide font-semibold text-amber-900">Pending</span>
                         </button>
                         <button
                           onClick={() => updateOrderStatus(selectedOrder.id, 'PROCESSING')}
-                          className={`status-btn-new processing ${selectedOrder.status === 'PROCESSING' ? 'active' : ''}`}
+                          className={`flex flex-col items-center gap-2 p-4 border-2 rounded-2xl cursor-pointer transition ${selectedOrder.status === 'PROCESSING' ? 'bg-blue-100 border-blue-400 scale-105 shadow-lg' : 'bg-blue-100 border-transparent hover:shadow-md'} ${selectedOrder.status === 'PROCESSING' ? '' : ''}`}
                           disabled={selectedOrder.status === 'PROCESSING'}
                         >
-                          <span className="status-icon">🔄</span>
-                          <span className="status-text">Processing</span>
+                          <span className="text-2xl">🔄</span>
+                          <span className="text-xs uppercase tracking-wide font-semibold text-blue-900">Processing</span>
                         </button>
                         <button
                           onClick={() => updateOrderStatus(selectedOrder.id, 'SHIPPED')}
-                          className={`status-btn-new shipped ${selectedOrder.status === 'SHIPPED' ? 'active' : ''}`}
+                          className={`flex flex-col items-center gap-2 p-4 border-2 rounded-2xl cursor-pointer transition ${selectedOrder.status === 'SHIPPED' ? 'bg-indigo-100 border-indigo-400 scale-105 shadow-lg' : 'bg-indigo-100 border-transparent hover:shadow-md'} ${selectedOrder.status === 'SHIPPED' ? '' : ''}`}
                           disabled={selectedOrder.status === 'SHIPPED'}
                         >
-                          <span className="status-icon">🚚</span>
-                          <span className="status-text">Shipped</span>
+                          <span className="text-2xl">🚚</span>
+                          <span className="text-xs uppercase tracking-wide font-semibold text-indigo-700">Shipped</span>
                         </button>
                         <button
                           onClick={() => updateOrderStatus(selectedOrder.id, 'COMPLETED')}
-                          className={`status-btn-new completed ${selectedOrder.status === 'COMPLETED' ? 'active' : ''}`}
+                          className={`flex flex-col items-center gap-2 p-4 border-2 rounded-2xl cursor-pointer transition ${selectedOrder.status === 'COMPLETED' ? 'bg-green-100 border-green-400 scale-105 shadow-lg' : 'bg-green-100 border-transparent hover:shadow-md'} ${selectedOrder.status === 'COMPLETED' ? '' : ''}`}
                           disabled={selectedOrder.status === 'COMPLETED'}
                         >
-                          <span className="status-icon">✅</span>
-                          <span className="status-text">Completed</span>
+                          <span className="text-2xl">✅</span>
+                          <span className="text-xs uppercase tracking-wide font-semibold text-green-900">Completed</span>
                         </button>
                         <button
                           onClick={() => updateOrderStatus(selectedOrder.id, 'CANCELLED')}
-                          className={`status-btn-new cancelled ${selectedOrder.status === 'CANCELLED' ? 'active' : ''}`}
+                          className={`flex flex-col items-center gap-2 p-4 border-2 rounded-2xl cursor-pointer transition ${selectedOrder.status === 'CANCELLED' ? 'bg-red-100 border-red-400 scale-105 shadow-lg' : 'bg-red-100 border-transparent hover:shadow-md'} ${selectedOrder.status === 'CANCELLED' ? '' : ''}`}
                           disabled={selectedOrder.status === 'CANCELLED'}
                         >
-                          <span className="status-icon">❌</span>
-                          <span className="status-text">Cancelled</span>
+                          <span className="text-2xl">❌</span>
+                          <span className="text-xs uppercase tracking-wide font-semibold text-red-900">Cancelled</span>
                         </button>
                       </div>
                     </div>
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="action-buttons-container">
+                  <div className="grid grid-cols-2 gap-3">
                     <button
                       onClick={() => window.print()}
-                      className="action-btn print-btn"
+                      className="flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-bold hover:from-blue-600 hover:to-blue-700 shadow hover:shadow-lg transition -translate-y-0.5"
                     >
                       🖨️ Print Order
                     </button>
                     <button
                       onClick={() => deleteOrder(selectedOrder.id)}
-                      className="action-btn delete-btn"
+                      className="flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-bold hover:from-red-600 hover:to-red-700 shadow hover:shadow-lg transition -translate-y-0.5"
                     >
                       🗑️ Delete Order
                     </button>

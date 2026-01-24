@@ -134,11 +134,11 @@ const AdminDashboard = () => {
                       <div key={category} className="space-y-2">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-semibold text-gray-700">{category}</span>
-                          <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-bold">{count}</span>
+                          <span className="bg-orange-100 text-blue-orange px-3 py-1 rounded-full text-sm font-bold">{count}</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                           <div
-                            className="bg-gradient-to-r from-blue-500 to-purple-500 h-full transition-all duration-500 rounded-full"
+                            className="bg-gradient-to-r from-orange-500 to-white-500 h-full transition-all duration-500 rounded-full"
                             style={{ width: `${percentage}%` }}
                           ></div>
                         </div>
@@ -157,21 +157,21 @@ const AdminDashboard = () => {
                 💹 Quick Stats
               </h3>
               <div className="space-y-4">
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg">
+                <div className="bg-gradient-to-br orange-50 to-orange-200 p-4 rounded-lg">
                   <p className="text-gray-600 text-sm mb-1">Categories</p>
-                  <p className="text-3xl font-bold text-blue-600">{stats.totalCategories}</p>
+                  <p className="text-3xl font-bold text-black">{stats.totalCategories}</p>
                 </div>
-                <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg">
+                <div className="bg-gradient-to-br orange-50 to-orange-200 p-4 rounded-lg">
                   <p className="text-gray-600 text-sm mb-1">Avg Price</p>
-                  <p className="text-3xl font-bold text-purple-600">${stats.avgPrice}</p>
+                  <p className="text-3xl font-bold text-black-600">${stats.avgPrice}</p>
                 </div>
-                <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg">
+                <div className="bg-gradient-to-br orange-50 to-orange-200 p-4 rounded-lg">
                   <p className="text-gray-600 text-sm mb-1">Conversion</p>
-                  <p className="text-3xl font-bold text-green-600">12.5%</p>
+                  <p className="text-3xl font-bold text-black-600">12.5%</p>
                 </div>
-                <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-lg">
+                <div className="bg-gradient-to-br orange-50 to-orange-200 p-4 rounded-lg">
                   <p className="text-gray-600 text-sm mb-1">Total Views</p>
-                  <p className="text-3xl font-bold text-orange-600">2,547</p>
+                  <p className="text-3xl font-bold text-black-600">2,547</p>
                 </div>
               </div>
             </div>

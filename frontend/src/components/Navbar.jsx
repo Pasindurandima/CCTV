@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { ShoppingCart } from "lucide-react";
+
 
 function Navbar() {
   const { getCartCount } = useCart();
@@ -49,14 +51,17 @@ function Navbar() {
 
         {/* Cart Button */}
         <Link to="/cart" className="relative">
-          <button className="bg-orange-500 text-white no-underline px-6 py-2 h-full flex items-center transition-all hover:bg-orange-600 font-bold rounded text-sm">
-            Cart
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </button>
+         <button className="relative bg-orange-500 text-white no-underline px-6 py-2 h-full flex items-center gap-2 transition-all hover:bg-orange-600 font-bold rounded text-sm">
+  <ShoppingCart size={18} className="text-white" />
+  Cart
+
+  {cartCount > 0 && (
+    <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+      {cartCount}
+    </span>
+  )}
+</button>
+
         </Link>
       </div>
     </nav>

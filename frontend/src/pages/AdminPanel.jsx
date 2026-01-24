@@ -291,8 +291,16 @@ const AdminPanel = () => {
           {/* Form Section */}
           <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-2">
-              {editMode ? '✏️ Edit Product' : '➕ Add New Product'}
+              {editMode ? (
+                '✏️ Edit Product'
+              ) : (
+                <>
+                  <span className="text-orange-500 text-4xl font-bold">+</span>
+                  Add New Product
+                </>
+              )}
             </h2>
+
 
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Product Name and Brand */}
