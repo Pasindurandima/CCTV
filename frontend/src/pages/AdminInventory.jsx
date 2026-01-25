@@ -205,7 +205,7 @@ const AdminInventory = () => {
       <div className="max-w-7xl mx-auto px-5">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-500 hover:shadow-xl transition-all">
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-200 hover:shadow-xl transition-all">
             <div className="flex items-center gap-4">
               <div className="text-4xl">📦</div>
               <div>
@@ -215,7 +215,7 @@ const AdminInventory = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-500 hover:shadow-xl transition-all">
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-200 hover:shadow-xl transition-all">
             <div className="flex items-center gap-4">
               <div className="text-4xl">🔢</div>
               <div>
@@ -225,7 +225,7 @@ const AdminInventory = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-500 hover:shadow-xl transition-all">
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-200 hover:shadow-xl transition-all">
             <div className="flex items-center gap-4">
               <div className="text-4xl">⚠️</div>
               <div>
@@ -235,7 +235,7 @@ const AdminInventory = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-500 hover:shadow-xl transition-all">
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-200 hover:shadow-xl transition-all">
             <div className="flex items-center gap-4">
               <div className="text-4xl">💰</div>
               <div>
@@ -266,7 +266,7 @@ const AdminInventory = () => {
 
         {/* Low Stock Alert */}
         {lowStockItems.length > 0 && (
-          <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-lg mb-8 flex gap-4">
+          <div className="bg-yellow-50 border-l-4 border-orange-200 p-4 rounded-lg mb-8 flex gap-4">
             <div className="text-3xl">⚠️</div>
             <div>
               <h3 className="font-bold text-yellow-900 mb-1">Low Stock Alert</h3>

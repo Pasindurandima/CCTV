@@ -62,9 +62,9 @@ function ProductDetail() {
   // Show loading state
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto py-20 px-5 text-center">
-        <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
-        <p className="text-xl text-gray-600">Loading product...</p>
+      <div className="max-w-6xl mx-auto py-10 md:py-20 px-3 sm:px-4 md:px-5 mt-20 lg:mt-24 text-center">
+        <div className="inline-block animate-spin rounded-full h-12 sm:h-16 w-12 sm:w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 px-4">Loading product...</p>
       </div>
     );
   }
@@ -72,9 +72,9 @@ function ProductDetail() {
   // Show error state
   if (error || !product) {
     return (
-      <div className="max-w-6xl mx-auto py-20 px-5 text-center">
-        <h2 className="text-3xl font-bold text-slate-800 mb-4">Product Not Found</h2>
-        <Link to="/store" className="text-blue-500 hover:text-blue-600">
+      <div className="max-w-6xl mx-auto py-10 md:py-20 px-3 sm:px-4 md:px-5 mt-20 lg:mt-24 text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-4">Product Not Found</h2>
+        <Link to="/store" className="text-blue-500 hover:text-blue-600 text-sm sm:text-base">
           ← Back to Store
         </Link>
       </div>
@@ -82,114 +82,113 @@ function ProductDetail() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto py-10 px-5">
+    <div className="max-w-6xl mx-auto py-6 md:py-10 px-3 sm:px-4 md:px-5 mt-20 lg:mt-24">
       {/* Breadcrumb */}
-      <div className="mb-6 text-sm text-gray-600">
+      <div className="mb-4 md:mb-6 text-xs sm:text-sm text-gray-600">
         <Link to="/" className="hover:text-blue-500">Home</Link>
-        <span className="mx-2">/</span>
+        <span className="mx-1 md:mx-2">/</span>
         <Link to="/store" className="hover:text-blue-500">Store</Link>
-        <span className="mx-2">/</span>
-        <span className="text-slate-800">{product.name}</span>
+        <span className="mx-1 md:mx-2">/</span>
+        <span className="text-slate-800 line-clamp-1">{product.name}</span>
       </div>
 
       {/* Back Button */}
       <button 
         onClick={() => navigate(-1)}
-        className="mb-6 text-blue-500 hover:text-blue-600 flex items-center gap-2"
+        className="mb-4 md:mb-6 text-blue-500 hover:text-blue-600 flex items-center gap-2 text-sm md:text-base"
       >
         ← Back to Products
       </button>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
         {/* Product Image Section */}
-        <div className="bg-white rounded-xl shadow-lg p-6 sticky top-20">
+        <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 sticky top-20 md:top-24 h-fit">
           <div className="w-full aspect-square bg-white rounded-xl flex items-center justify-center text-white overflow-hidden group mb-4">
             {product.imageUrl ? (
               <img 
                 src={product.imageUrl} 
                 alt={product.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
               />
             ) : (
-              <div className="flex flex-col items-center justify-center">
-                <div className="text-9xl mb-4">📷</div>
-                <p className="text-lg">Product Image</p>
+              <div className="flex flex-col items-center justify-center text-gray-400">
+                <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl mb-2 md:mb-4">📷</div>
+                <p className="text-xs sm:text-sm md:text-base">Product Image</p>
               </div>
             )}
           </div>
           {product.brand && (
-            <div className="inline-block bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-bold w-full text-center">
+            <div className="inline-block bg-orange-100 text-orange-600 px-3 md:px-4 py-2 rounded-full text-xs sm:text-sm font-bold w-full text-center">
               {product.brand}
             </div>
           )}
         </div>
 
         {/* Product Details Section */}
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-slate-800 mb-4">{product.name}</h1>
+        <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-800 mb-4">{product.name}</h1>
           
           {/* Price Section */}
           <div className="mb-6">
-           
-            <div className="text-4xl font-bold text-orange-500">
+            <div className="text-3xl sm:text-4xl font-bold text-orange-500">
               Rs {product.price.toFixed(2)}
             </div>
-            <p className="text-sm text-gray-500 mt-2">Current price</p>
+            <p className="text-xs sm:text-sm text-gray-500 mt-2">Current price</p>
           </div>
 
           {/* Category */}
           <div className="mb-6">
-            <span className="inline-block bg-gray-100 text-gray-700 px-4 py-2 rounded-md text-sm font-semibold">
+            <span className="inline-block bg-gray-100 text-gray-700 px-3 md:px-4 py-2 rounded-md text-xs sm:text-sm font-semibold">
               Category: {product.category}
             </span>
           </div>
 
           {/* Short Description */}
           <div className="mb-6">
-            <h3 className="text-lg font-bold text-slate-800 mb-2">Product Overview</h3>
-            <p className="text-gray-600 leading-relaxed">{product.shortDesc}</p>
+            <h3 className="text-base md:text-lg font-bold text-slate-800 mb-2">Product Overview</h3>
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">{product.shortDesc}</p>
           </div>
 
           {/* Technical Specifications Summary */}
           <div className="mb-6 p-4 bg-gradient-to-r from-orange-50 to-orange-50 rounded-lg border border-blue-200">
-            <h3 className="text-lg font-bold text-slate-800 mb-3">Technical Specifications</h3>
-            <div className="grid grid-cols-1 gap-3">
+            <h3 className="text-base md:text-lg font-bold text-slate-800 mb-3">Technical Specifications</h3>
+            <div className="grid grid-cols-1 gap-2 md:gap-3">
               {technicalSpecs.type && (
-                <div className="flex items-start gap-2">
-                  <span className="font-semibold text-gray-700 min-w-32">Type:</span>
+                <div className="flex items-start gap-2 text-xs sm:text-sm md:text-base">
+                  <span className="font-semibold text-gray-700 min-w-24 md:min-w-32 flex-shrink-0">Type:</span>
                   <span className="text-gray-800">{technicalSpecs.type}</span>
                 </div>
               )}
               {technicalSpecs.resolution && (
-                <div className="flex items-start gap-2">
-                  <span className="font-semibold text-gray-700 min-w-32">Resolution:</span>
+                <div className="flex items-start gap-2 text-xs sm:text-sm md:text-base">
+                  <span className="font-semibold text-gray-700 min-w-24 md:min-w-32 flex-shrink-0">Resolution:</span>
                   <span className="text-gray-800">{technicalSpecs.resolution}</span>
                 </div>
               )}
               {technicalSpecs.connectivity && (
-                <div className="flex items-start gap-2">
-                  <span className="font-semibold text-gray-700 min-w-32">Connectivity:</span>
+                <div className="flex items-start gap-2 text-xs sm:text-sm md:text-base">
+                  <span className="font-semibold text-gray-700 min-w-24 md:min-w-32 flex-shrink-0">Connectivity:</span>
                   <span className="text-gray-800">{technicalSpecs.connectivity}</span>
                 </div>
               )}
-              <div className="flex items-start gap-2">
-                <span className="font-semibold text-gray-700 min-w-32">Brand:</span>
+              <div className="flex items-start gap-2 text-xs sm:text-sm md:text-base">
+                <span className="font-semibold text-gray-700 min-w-24 md:min-w-32 flex-shrink-0">Brand:</span>
                 <span className="text-gray-800">{product.brand}</span>
               </div>
-              <div className="flex items-start gap-2">
-                <span className="font-semibold text-gray-700 min-w-32">Category:</span>
+              <div className="flex items-start gap-2 text-xs sm:text-sm md:text-base">
+                <span className="font-semibold text-gray-700 min-w-24 md:min-w-32 flex-shrink-0">Category:</span>
                 <span className="text-gray-800">{product.category}</span>
               </div>
             </div>
           </div>
 
           {/* Features List */}
-          <div className="mb-8">
-            <h3 className="text-lg font-bold text-slate-800 mb-3">Key Features</h3>
-            <ul className="space-y-2">
+          <div className="mb-6 md:mb-8">
+            <h3 className="text-base md:text-lg font-bold text-slate-800 mb-3">Key Features</h3>
+            <ul className="space-y-1.5 md:space-y-2">
               {product.features.map((feature, index) => (
-                <li key={index} className="flex items-start gap-2 text-gray-700">
-                  <span className="text-green-500 mt-1">✓</span>
+                <li key={index} className="flex items-start gap-2 text-xs sm:text-sm md:text-base text-gray-700">
+                  <span className="text-green-500 mt-0.5 flex-shrink-0">✓</span>
                   <span>{feature}</span>
                 </li>
               ))}
@@ -197,35 +196,35 @@ function ProductDetail() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-4">
+          <div className="flex gap-2 md:gap-4 flex-col sm:flex-row">
             <button
               onClick={() => {
                 addToCart(product);
                 navigate('/cart');
               }}
-              className="flex-1 bg-orange-500 text-white py-4 px-6 rounded-lg font-bold text-lg hover:bg-orange-600 transition-all hover:scale-105"
+              className="flex-1 bg-orange-500 text-white py-3 md:py-4 px-4 md:px-6 rounded-lg font-bold text-base md:text-lg hover:bg-orange-600 active:bg-orange-700 transition-all text-center"
             >
               Add to Cart
             </button>
-            <button className="bg-gray-200 text-slate-700 py-4 px-6 rounded-lg font-bold hover:bg-gray-300 transition-all">
+            <button className="bg-gray-200 hover:bg-gray-300 active:bg-gray-400 text-slate-700 py-3 md:py-4 px-4 md:px-6 rounded-lg font-bold transition-all text-base md:text-lg">
               ❤️
             </button>
           </div>
 
           {/* Stock Status */}
-          <div className="mt-6 flex items-center gap-2 text-green-600">
-            <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-            <span className="font-semibold">In Stock</span>
+          <div className="mt-4 md:mt-6 flex items-center gap-2 text-green-600">
+            <span className="w-3 h-3 bg-green-500 rounded-full flex-shrink-0"></span>
+            <span className="font-semibold text-sm md:text-base">In Stock</span>
           </div>
 
           {/* Contact for Orders */}
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <h4 className="font-bold text-slate-800 mb-2">📞 Call to Order</h4>
+          <div className="mt-4 md:mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <h4 className="font-bold text-slate-800 mb-2 text-sm md:text-base">📞 Call to Order</h4>
             <div className="space-y-1">
-              <a href={`tel:${CONTACT_NUMBERS.phone1}`} className="block text-blue-600 hover:text-blue-700 font-semibold">
+              <a href={`tel:${CONTACT_NUMBERS.phone1}`} className="block text-blue-600 hover:text-blue-700 font-semibold text-xs sm:text-sm md:text-base">
                 {CONTACT_NUMBERS.phone1}
               </a>
-              <a href={`tel:${CONTACT_NUMBERS.phone2}`} className="block text-blue-600 hover:text-blue-700 font-semibold">
+              <a href={`tel:${CONTACT_NUMBERS.phone2}`} className="block text-blue-600 hover:text-blue-700 font-semibold text-xs sm:text-sm md:text-base">
                 {CONTACT_NUMBERS.phone2}
               </a>
             </div>
@@ -234,21 +233,21 @@ function ProductDetail() {
       </div>
 
       {/* Additional Information Tabs */}
-      <div className="mt-12 bg-white rounded-xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-slate-800 mb-6">Detailed Specifications</h2>
+      <div className="mt-8 md:mt-12 bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8">
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-4 md:mb-6">Detailed Specifications</h2>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {/* Left Column - Product Specifications */}
           <div>
-            <h3 className="text-lg font-bold text-slate-800 mb-4 pb-2 border-b-2 border-blue-500">Product Information</h3>
-            <div className="space-y-3">
-              <div className="flex justify-between py-3 border-b border-gray-200 hover:bg-gray-50 px-2 rounded transition-colors">
-                <span className="font-semibold text-gray-700">Product Name:</span>
-                <span className="text-gray-800 text-right max-w-xs">{product.name}</span>
+            <h3 className="text-base md:text-lg font-bold text-slate-800 mb-3 md:mb-4 pb-2 border-b-2 border-blue-500">Product Information</h3>
+            <div className="space-y-2 md:space-y-3">
+              <div className="flex flex-col sm:flex-row justify-between py-2 md:py-3 border-b border-gray-200 hover:bg-gray-50 px-2 rounded transition-colors gap-2">
+                <span className="font-semibold text-gray-700 text-xs sm:text-sm md:text-base">Product Name:</span>
+                <span className="text-gray-800 text-xs sm:text-sm md:text-base text-right max-w-xs">{product.name}</span>
               </div>
-              <div className="flex justify-between py-3 border-b border-gray-200 hover:bg-gray-50 px-2 rounded transition-colors">
-                <span className="font-semibold text-gray-700">Brand:</span>
-                <span className="text-gray-800">{product.brand}</span>
+              <div className="flex flex-col sm:flex-row justify-between py-2 md:py-3 border-b border-gray-200 hover:bg-gray-50 px-2 rounded transition-colors gap-2">
+                <span className="font-semibold text-gray-700 text-xs sm:text-sm md:text-base">Brand:</span>
+                <span className="text-gray-800 text-xs sm:text-sm md:text-base text-right">{product.brand}</span>
               </div>
               <div className="flex justify-between py-3 border-b border-gray-200 hover:bg-gray-50 px-2 rounded transition-colors">
                 <span className="font-semibold text-gray-700">Category:</span>

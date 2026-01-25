@@ -228,7 +228,7 @@ function AdminOrders() {
                       {order.productCount} {order.productCount === 1 ? 'item' : 'items'}
                     </span>
                   </td>
-                  <td className="p-4 border-b border-slate-200 font-bold text-green-600 text-lg">Rs {order.totalAmount?.toFixed(2)}</td>
+                  <td className="p-4 border-b border-slate-200 font-bold text-black text-m">Rs {order.totalAmount?.toFixed(2)}</td>
                   <td className="p-4 border-b border-slate-200">
                     <span className={`inline-block py-1.5 px-3 rounded-full text-sm font-semibold ${order.paymentMethod === 'cash' ? 'bg-yellow-100 text-amber-900' : 'bg-blue-100 text-blue-900'}`}>
                       {order.paymentMethod === 'cash' ? '💵 COD' : '💳 Online'}
@@ -263,17 +263,17 @@ function AdminOrders() {
 
       {/* Order Detail Modal */}
       {selectedOrder && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 p-5" onClick={() => setSelectedOrder(null)}>
-          <div className="bg-slate-100 rounded-3xl max-w-5xl w-full max-h-95vh overflow-y-auto shadow-2xl animate-in" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-white bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-[1000] p-4 sm:p-8" onClick={() => setSelectedOrder(null)}>
+          <div className="bg-slate-100 rounded-3xl max-w-6xl w-[95vw] lg:w-[90vw] max-h-[90vh] overflow-y-auto shadow-2xl shadow-black/15 border border-slate-200 animate-in" onClick={(e) => e.stopPropagation()}>
             {/* Header with Status Badge */}
-            <div className="bg-gradient-to-r from-purple-600 to-purple-700 py-6 px-8 flex justify-between items-center rounded-3xl rounded-b-none text-white">
+            <div className="bg-black py-6 px-8 flex justify-between items-center rounded-3xl rounded-b-none text-white">
               <div className="flex items-center gap-4">
                 <h2 className="text-3xl font-bold">Order #{selectedOrder.id}</h2>
                 <span className={`py-2 px-5 rounded-full text-sm font-bold uppercase tracking-wide ${selectedOrder.status?.toLowerCase() === 'pending' ? 'bg-yellow-400 bg-opacity-20' : selectedOrder.status?.toLowerCase() === 'processing' ? 'bg-blue-400 bg-opacity-20' : selectedOrder.status?.toLowerCase() === 'shipped' ? 'bg-indigo-400 bg-opacity-20' : selectedOrder.status?.toLowerCase() === 'completed' ? 'bg-green-400 bg-opacity-20' : 'bg-red-400 bg-opacity-20'}`}>
                   {selectedOrder.status}
                 </span>
               </div>
-              <button onClick={() => setSelectedOrder(null)} className="bg-white bg-opacity-20 border-none text-white text-3xl cursor-pointer w-11 h-11 rounded-full flex items-center justify-center hover:bg-opacity-30 transition -rotate-0 hover:rotate-90">✕</button>
+              <button onClick={() => setSelectedOrder(null)} className="bg-orange bg-opacity-20 border-none text-white text-3xl cursor-pointer w-11 h-11 rounded-full flex items-center justify-center hover:bg-opacity-30 transition -rotate-0 hover:rotate-90">✕</button>
             </div>
             
             <div className="p-6">
@@ -338,7 +338,7 @@ function AdminOrders() {
                       </div>
                       <div className="flex justify-between items-center py-3 bg-gradient-to-r from-blue-50 to-indigo-50 px-4 mx-(-5) mb-(-5) rounded-b-2xl">
                         <span className="font-semibold text-slate-600 text-sm">Total Amount</span>
-                        <span className="text-2xl font-bold text-blue-500">Rs {selectedOrder.totalAmount?.toFixed(2)}</span>
+                        <span className="text-2xl font-bold text-orange-500">Rs {selectedOrder.totalAmount?.toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
@@ -369,7 +369,7 @@ function AdminOrders() {
                         <div className="overflow-x-auto">
                           <table className="w-full border-collapse">
                             <thead>
-                              <tr className="bg-gradient-to-r from-purple-600 to-purple-700">
+                              <tr className="bg-orange-500">
                                 <th className="p-3.5 text-left text-white font-semibold text-sm uppercase tracking-widest">Product</th>
                                 <th className="p-3.5 text-left text-white font-semibold text-sm uppercase tracking-widest">Qty</th>
                                 <th className="p-3.5 text-left text-white font-semibold text-sm uppercase tracking-widest">Price</th>
@@ -380,16 +380,16 @@ function AdminOrders() {
                               {selectedOrder.items.map((item, index) => (
                                 <tr key={index} className="border-b border-slate-100 hover:bg-slate-50 transition">
                                   <td className="p-3.5 font-semibold text-slate-800">{item.productName}</td>
-                                  <td className="p-3.5 text-center font-bold text-purple-600">{item.quantity}</td>
+                                  <td className="p-3.5 text-center font-bold text-orange-500">{item.quantity}</td>
                                   <td className="p-3.5 text-right text-slate-600">Rs {item.price.toFixed(2)}</td>
-                                  <td className="p-3.5 text-right font-bold text-green-600">Rs {(item.price * item.quantity).toFixed(2)}</td>
+                                  <td className="p-3.5 text-right font-bold text-blue-600">Rs {(item.price * item.quantity).toFixed(2)}</td>
                                 </tr>
                               ))}
                             </tbody>
-                            <tfoot className="bg-slate-50 border-t-3 border-purple-600">
+                            <tfoot className="bg-slate-50 border-t-3 border-orange-600">
                               <tr>
                                 <td colSpan="3" className="p-4 font-bold text-slate-800">Total</td>
-                                <td className="p-4 font-bold text-blue-500 text-lg">Rs {selectedOrder.totalAmount?.toFixed(2)}</td>
+                                <td className="p-2 font-bold text-orange-500 text-lg">Rs {selectedOrder.totalAmount?.toFixed(2)}</td>
                               </tr>
                             </tfoot>
                           </table>

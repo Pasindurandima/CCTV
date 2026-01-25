@@ -271,42 +271,42 @@ const AdminPanel = () => {
      
 
       {/* Main Content */}
-      <section className="py-12 px-5 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-8 sm:py-10 md:py-12 px-4 sm:px-5 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto">
           {/* Message Display */}
           {message.text && (
-            <div className={`mb-6 p-4 rounded-lg border-l-4 flex items-start gap-3 ${
+            <div className={`mb-4 sm:mb-5 md:mb-6 p-3 sm:p-4 rounded-lg border-l-4 flex items-start gap-2 sm:gap-3 text-sm sm:text-base ${
               message.type === 'success' 
                 ? 'bg-green-100 border-green-500 text-green-700' 
                 : 'bg-red-100 border-red-500 text-red-700'
             }`}>
-              <span className="text-xl">{message.type === 'success' ? '✅' : '⚠️'}</span>
-              <div>
-                <p className="font-semibold">{message.type === 'success' ? 'Success' : 'Error'}</p>
-                <p className="text-sm">{message.text}</p>
+              <span className="text-lg sm:text-xl flex-shrink-0">{message.type === 'success' ? '✅' : '⚠️'}</span>
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-sm sm:text-base">{message.type === 'success' ? 'Success' : 'Error'}</p>
+                <p className="text-xs sm:text-sm mt-0.5">{message.text}</p>
               </div>
             </div>
           )}
 
           {/* Form Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-2">
+          <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 mb-8 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-8 flex items-center gap-2">
               {editMode ? (
                 '✏️ Edit Product'
               ) : (
                 <>
-                  <span className="text-orange-500 text-4xl font-bold">+</span>
+                  <span className="text-orange-500 text-2xl sm:text-3xl md:text-4xl font-bold">+</span>
                   Add New Product
                 </>
               )}
             </h2>
 
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               {/* Product Name and Brand */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
                 <div>
-                  <label className="block mb-2 text-slate-800 font-semibold">
+                  <label className="block mb-1.5 md:mb-2 text-slate-800 font-semibold text-sm md:text-base">
                     Product Name <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -316,12 +316,12 @@ const AdminPanel = () => {
                     onChange={handleInputChange}
                     required
                     placeholder="Enter product name"
-                    className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                    className="w-full py-2 md:py-3 px-3 md:px-4 border-2 border-gray-300 rounded-lg text-sm md:text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-slate-800 font-semibold">
+                  <label className="block mb-1.5 md:mb-2 text-slate-800 font-semibold text-sm md:text-base">
                     Brand <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -331,15 +331,15 @@ const AdminPanel = () => {
                     onChange={handleInputChange}
                     required
                     placeholder="Enter brand name"
-                    className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                    className="w-full py-2 md:py-3 px-3 md:px-4 border-2 border-gray-300 rounded-lg text-sm md:text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
                   />
                 </div>
               </div>
 
               {/* Price Fields */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
                 <div>
-                  <label className="block mb-2 text-slate-800 font-semibold">
+                  <label className="block mb-1.5 md:mb-2 text-slate-800 font-semibold text-sm md:text-base">
                     Price <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -350,12 +350,12 @@ const AdminPanel = () => {
                     required
                     step="0.01"
                     placeholder="0.00"
-                    className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                    className="w-full py-2 md:py-3 px-3 md:px-4 border-2 border-gray-300 rounded-lg text-sm md:text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-slate-800 font-semibold">
+                  <label className="block mb-1.5 md:mb-2 text-slate-800 font-semibold text-sm md:text-base">
                     Original Price
                   </label>
                   <input
@@ -365,21 +365,21 @@ const AdminPanel = () => {
                     onChange={handleInputChange}
                     step="0.01"
                     placeholder="0.00"
-                    className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                    className="w-full py-2 md:py-3 px-3 md:px-4 border-2 border-gray-300 rounded-lg text-sm md:text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
                   />
                 </div>
               </div>
 
               {/* Category */}
               <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="text-slate-800 font-semibold">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-3 mb-1.5 md:mb-2">
+                  <label className="text-slate-800 font-semibold text-sm md:text-base">
                     Category <span className="text-red-500">*</span>
                   </label>
                   <button
                     type="button"
                     onClick={() => window.location.href = '/admin/categories'}
-                    className="bg-blue-500 text-white px-3 py-1 rounded text-sm font-semibold hover:bg-blue-600 transition-all"
+                    className="bg-blue-500 text-white px-3 py-1.5 rounded text-xs md:text-sm font-semibold hover:bg-blue-600 transition-all"
                   >
                     📂 Manage Categories
                   </button>
@@ -389,7 +389,7 @@ const AdminPanel = () => {
                   value={formData.category}
                   onChange={handleInputChange}
                   required
-                  className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                  className="w-full py-2 md:py-3 px-3 md:px-4 border-2 border-gray-300 rounded-lg text-sm md:text-base transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
                 >
                   <option value="">Select Category</option>
                   {categories.map((cat) => (

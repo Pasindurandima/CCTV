@@ -205,12 +205,12 @@ function Store() {
   // Show loading state
   if (loading) {
     return (
-      <div className="max-w-[1600px] mx-auto py-10 px-5">
-        <h1 className="text-4xl text-slate-800 mb-8 text-center">Our Store</h1>
-        <div className="flex justify-center items-center min-h-[400px]">
+      <div className="max-w-[1600px] mx-auto py-6 md:py-10 px-3 sm:px-4 md:px-5 mt-20 lg:mt-24">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl text-slate-800 mb-6 md:mb-8 text-center">Our Store</h1>
+        <div className="flex justify-center items-center min-h-[300px] sm:min-h-[400px]">
           <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
-            <p className="text-xl text-gray-600">Loading products...</p>
+            <div className="inline-block animate-spin rounded-full h-12 sm:h-16 w-12 sm:w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 px-4">Loading products...</p>
           </div>
         </div>
       </div>
@@ -220,16 +220,16 @@ function Store() {
   // Show error state
   if (error) {
     return (
-      <div className="max-w-[1600px] mx-auto py-10 px-5">
-        <h1 className="text-4xl text-slate-800 mb-8 text-center">Our Store</h1>
-        <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-center bg-red-50 p-8 rounded-lg">
-            <p className="text-2xl text-red-600 mb-4">⚠️ Error Loading Products</p>
-            <p className="text-gray-600 mb-4">{error}</p>
-            <p className="text-sm text-gray-500">Please make sure the backend server is running on port 8080</p>
+      <div className="max-w-[1600px] mx-auto py-6 md:py-10 px-3 sm:px-4 md:px-5 mt-20 lg:mt-24">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl text-slate-800 mb-6 md:mb-8 text-center">Our Store</h1>
+        <div className="flex justify-center items-center min-h-[300px] sm:min-h-[400px]">
+          <div className="text-center bg-red-50 p-4 sm:p-6 md:p-8 rounded-lg mx-4">
+            <p className="text-xl sm:text-2xl text-red-600 mb-3 md:mb-4">⚠️ Error Loading Products</p>
+            <p className="text-sm sm:text-base text-gray-600 mb-3 md:mb-4">{error}</p>
+            <p className="text-xs sm:text-sm text-gray-500 mb-4">Please make sure the backend server is running on port 8080</p>
             <button 
               onClick={() => window.location.reload()} 
-              className="mt-4 bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
+              className="mt-3 md:mt-4 bg-blue-500 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-blue-600 active:bg-blue-700 font-semibold text-sm sm:text-base"
             >
               Retry
             </button>
@@ -241,207 +241,259 @@ function Store() {
 
   return (
     <div className="w-full bg-white pt-0">
-      <div className="max-w-[1600px] mx-auto py-16 px-5">
-      <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-8 text-center">
-        OUR <span className="text-orange-500">STORE</span>
-      </h1>
-      
-      {/* Search Bar */}
-      <div className="flex justify-center mb-12">
-        <input
-          type="text"
-          placeholder="Search products..."
-          className="py-3 px-5 border-2 border-orange-300 rounded-lg text-base w-full max-w-[500px] transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200 shadow-md"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
-
-      {/* Main Content with Sidebar */}
-      <div className="flex gap-8 flex-col lg:flex-row">
-        {/* Sidebar */}
-        <aside className="lg:w-64 w-full">
-          <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4 uppercase">Categories</h2>
-            <div className="space-y-2">
-              <button
-                onClick={() => setSelectedCategory('')}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-all font-medium ${
-                  selectedCategory === ''
-                    ? 'bg-orange-500 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                All Products
-              </button>
-              {categories.map((category) => (
+      <div className="max-w-[1600px] mx-auto pt-16 pb-2 md:pt-18 md:pb-3 lg:pt-20 lg:pb-4 px-3 sm:px-4 md:px-5">
+        {/* Main Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6 md:gap-8">
+          {/* Sidebar - At same height as title */}
+          <aside className="hidden md:block">
+            <div className="bg-white rounded-lg shadow-lg sticky top-20 md:top-24 h-[calc(100vh-100px)] flex flex-col">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-3 md:mb-4 uppercase text-center md:text-left p-4 md:p-6 pb-0">Categories</h2>
+              <div className="space-y-1.5 md:space-y-2 overflow-y-auto px-4 md:px-6 pb-4 md:pb-6 flex-1 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
                 <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.name)}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-all font-medium ${
-                    selectedCategory === category.name
+                  onClick={() => setSelectedCategory('')}
+                  className={`w-full text-left px-3 md:px-4 py-2 md:py-3 rounded-lg transition-all font-medium text-sm md:text-base ${
+                    selectedCategory === ''
                       ? 'bg-orange-500 text-white shadow-md'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  {category.name}
+                  All Products
                 </button>
-              ))}
+                {categories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => setSelectedCategory(category.name)}
+                    className={`w-full text-left px-3 md:px-4 py-2 md:py-3 rounded-lg transition-all font-medium text-sm md:text-base ${
+                      selectedCategory === category.name
+                        ? 'bg-orange-500 text-white shadow-md'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {category.name}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        </aside>
+          </aside>
 
-        {/* Products Section */}
-        <div className="flex-1">
-          <div className="mb-5 text-gray-600">
-            Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
-            {selectedCategory && <span className="font-semibold"> in {selectedCategory}</span>}
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => (
-              <Link key={product.id} to={`/product/${product.id}`} className="no-underline">
-                <div className="bg-white rounded-xl overflow-hidden shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl cursor-pointer h-full flex flex-col">
-                  {/* Image Container - Fixed Height for Better Display */}
-                  <div className="relative w-full h-64 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex items-center justify-center group">
-                    {product.imageUrl ? (
-                      <img 
-                        src={product.imageUrl} 
-                        alt={product.name}
-                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="flex flex-col items-center justify-center text-gray-400">
-                        <div className="text-6xl mb-2">📷</div>
-                        <p className="text-sm px-2 text-center">No Image Available</p>
-                      </div>
-                    )}
-                    {/* Brand Badge */}
-                    {product.brand && (
-                      <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-indigo-600 px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                        {product.brand}
-                      </div>
-                    )}
-                  </div>
+          {/* Right Content Area */}
+          <div className="flex-1 min-w-0">
+            {/* Title and Search */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4 md:mb-6 text-center md:text-left">
+              OUR <span className="text-orange-500">STORE</span>
+            </h1>
+            
+            {/* Search Bar */}
+            <div className="flex justify-center md:justify-start mb-6 md:mb-8">
+              <input
+                type="text"
+                placeholder="Search products..."
+                className="py-2.5 sm:py-3 px-4 sm:px-5 border-2 border-orange-300 rounded-lg text-sm sm:text-base w-full max-w-[500px] transition-all focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200 shadow-md"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
 
-                  {/* Product Info Container */}
-                  <div className="p-5 flex flex-col flex-grow">
-                    <h3 className="text-base font-bold mb-4 text-slate-800 line-clamp-2 min-h-[2.5rem] leading-tight">
-                      {product.name}
-                    </h3>
-                    
-                    {/* Price and Buttons */}
-                    <div className="mt-auto pt-4 border-t border-gray-100">
-                      <p className="text-2xl text-orange-500 font-bold mb-3">Rs {product.price}</p>
-                      <div className="flex flex-col gap-2">
-                        <button 
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleOrderNowClick(product);
-                          }}
-                          className="bg-orange-500 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs transition-all hover:bg-orange-600 hover:scale-105 font-semibold flex items-center justify-center gap-1 w-full"
-                          title="Order Now"
-                        >
-                          🛒 Order Now
-                        </button>
-                        <button 
-                          onClick={(e) => {
-                            e.preventDefault();
-                            addToCart(product);
-                            alert(`${product.name} added to cart!`);
-                          }}
-                          className="bg-gray-700 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs transition-all hover:bg-gray-800 hover:scale-105 font-semibold flex items-center justify-center gap-1 w-full"
-                          title="Add to Cart"
-                        >
-                          ❤️ Add To Cart
-                        </button>
+            {/* Mobile Categories Dropdown */}
+            <div className="md:hidden mb-6">
+              <div className="bg-white rounded-lg shadow-lg p-4">
+                <h2 className="text-lg font-bold text-gray-800 mb-3 uppercase">Categories</h2>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => setSelectedCategory('')}
+                    className={`w-full text-left px-3 py-2 rounded-lg transition-all font-medium text-sm ${
+                      selectedCategory === ''
+                        ? 'bg-orange-500 text-white shadow-md'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    All Products
+                  </button>
+                  {categories.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => setSelectedCategory(category.name)}
+                      className={`w-full text-left px-3 py-2 rounded-lg transition-all font-medium text-sm ${
+                        selectedCategory === category.name
+                          ? 'bg-orange-500 text-white shadow-md'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      {category.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Products Section */}
+            <div className="mb-4 md:mb-5 text-sm md:text-base text-gray-600">
+              Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
+              {selectedCategory && <span className="font-semibold"> in {selectedCategory}</span>}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+              {filteredProducts.map((product) => (
+                <Link key={product.id} to={`/product/${product.id}`} className="no-underline">
+                  <div className="bg-white rounded-xl overflow-hidden shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl cursor-pointer h-full flex flex-col">
+                    {/* Image Container - Fixed Height for Better Display */}
+                    <div className="relative w-full h-48 sm:h-56 md:h-60 lg:h-64 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex items-center justify-center group">
+                      {product.imageUrl ? (
+                        <img 
+                          src={product.imageUrl} 
+                          alt={product.name}
+                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="flex flex-col items-center justify-center text-gray-400">
+                          <div className="text-4xl sm:text-5xl md:text-6xl mb-2">📷</div>
+                          <p className="text-xs md:text-sm px-2 text-center">No Image Available</p>
+                        </div>
+                      )}
+                      {/* Brand Badge */}
+                      {product.brand && (
+                        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-white/95 backdrop-blur-sm text-indigo-600 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs font-bold shadow-md">
+                          {product.brand}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Product Info Container */}
+                    <div className="p-3 sm:p-4 md:p-5 flex flex-col flex-grow">
+                      <h3 className="text-sm sm:text-base font-bold text-slate-800 line-clamp-2 min-h-[2.5rem] leading-tight">
+                        {product.name}
+                      </h3>
+                      
+                      {/* Price and Buttons */}
+                      <div className="mt-auto">
+                        <div className="flex items-center justify-between mb-2 md:mb-3">
+                          <p className="text-xl sm:text-2xl text-orange-500 font-bold">Rs {product.price}</p>
+                          <a
+                            href={
+                              `https://wa.me/94777602021?text=${encodeURIComponent(
+                                `Quality products for Quality people\nProduct Name: ${product.name}\nQuantity: 1\nPrice: Rs ${product.price}\nUrl: ${window.location.origin}/product/${product.id}`
+                              )}`
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={e => e.stopPropagation()}
+                            className="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full transition-colors flex items-center justify-center"
+                            title="Chat on WhatsApp"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"/>
+                            </svg>
+                          </a>
+                        </div>
+                        <div className="flex flex-col gap-1.5 md:gap-2">
+                          <button 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleOrderNowClick(product);
+                            }}
+                            className="bg-orange-500 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs sm:text-sm transition-all hover:bg-orange-600 active:scale-95 font-semibold flex items-center justify-center gap-1 w-full"
+                            title="Order Now"
+                          >
+                            🛒 Order Now
+                          </button>
+                          <button 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              addToCart(product);
+                              alert(`${product.name} added to cart!`);
+                            }}
+                            className="bg-gray-700 text-white border-none py-2 px-3 rounded-lg cursor-pointer text-xs sm:text-sm transition-all hover:bg-gray-800 active:scale-95 font-semibold flex items-center justify-center gap-1 w-full"
+                            title="Add to Cart"
+                          >
+                            ❤️ Add To Cart
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Contact Banner */}
-      <div className="mt-16 bg-blue-100 text-black rounded-lg p-10 text-center ">
-
-
-        <h3 className="text-3xl font-bold mb-6">Need Help Choosing? Call Us!</h3>
-        <div className="flex justify-center gap-8 flex-wrap mb-6">
-          <a href="tel:0777602021" className="flex items-center gap-2 text-xl hover:text-orange-100 transition-colors font-semibold">
-            <span className="text-2xl">📞</span>
-            <span>077 760 2021</span>
-          </a>
-          <a href="tel:0774820276" className="flex items-center gap-2 text-xl hover:text-orange-100 transition-colors font-semibold">
-            <span className="text-2xl">📞</span>
-            <span>077 482 0276</span>
-          </a>
+        {/* Contact Banner */}
+        <div className="mt-12 md:mt-16 bg-blue-100 text-black rounded-lg p-6 sm:p-8 md:p-10 text-center">
+          <h3 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6">Need Help Choosing? Call Us!</h3>
+          <div className="flex justify-center gap-4 sm:gap-6 md:gap-8 flex-wrap mb-4 md:mb-6">
+            <a href="tel:0777602021" className="flex items-center gap-2 text-base sm:text-lg md:text-xl hover:text-orange-600 transition-colors font-semibold">
+              <span className="text-lg sm:text-2xl">📞</span>
+              <span className="hidden sm:inline">077 760 2021</span>
+              <span className="sm:hidden">077 760</span>
+            </a>
+            <a href="tel:0774820276" className="flex items-center gap-2 text-base sm:text-lg md:text-xl hover:text-orange-600 transition-colors font-semibold">
+              <span className="text-lg sm:text-2xl">📞</span>
+              <span className="hidden sm:inline">077 482 0276</span>
+              <span className="sm:hidden">077 482</span>
+            </a>
+          </div>
+          <p className="text-sm md:text-base text-gray-700">Our experts are ready to help you find the perfect security solution</p>
         </div>
-        <p className="text-black-100">Our experts are ready to help you find the perfect security solution</p>
-      </div>
 
-      {/* Quantity Selection Modal */}
-      {showQuantityModal && selectedProduct && (
-        <div className="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center z-[1000] p-4">
-          <div className="bg-orange-100 rounded-lg shadow-2xl max-w-md w-full p-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Select Quantity</h2>
-            
-            {/* Product Info */}
-            <div className="mb-6 pb-6 border-b border-gray-200">
-              <p className="text-lg font-semibold text-gray-700 mb-2">{selectedProduct.name}</p>
-              <p className="text-2xl font-bold text-orange-500">Rs {selectedProduct.price}</p>
-            </div>
+        {/* Quantity Selection Modal */}
+        {showQuantityModal && selectedProduct && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1000] p-4">
+            <div className="bg-white rounded-lg shadow-2xl max-w-md w-full p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">Select Quantity</h2>
+              
+              {/* Product Info */}
+              <div className="mb-6 pb-6 border-b border-gray-200">
+                <p className="text-base sm:text-lg font-semibold text-gray-700 mb-2">{selectedProduct.name}</p>
+                <p className="text-xl sm:text-2xl font-bold text-orange-500">Rs {selectedProduct.price}</p>
+              </div>
 
-            {/* Quantity Selector */}
-            <div className="mb-8">
-              <label className="block text-sm font-semibold text-gray-700 mb-4">Quantity</label>
-              <div className="flex items-center gap-4">
+              {/* Quantity Selector */}
+              <div className="mb-8">
+                <label className="block text-sm font-semibold text-gray-700 mb-4">Quantity</label>
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="bg-gray-300 hover:bg-gray-400 active:bg-gray-500 text-gray-800 font-bold py-2 px-3 sm:px-4 rounded-lg transition-colors"
+                  >
+                    −
+                  </button>
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                    className="w-16 sm:w-20 text-center text-lg sm:text-xl font-bold border-2 border-gray-300 rounded-lg py-2 focus:outline-none focus:border-orange-500 touch-manipulation"
+                    min="1"
+                  />
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="bg-gray-300 hover:bg-gray-400 active:bg-gray-500 text-gray-800 font-bold py-2 px-3 sm:px-4 rounded-lg transition-colors"
+                  >
+                    +
+                  </button>
+                </div>
+                <p className="text-xs sm:text-sm text-gray-600 mt-3">Total: Rs {(selectedProduct.price * quantity).toFixed(2)}</p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-2 sm:gap-3">
                 <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition-colors"
+                  onClick={() => {
+                    setShowQuantityModal(false);
+                    setSelectedProduct(null);
+                  }}
+                  className="flex-1 bg-gray-300 hover:bg-gray-400 active:bg-gray-500 text-gray-800 font-bold py-2 sm:py-3 px-4 rounded-lg transition-colors text-sm sm:text-base"
                 >
-                  −
+                  Cancel
                 </button>
-                <input
-                  type="number"
-                  value={quantity}
-                  onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-20 text-center text-xl font-bold border-2 border-gray-300 rounded-lg py-2 focus:outline-none focus:border-orange-500"
-                  min="1"
-                />
                 <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition-colors"
+                  onClick={handleConfirmOrder}
+                  className="flex-1 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-bold py-2 sm:py-3 px-4 rounded-lg transition-colors text-sm sm:text-base"
                 >
-                  +
+                  Proceed
                 </button>
               </div>
-              <p className="text-sm text-gray-600 mt-3">Total: Rs {(selectedProduct.price * quantity).toFixed(2)}</p>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex gap-3">
-              <button
-                onClick={() => {
-                  setShowQuantityModal(false);
-                  setSelectedProduct(null);
-                }}
-                className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleConfirmOrder}
-                className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors"
-              >
-                Proceed to Checkout
-              </button>
             </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
     </div>
   );
