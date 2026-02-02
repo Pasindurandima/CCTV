@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 
 function AboutUs() {
@@ -16,7 +17,7 @@ function AboutUs() {
 
 
       {/* Company Story Section */}
-      <section className="bg-blue-100 py-16 px-2">
+      <section className="bg-white py-16 px-2">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-30 items-center">
             {/* Image */}
@@ -242,87 +243,7 @@ function AboutUs() {
       </section>
 
 
-  {/* Footer */}
-      <section className="bg-white text-gray-800 py-16 px-5 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto">
-          {/* Header with Logo and Button */}
-          <div className="flex justify-between items-center mb-12 pb-4 border-b border-gray-300">
-            <div className="flex items-center gap-2">
-              <img src="/assets/logo.jpg" alt="SecU Engineering Logo" className="h-10 w-auto" />
-              <span className="font-bold text-lg">SecU</span><span className="font-bold text-lg text-orange-500">Engineering</span>
-            </div>
-            <button className="bg-orange-500 text-white px-6 py-2 font-bold rounded hover:bg-orange-600 transition-all">
-              Get In Touch
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
-            {/* Company */}
-            <div>
-              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">COMPANY</h3>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Who we are</p>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Blog</p>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Careers</p>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Report Fraud</p>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Contact</p>
-              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Investor Relations</p>
-            </div>
-
-            {/* For Service */}
-            <div>
-              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">FOR SERVICE</h3>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">YT video support</p>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Case Studies</p>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Email Support</p>
-              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Chat Support</p>
-            </div>
-
-            {/* For You */}
-            <div>
-              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">FOR YOU</h3>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Privacy</p>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Terms</p>
-              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Security</p>
-            </div>
-
-            {/* Marketing */}
-            <div>
-              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">MARKETING</h3>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Posters/EDM</p>
-              <p className="text-gray-600 text-sm mb-2 hover:text-orange-500 cursor-pointer">Brouchers</p>
-              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Schema</p>
-              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Videos</p>
-              <p className="text-gray-600 text-sm hover:text-orange-500 cursor-pointer">Events</p>
-            </div>
-
-            {/* Social Links and Apps */}
-            <div>
-              <h3 className="text-sm font-bold uppercase text-gray-700 mb-4">SOCIAL LINKS</h3>
-              <div className="flex gap-3 mb-6">
-                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📱</a>
-                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📘</a>
-                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">📹</a>
-                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">🐦</a>
-                <a href="#" className="text-gray-600 hover:text-orange-500 text-xl">💼</a>
-              </div>
-              
-              {/* App Badges */}
-              <div className="flex flex-col gap-2">
-                <img src="/assets/google-play.png" alt="Google Play" className="h-10 w-auto" />
-                <img src="/assets/app-store.png" alt="App Store" className="h-10 w-auto" />
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Footer */}
-          <div className="border-t border-gray-300 pt-8 text-center text-gray-600 text-sm">
-            <p className="mb-4">
-              By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners.
-            </p>
-            <p>2008-2026 © Eagle Eye™ Ltd. All rights reserved.</p>
-          </div>
-        </div>
-      </section>
+      <Footer />
 
 
     </div>

@@ -33,7 +33,27 @@ export const CartProvider = ({ children }) => {
       isFirstRender.current = false;
       return;
     }
-    localStorage.setItem('cart', JSON.stringify(cartItems));
+    try {
+      // Store minimal product data without large images to avoid quota exceeded error
+      const cartToSave = cartItems.map(item => ({
+        id: item.id,
+        name: item.name,
+        brand: item.brand,
+        price: item.price,
+        category: item.category,
+        quantity: item.quantity,
+        // Store only first image URL or none to save space
+        imageUrl: item.imageUrl1 || item.imageUrl || ''
+      }));
+      localStorage.setItem('cart', JSON.stringify(cartToSave));
+    } catch (error) {
+      console.error('Failed to save cart to localStorage:', error);
+      // Clear old data if quota exceeded
+      if (error.name === 'QuotaExceededError') {
+        console.warn('localStorage quota exceeded, clearing cart data');
+        localStorage.removeItem('cart');
+      }
+    }
   }, [cartItems]);
 
   const addToCart = (product) => {
@@ -46,7 +66,20 @@ export const CartProvider = ({ children }) => {
             : item
         );
       }
-      return [...prevItems, { ...product, quantity: 1 }];
+      // Store only essential product data, exclude large image data
+      return [...prevItems, { 
+        id: product.id,
+        name: product.name,
+        brand: product.brand,
+        price: product.price,
+        originalPrice: product.originalPrice,
+        category: product.category,
+        shortDesc: product.shortDesc,
+        features: product.features,
+        // Only store first image to minimize storage
+        imageUrl: product.imageUrl1 || product.imageUrl || '',
+        quantity: 1 
+      }];
     });
   };
 

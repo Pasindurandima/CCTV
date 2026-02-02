@@ -85,6 +85,7 @@ function ProductDetail() {
   return (
     <div className="max-w-6xl mx-auto py-6 md:py-10 px-3 sm:px-4 md:px-5 mt-20 lg:mt-24">
       {/* Breadcrumb */}
+     {/*
       <div className="mb-4 md:mb-6 text-xs sm:text-sm text-gray-600">
         <Link to="/" className="hover:text-blue-500">Home</Link>
         <span className="mx-1 md:mx-2">/</span>
@@ -92,6 +93,7 @@ function ProductDetail() {
         <span className="mx-1 md:mx-2">/</span>
         <span className="text-slate-800 line-clamp-1">{product.name}</span>
       </div>
+      */}
 
       {/* Back Button */}
       <button 

@@ -367,16 +367,19 @@ function Store() {
                       <div className="mt-auto">
                         <div className="flex items-center justify-between mb-2 md:mb-3">
                           <p className="text-xl sm:text-2xl text-orange-500 font-bold">Rs {product.price}</p>
-                          <a
-                            href={
-                              `https://wa.me/94777602021?text=${encodeURIComponent(
-                                `Quality products for Quality people\nProduct Name: ${product.name}\nQuantity: 1\nPrice: Rs ${product.price}\nUrl: ${window.location.origin}/product/${product.id}`
-                              )}`
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={e => e.stopPropagation()}
-                            className="group relative bg-green-500 hover:bg-green-600 text-white p-2 rounded-full transition-colors flex items-center justify-center overflow-visible"
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              window.open(
+                                `https://wa.me/94777602021?text=${encodeURIComponent(
+                                  `Quality products for Quality people\nProduct Name: ${product.name}\nQuantity: 1\nPrice: Rs ${product.price}\nUrl: ${window.location.origin}/product/${product.id}`
+                                )}`,
+                                '_blank',
+                                'noopener,noreferrer'
+                              );
+                            }}
+                            className="group relative bg-green-500 hover:bg-green-600 text-white p-2 rounded-full transition-colors flex items-center justify-center overflow-visible border-none cursor-pointer"
                             title="Chat on WhatsApp"
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -388,7 +391,7 @@ function Store() {
                             >
                               Order
                             </span>
-                          </a>
+                          </button>
                         </div>
                         <div className="flex flex-col gap-1.5 md:gap-2">
                           <button 
