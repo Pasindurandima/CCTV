@@ -151,11 +151,9 @@ function Home() {
                         {category.description}
                       </p>
                     </div>
-                    <Link to="/store">
-                      <button className="bg-orange-500 text-white px-6 sm:px-7 md:px-8 py-1.5 md:py-2 rounded font-bold hover:bg-orange-600 transition-all text-xs sm:text-sm mt-3 md:mt-4">
-                        Know More
-                      </button>
-                    </Link>
+                    <button className="bg-orange-500 text-white px-6 sm:px-7 md:px-8 py-1.5 md:py-2 rounded font-bold hover:bg-orange-600 transition-all text-xs sm:text-sm mt-3 md:mt-4">
+                      Know More
+                    </button>
                   </div>
                 </div>
               </Link>

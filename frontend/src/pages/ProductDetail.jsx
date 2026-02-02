@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import ProductImageSlideshow from '../components/ProductImageSlideshow';
 
 const CONTACT_NUMBERS = {
   phone1: '077 760 2021',
@@ -103,20 +104,8 @@ function ProductDetail() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
         {/* Product Image Section */}
         <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 sticky top-20 md:top-24 h-fit">
-          <div className="w-full aspect-square bg-white rounded-xl flex items-center justify-center text-white overflow-hidden group mb-4">
-            {product.imageUrl ? (
-              <img 
-                src={product.imageUrl} 
-                alt={product.name}
-                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-              />
-            ) : (
-              <div className="flex flex-col items-center justify-center text-gray-400">
-                <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl mb-2 md:mb-4">📷</div>
-                <p className="text-xs sm:text-sm md:text-base">Product Image</p>
-              </div>
-            )}
-          </div>
+            {/* Product Images Slideshow */}
+            <ProductImageSlideshow images={product.imageUrls || (product.imageUrl ? [product.imageUrl] : [])} name={product.name} />
           {product.brand && (
             <div className="inline-block bg-orange-100 text-orange-600 px-3 md:px-4 py-2 rounded-full text-xs sm:text-sm font-bold w-full text-center">
               {product.brand}

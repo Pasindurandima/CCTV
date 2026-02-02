@@ -10,7 +10,13 @@ const AdminPanel = () => {
     shortDesc: '',
     features: [''],
     imageFile: null,
-    imagePreview: ''
+    imagePreview: '',
+    imageFile1: null,
+    imagePreview1: '',
+    imageFile2: null,
+    imagePreview2: '',
+    imageFile3: null,
+    imagePreview3: ''
   });
 
   const [products, setProducts] = useState([]);
@@ -57,7 +63,7 @@ const AdminPanel = () => {
   };
 
   // Handle image file selection
-  const handleImageChange = (e) => {
+  const handleImageChange = (e, imageNumber = 0) => {
     const file = e.target.files[0];
     if (file) {
       // Validate file type
@@ -72,20 +78,50 @@ const AdminPanel = () => {
         return;
       }
 
-      setFormData({ ...formData, imageFile: file });
-
       // Create preview
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormData(prev => ({ ...prev, imagePreview: reader.result }));
+        if (imageNumber === 0) {
+          setFormData(prev => ({ 
+            ...prev, 
+            imageFile: file,
+            imagePreview: reader.result 
+          }));
+        } else if (imageNumber === 1) {
+          setFormData(prev => ({ 
+            ...prev, 
+            imageFile1: file,
+            imagePreview1: reader.result 
+          }));
+        } else if (imageNumber === 2) {
+          setFormData(prev => ({ 
+            ...prev, 
+            imageFile2: file,
+            imagePreview2: reader.result 
+          }));
+        } else if (imageNumber === 3) {
+          setFormData(prev => ({ 
+            ...prev, 
+            imageFile3: file,
+            imagePreview3: reader.result 
+          }));
+        }
       };
       reader.readAsDataURL(file);
     }
   };
 
   // Remove image
-  const removeImage = () => {
-    setFormData({ ...formData, imageFile: null, imagePreview: '' });
+  const removeImage = (imageNumber = 0) => {
+    if (imageNumber === 0) {
+      setFormData({ ...formData, imageFile: null, imagePreview: '' });
+    } else if (imageNumber === 1) {
+      setFormData({ ...formData, imageFile1: null, imagePreview1: '' });
+    } else if (imageNumber === 2) {
+      setFormData({ ...formData, imageFile2: null, imagePreview2: '' });
+    } else if (imageNumber === 3) {
+      setFormData({ ...formData, imageFile3: null, imagePreview3: '' });
+    }
   };
 
   // Handle feature input changes
@@ -117,7 +153,7 @@ const AdminPanel = () => {
 
     try {
       // Try multipart form data first (with file)
-      if (formData.imageFile) {
+      if (formData.imageFile || formData.imageFile1 || formData.imageFile2 || formData.imageFile3) {
         const formDataToSend = new FormData();
         formDataToSend.append('name', formData.name);
         formDataToSend.append('brand', formData.brand);
@@ -126,7 +162,20 @@ const AdminPanel = () => {
         formDataToSend.append('category', formData.category);
         formDataToSend.append('shortDesc', formData.shortDesc);
         formDataToSend.append('features', JSON.stringify(filteredFeatures));
-        formDataToSend.append('image', formData.imageFile);
+        
+        // Append images
+        if (formData.imageFile) {
+          formDataToSend.append('image', formData.imageFile);
+        }
+        if (formData.imageFile1) {
+          formDataToSend.append('image1', formData.imageFile1);
+        }
+        if (formData.imageFile2) {
+          formDataToSend.append('image2', formData.imageFile2);
+        }
+        if (formData.imageFile3) {
+          formDataToSend.append('image3', formData.imageFile3);
+        }
 
         const url = editMode 
           ? `http://localhost:8080/api/products/${editId}`
@@ -134,11 +183,16 @@ const AdminPanel = () => {
         
         const method = editMode ? 'PUT' : 'POST';
 
-        console.log('Sending FormData with image:', {
+        console.log('Sending FormData with images:', {
           name: formData.name,
           brand: formData.brand,
           price: formData.price,
-          imageFile: formData.imageFile.name,
+          images: [
+            formData.imageFile?.name,
+            formData.imageFile1?.name,
+            formData.imageFile2?.name,
+            formData.imageFile3?.name
+          ].filter(Boolean)
         });
 
         const response = await fetch(url, {
@@ -221,7 +275,13 @@ const AdminPanel = () => {
       shortDesc: '',
       features: [''],
       imageFile: null,
-      imagePreview: ''
+      imagePreview: '',
+      imageFile1: null,
+      imagePreview1: '',
+      imageFile2: null,
+      imagePreview2: '',
+      imageFile3: null,
+      imagePreview3: ''
     });
     setEditMode(false);
     setEditId(null);
@@ -424,48 +484,134 @@ const AdminPanel = () => {
               {/* Image Upload */}
               <div>
                 <label className="block mb-2 text-slate-800 font-semibold">
-                  Product Image (optional)
+                  Product Images (up to 3 images)
                 </label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-orange-500 transition-all">
+                
+                {/* Image 1 */}
+                <div className="mb-4 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-orange-500 transition-all">
+                  <h4 className="font-semibold mb-2">Image 1</h4>
                   <input
                     type="file"
-                    id="image-input"
+                    id="image-input-1"
                     accept="image/*"
-                    onChange={handleImageChange}
+                    onChange={(e) => handleImageChange(e, 1)}
                     className="hidden"
                   />
                   <button
                     type="button"
-                    onClick={() => document.getElementById('image-input').click()}
+                    onClick={() => document.getElementById('image-input-1').click()}
                     className="bg-orange-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-orange-600 transition-all inline-block"
                   >
-                    📸 Browse Image from Your Laptop
+                    📸 Browse Image 1
                   </button>
                   
-                  {formData.imagePreview && (
+                  {formData.imagePreview1 && (
                     <div className="mt-4">
                       <img 
-                        src={formData.imagePreview} 
-                        alt="Preview" 
+                        src={formData.imagePreview1} 
+                        alt="Preview 1" 
                         className="max-w-xs mx-auto rounded-lg shadow-md"
                       />
                       <p className="text-gray-600 text-sm mt-2">
-                        {formData.imageFile ? formData.imageFile.name : 'Current Image'}
+                        {formData.imageFile1 ? formData.imageFile1.name : 'Current Image'}
                       </p>
-                      {formData.imageFile && (
+                      {formData.imageFile1 && (
                         <button
                           type="button"
-                          onClick={removeImage}
+                          onClick={() => removeImage(1)}
                           className="bg-red-500 text-white px-4 py-1 rounded text-sm mt-2 hover:bg-red-600 transition-all"
                         >
-                          ✕ Remove Image
+                          ✕ Remove Image 1
                         </button>
                       )}
                     </div>
                   )}
                 </div>
+                
+                {/* Image 2 */}
+                <div className="mb-4 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-orange-500 transition-all">
+                  <h4 className="font-semibold mb-2">Image 2 (Optional)</h4>
+                  <input
+                    type="file"
+                    id="image-input-2"
+                    accept="image/*"
+                    onChange={(e) => handleImageChange(e, 2)}
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById('image-input-2').click()}
+                    className="bg-orange-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-orange-600 transition-all inline-block"
+                  >
+                    📸 Browse Image 2
+                  </button>
+                  
+                  {formData.imagePreview2 && (
+                    <div className="mt-4">
+                      <img 
+                        src={formData.imagePreview2} 
+                        alt="Preview 2" 
+                        className="max-w-xs mx-auto rounded-lg shadow-md"
+                      />
+                      <p className="text-gray-600 text-sm mt-2">
+                        {formData.imageFile2 ? formData.imageFile2.name : 'Current Image'}
+                      </p>
+                      {formData.imageFile2 && (
+                        <button
+                          type="button"
+                          onClick={() => removeImage(2)}
+                          className="bg-red-500 text-white px-4 py-1 rounded text-sm mt-2 hover:bg-red-600 transition-all"
+                        >
+                          ✕ Remove Image 2
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
+                
+                {/* Image 3 */}
+                <div className="mb-4 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-orange-500 transition-all">
+                  <h4 className="font-semibold mb-2">Image 3 (Optional)</h4>
+                  <input
+                    type="file"
+                    id="image-input-3"
+                    accept="image/*"
+                    onChange={(e) => handleImageChange(e, 3)}
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById('image-input-3').click()}
+                    className="bg-orange-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-orange-600 transition-all inline-block"
+                  >
+                    📸 Browse Image 3
+                  </button>
+                  
+                  {formData.imagePreview3 && (
+                    <div className="mt-4">
+                      <img 
+                        src={formData.imagePreview3} 
+                        alt="Preview 3" 
+                        className="max-w-xs mx-auto rounded-lg shadow-md"
+                      />
+                      <p className="text-gray-600 text-sm mt-2">
+                        {formData.imageFile3 ? formData.imageFile3.name : 'Current Image'}
+                      </p>
+                      {formData.imageFile3 && (
+                        <button
+                          type="button"
+                          onClick={() => removeImage(3)}
+                          className="bg-red-500 text-white px-4 py-1 rounded text-sm mt-2 hover:bg-red-600 transition-all"
+                        >
+                          ✕ Remove Image 3
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
+                
                 <p className="text-gray-600 text-sm mt-2">
-                  ℹ️ Supported formats: JPG, PNG, GIF, WebP. Max size: 5MB
+                  ℹ️ Supported formats: JPG, PNG, GIF, WebP. Max size: 5MB per image
                 </p>
               </div>
 
@@ -549,10 +695,10 @@ const AdminPanel = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {products.map((product) => (
                   <div key={product.id} className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow-lg hover:shadow-xl transition-all overflow-hidden">
-                    {product.imageUrl ? (
+                    {(product.imageUrl1 || product.imageUrl) ? (
                       <div className="h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center group">
                         <img
-                          src={product.imageUrl}
+                          src={product.imageUrl1 || product.imageUrl}
                           alt={product.name}
                           className="w-full h-full object-contain group-hover:scale-105 transition-transform"
                         />

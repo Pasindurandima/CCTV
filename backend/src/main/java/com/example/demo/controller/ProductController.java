@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
-import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -93,7 +93,10 @@ public class ProductController {
             @RequestParam String category,
             @RequestParam String shortDesc,
             @RequestParam(required = false) String features,
-            @RequestParam(required = false) MultipartFile image) {
+            @RequestParam(required = false) MultipartFile image,
+            @RequestParam(required = false) MultipartFile image1,
+            @RequestParam(required = false) MultipartFile image2,
+            @RequestParam(required = false) MultipartFile image3) {
         try {
             // Validation
             if (name == null || name.trim().isEmpty()) {
@@ -137,7 +140,7 @@ public class ProductController {
                 }
             }
             
-            // Handle image upload
+            // Handle legacy single image upload
             if (image != null && !image.isEmpty()) {
                 try {
                     byte[] imageBytes = image.getBytes();
@@ -145,9 +148,55 @@ public class ProductController {
                     String mimeType = image.getContentType();
                     String dataUri = "data:" + mimeType + ";base64," + base64Image;
                     product.setImageUrl(dataUri);
+                    // Also set as first image if image1 not provided
+                    if (image1 == null || image1.isEmpty()) {
+                        product.setImageUrl1(dataUri);
+                    }
                 } catch (Exception e) {
                     return ResponseEntity.badRequest()
                             .body(new ErrorResponse("Failed to process image: " + e.getMessage()));
+                }
+            }
+            
+            // Handle image1 upload
+            if (image1 != null && !image1.isEmpty()) {
+                try {
+                    byte[] imageBytes = image1.getBytes();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    String mimeType = image1.getContentType();
+                    String dataUri = "data:" + mimeType + ";base64," + base64Image;
+                    product.setImageUrl1(dataUri);
+                } catch (Exception e) {
+                    return ResponseEntity.badRequest()
+                            .body(new ErrorResponse("Failed to process image1: " + e.getMessage()));
+                }
+            }
+            
+            // Handle image2 upload
+            if (image2 != null && !image2.isEmpty()) {
+                try {
+                    byte[] imageBytes = image2.getBytes();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    String mimeType = image2.getContentType();
+                    String dataUri = "data:" + mimeType + ";base64," + base64Image;
+                    product.setImageUrl2(dataUri);
+                } catch (Exception e) {
+                    return ResponseEntity.badRequest()
+                            .body(new ErrorResponse("Failed to process image2: " + e.getMessage()));
+                }
+            }
+            
+            // Handle image3 upload
+            if (image3 != null && !image3.isEmpty()) {
+                try {
+                    byte[] imageBytes = image3.getBytes();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    String mimeType = image3.getContentType();
+                    String dataUri = "data:" + mimeType + ";base64," + base64Image;
+                    product.setImageUrl3(dataUri);
+                } catch (Exception e) {
+                    return ResponseEntity.badRequest()
+                            .body(new ErrorResponse("Failed to process image3: " + e.getMessage()));
                 }
             }
 
@@ -202,7 +251,10 @@ public class ProductController {
             @RequestParam String category,
             @RequestParam String shortDesc,
             @RequestParam(required = false) String features,
-            @RequestParam(required = false) MultipartFile image) {
+            @RequestParam(required = false) MultipartFile image,
+            @RequestParam(required = false) MultipartFile image1,
+            @RequestParam(required = false) MultipartFile image2,
+            @RequestParam(required = false) MultipartFile image3) {
         try {
             Optional<Product> productData = productRepository.findById(id);
 
@@ -253,7 +305,7 @@ public class ProductController {
                 }
             }
             
-            // Handle image upload - only update if new image is provided
+            // Handle legacy image upload - only update if new image is provided
             if (image != null && !image.isEmpty()) {
                 try {
                     byte[] imageBytes = image.getBytes();
@@ -264,6 +316,48 @@ public class ProductController {
                 } catch (Exception e) {
                     return ResponseEntity.badRequest()
                             .body(new ErrorResponse("Failed to process image: " + e.getMessage()));
+                }
+            }
+            
+            // Handle image1 upload
+            if (image1 != null && !image1.isEmpty()) {
+                try {
+                    byte[] imageBytes = image1.getBytes();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    String mimeType = image1.getContentType();
+                    String dataUri = "data:" + mimeType + ";base64," + base64Image;
+                    existingProduct.setImageUrl1(dataUri);
+                } catch (Exception e) {
+                    return ResponseEntity.badRequest()
+                            .body(new ErrorResponse("Failed to process image1: " + e.getMessage()));
+                }
+            }
+            
+            // Handle image2 upload
+            if (image2 != null && !image2.isEmpty()) {
+                try {
+                    byte[] imageBytes = image2.getBytes();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    String mimeType = image2.getContentType();
+                    String dataUri = "data:" + mimeType + ";base64," + base64Image;
+                    existingProduct.setImageUrl2(dataUri);
+                } catch (Exception e) {
+                    return ResponseEntity.badRequest()
+                            .body(new ErrorResponse("Failed to process image2: " + e.getMessage()));
+                }
+            }
+            
+            // Handle image3 upload
+            if (image3 != null && !image3.isEmpty()) {
+                try {
+                    byte[] imageBytes = image3.getBytes();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    String mimeType = image3.getContentType();
+                    String dataUri = "data:" + mimeType + ";base64," + base64Image;
+                    existingProduct.setImageUrl3(dataUri);
+                } catch (Exception e) {
+                    return ResponseEntity.badRequest()
+                            .body(new ErrorResponse("Failed to process image3: " + e.getMessage()));
                 }
             }
 

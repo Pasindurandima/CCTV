@@ -337,9 +337,9 @@ function Store() {
                   <div className="bg-white rounded-xl overflow-hidden shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl cursor-pointer h-full flex flex-col">
                     {/* Image Container - Fixed Height for Better Display */}
                     <div className="relative w-full h-48 sm:h-56 md:h-60 lg:h-64 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex items-center justify-center group">
-                      {product.imageUrl ? (
+                      {(product.imageUrl1 || product.imageUrl) ? (
                         <img 
-                          src={product.imageUrl} 
+                          src={product.imageUrl1 || product.imageUrl} 
                           alt={product.name}
                           className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                         />

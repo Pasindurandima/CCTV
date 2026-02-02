@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -13,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "products")
@@ -49,6 +52,18 @@ public class Product {
     @Lob
     @Column(columnDefinition = "MEDIUMTEXT")
     private String imageUrl;
+    
+    @Lob
+    @Column(columnDefinition = "MEDIUMTEXT")
+    private String imageUrl1;
+    
+    @Lob
+    @Column(columnDefinition = "MEDIUMTEXT")
+    private String imageUrl2;
+    
+    @Lob
+    @Column(columnDefinition = "MEDIUMTEXT")
+    private String imageUrl3;
     
     // Constructors
     public Product() {
@@ -145,5 +160,44 @@ public class Product {
     
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+    
+    public String getImageUrl1() {
+        return imageUrl1;
+    }
+    
+    public void setImageUrl1(String imageUrl1) {
+        this.imageUrl1 = imageUrl1;
+    }
+    
+    public String getImageUrl2() {
+        return imageUrl2;
+    }
+    
+    public void setImageUrl2(String imageUrl2) {
+        this.imageUrl2 = imageUrl2;
+    }
+    
+    public String getImageUrl3() {
+        return imageUrl3;
+    }
+    
+    public void setImageUrl3(String imageUrl3) {
+        this.imageUrl3 = imageUrl3;
+    }
+    
+    // Helper method to get all image URLs as an array
+    @Transient
+    @JsonProperty("imageUrls")
+    public java.util.List<String> getImageUrls() {
+        java.util.List<String> urls = new java.util.ArrayList<>();
+        if (imageUrl1 != null && !imageUrl1.isEmpty()) urls.add(imageUrl1);
+        if (imageUrl2 != null && !imageUrl2.isEmpty()) urls.add(imageUrl2);
+        if (imageUrl3 != null && !imageUrl3.isEmpty()) urls.add(imageUrl3);
+        // Fallback to legacy imageUrl if no new images
+        if (urls.isEmpty() && imageUrl != null && !imageUrl.isEmpty()) {
+            urls.add(imageUrl);
+        }
+        return urls;
     }
 }
